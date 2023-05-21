@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Validador {
+
     private final HashMap<String, Validacion> validaciones;
     private String mensajeDeError;
 

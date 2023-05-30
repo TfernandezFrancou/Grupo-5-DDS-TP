@@ -4,4 +4,4 @@
 
 [Documento de entrega](https://docs.google.com/document/d/1t-8gzrmkRD8hoECocfHSi5JKWmO7Byrmb9I2-0sgPiU/edit)
 
-Las diferentes entregas estan diferenciadas por cada rama
+Las entregas estan diferenciadas por cada rama

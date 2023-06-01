@@ -26,7 +26,7 @@ public class CargaDatosTest {
         LineaRepo.getInstance().agregar(linea1);
         LineaRepo.getInstance().agregar(linea2);
 
-        OrganizacionesRepo.getInstance().agregar(new Organizacion("organizacion1","srl"));
+        OrganizacionesRepo.getInstance().agregar(new Organizacion("Organizacion1","srl"));
 
        ServicioPublicoRepo.getInstance().agregarServicio(new ServicioPublico(TipoDeTransporte.COLECTIVO));
        ServicioPublicoRepo.getInstance().agregarServicio(new ServicioPublico(TipoDeTransporte.TREN));
@@ -43,9 +43,11 @@ public class CargaDatosTest {
         List<OrganismoDeControl> organismos = OrganismoDeControlRepo.getInstance().getOrganismosDeControl();
         for (Propietario p : propietarios) {
             System.out.println(p.getNombre());
+            System.out.println(p.getServicioPublico().getTipoDeTransporte());
         }
         for (OrganismoDeControl org : organismos) {
             System.out.println(org.getNombre());
+            System.out.println(org.getEntidad().getNombre());
         }
 
         Assert.assertEquals(propietarios.size(),3);

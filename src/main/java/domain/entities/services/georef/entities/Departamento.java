@@ -1,6 +1,11 @@
 package domain.entities.services.georef.entities;
 
-public class Departamento {
-    public int id;
-    public String nombre;
+import lombok.Getter;
+
+public class Departamento extends Localizacion {
+    public Provincia provincia;
+
+    public Provincia getProvincia(){
+        return this.provincia;
+    }
 }

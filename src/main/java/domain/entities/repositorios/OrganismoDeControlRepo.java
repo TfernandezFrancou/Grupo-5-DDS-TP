@@ -10,11 +10,21 @@ import java.util.List;
 public class OrganismoDeControlRepo {
     private List<OrganismoDeControl> organismosDeControl;
 
+    private static OrganismoDeControlRepo instance;
+
+    private OrganismoDeControlRepo() {
+        this.organismosDeControl= new ArrayList<>();
+    }
+
+    public static OrganismoDeControlRepo getInstance() {
+        if (instance == null) {
+            instance = new OrganismoDeControlRepo();
+        }
+        return instance;
+    }
+
     public void agregarOrganismo(OrganismoDeControl org){
         this.organismosDeControl.add(org);
     }
 
-    public OrganismoDeControlRepo() {
-        this.organismosDeControl = new ArrayList<>();
-    }
 }

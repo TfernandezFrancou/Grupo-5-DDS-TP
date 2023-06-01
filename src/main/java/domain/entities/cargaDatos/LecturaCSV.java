@@ -2,10 +2,9 @@ package domain.entities.cargaDatos;
 
 import domain.entities.actores.OrganismoDeControl;
 import domain.entities.actores.Propietario;
-import domain.entities.repositorios.OrganismoDeControlRepo;
-import domain.entities.repositorios.PropietarioRepo;
-import domain.entities.repositorios.ServicioPublicoRepo;
-import domain.entities.repositorios.TipoDeServicioRepo;
+import domain.entities.repositorios.*;
+import domain.entities.servicios.Entidad;
+import domain.entities.servicios.Organizacion;
 import lombok.Getter;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -21,21 +20,10 @@ import java.util.Objects;
 @Getter
 public class LecturaCSV {
 
-    private ServicioPublicoRepo servicioPublicoRepo;
-    private TipoDeServicioRepo tipoDeServicioRepo;
-    private OrganismoDeControlRepo organismoDeControlRepo;
-    private PropietarioRepo propietarioRepo;
     private static final String rutaArchivo = "src/main/java/domain/entities/cargaDatos/datos.csv";
     Reader reader;
 
-    public LecturaCSV(ServicioPublicoRepo servicioPublicoRepo,
-                      TipoDeServicioRepo tipoDeServicioRepo,
-                      PropietarioRepo propietarioRepo,
-                      OrganismoDeControlRepo organismoDeControlRepo) {
-        this.servicioPublicoRepo = servicioPublicoRepo;
-        this.tipoDeServicioRepo = tipoDeServicioRepo;
-        this.propietarioRepo = propietarioRepo;
-        this.organismoDeControlRepo = organismoDeControlRepo;
+    public LecturaCSV()
 
         {
             try {
@@ -47,16 +35,24 @@ public class LecturaCSV {
                     String nombre = registro.get(0);
                     String tipo = registro.get(1);
                     String servicio = registro.get(2);
-                    String tipoServicio = registro.get(3);
+                    String tipoServicio = "";
 
+                    if (registro.size() > 3) {
+                        tipoServicio = registro.get(3);
+                    }
 
                     if(Objects.equals(tipo, "propietario")){
-                        Propietario entidadPropietaria = new Propietario(nombre,servicioPublicoRepo.buscar(servicio,tipoServicio));
-                        this.propietarioRepo.agregarPropietario(entidadPropietaria);
+                        Propietario entidadPropietaria = new Propietario(nombre,ServicioPublicoRepo.getInstance().buscar(servicio));
+                        PropietarioRepo.getInstance().agregarPropietario(entidadPropietaria);
                     }else{
-                        OrganismoDeControl organismoControl = new OrganismoDeControl(nombre,
-                                tipoDeServicioRepo.buscar(servicio,tipoServicio));
-                        this.organismoDeControlRepo.agregarOrganismo(organismoControl);
+                        Entidad ent;
+                        if(tipoServicio.equals("organizacion")) {
+                           ent = OrganizacionesRepo.getInstance().buscar(servicio);
+
+                        }else{
+                            ent = LineaRepo.getInstance().buscar(servicio,tipoServicio);
+                        }
+                        OrganismoDeControlRepo.getInstance().agregarOrganismo(new OrganismoDeControl(nombre,ent));
                     }
                 }
             } catch (IOException e) {
@@ -68,4 +64,4 @@ public class LecturaCSV {
     }
 
 
-}
+

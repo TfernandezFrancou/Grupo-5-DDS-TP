@@ -11,11 +11,22 @@ public class PropietarioRepo {
 
     private List<Propietario> propietarios;
 
+    private static PropietarioRepo instance;
+
+    private PropietarioRepo() {
+        this.propietarios= new ArrayList<>();
+    }
+
+    public static PropietarioRepo getInstance() {
+        if (instance == null) {
+            instance = new PropietarioRepo();
+        }
+        return instance;
+    }
+
     public void agregarPropietario(Propietario propietario){
         propietarios.add(propietario);
     }
 
-    public PropietarioRepo() {
-        this.propietarios = new ArrayList<>();
-    }
+
 }

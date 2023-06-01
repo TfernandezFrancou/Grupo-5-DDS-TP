@@ -3,10 +3,7 @@ package domain;
 import domain.entities.actores.OrganismoDeControl;
 import domain.entities.actores.Propietario;
 import domain.entities.cargaDatos.LecturaCSV;
-import domain.entities.repositorios.OrganismoDeControlRepo;
-import domain.entities.repositorios.PropietarioRepo;
-import domain.entities.repositorios.ServicioPublicoRepo;
-import domain.entities.repositorios.TipoDeServicioRepo;
+import domain.entities.repositorios.*;
 import domain.entities.servicios.*;
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,35 +14,33 @@ import java.util.List;
 
 public class CargaDatosTest {
 
-    private OrganismoDeControlRepo organismoDeControlRepo;
-    private ServicioPublicoRepo servicioPublicoRepo;
-    private PropietarioRepo propietarioRepo;
-    private TipoDeServicioRepo tipoDeServicioRepo;
     private LecturaCSV lectorCSV;
 
     @Before
     public void init(){
 
-        servicioPublicoRepo= new ServicioPublicoRepo();
-        servicioPublicoRepo.agregarServicio(new ServicioPublico(TipoDeTransporte.COLECTIVO,new Linea("54")));
-        servicioPublicoRepo.agregarServicio(new ServicioPublico(TipoDeTransporte.TREN,new Linea("sarmiento")));
-        servicioPublicoRepo.agregarServicio(new ServicioPublico(TipoDeTransporte.SUBTE,new Linea("H")));
+        Linea linea1 = new Linea("7",TipoDeTransporte.COLECTIVO);
+        Linea linea2 = new Linea("A",TipoDeTransporte.SUBTE);
 
-        tipoDeServicioRepo = new TipoDeServicioRepo();
-        tipoDeServicioRepo.agregar(new TipoDeServicio("hombre",new AgrupacionServicio("banio")));
-        tipoDeServicioRepo.agregar(new TipoDeServicio("rivadavia",new AgrupacionServicio("escalera")));
-        tipoDeServicioRepo.agregar(new TipoDeServicio("alberdi",new AgrupacionServicio("ascensor")));
 
-        propietarioRepo = new PropietarioRepo();
-        organismoDeControlRepo = new OrganismoDeControlRepo();
+        LineaRepo.getInstance().agregar(linea1);
+        LineaRepo.getInstance().agregar(linea2);
 
-        lectorCSV = new LecturaCSV(servicioPublicoRepo,tipoDeServicioRepo,propietarioRepo,organismoDeControlRepo);
+        OrganizacionesRepo.getInstance().agregar(new Organizacion("organizacion1","srl"));
+
+       ServicioPublicoRepo.getInstance().agregarServicio(new ServicioPublico(TipoDeTransporte.COLECTIVO));
+       ServicioPublicoRepo.getInstance().agregarServicio(new ServicioPublico(TipoDeTransporte.TREN));
+       ServicioPublicoRepo.getInstance().agregarServicio(new ServicioPublico(TipoDeTransporte.SUBTE));
+
+
+
+        lectorCSV = new LecturaCSV();
     }
 
     @Test
     public void carga(){
-        List<Propietario> propietarios = lectorCSV.getPropietarioRepo().getPropietarios();
-        List<OrganismoDeControl> organismos = lectorCSV.getOrganismoDeControlRepo().getOrganismosDeControl();
+        List<Propietario> propietarios =PropietarioRepo.getInstance().getPropietarios();
+        List<OrganismoDeControl> organismos = OrganismoDeControlRepo.getInstance().getOrganismosDeControl();
         for (Propietario p : propietarios) {
             System.out.println(p.getNombre());
         }
@@ -56,5 +51,4 @@ public class CargaDatosTest {
         Assert.assertEquals(propietarios.size(),3);
         Assert.assertEquals(organismos.size(),3);
     }
-
 }

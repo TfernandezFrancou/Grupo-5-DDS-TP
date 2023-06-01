@@ -4,14 +4,17 @@ package domain.entities.servicios;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 public class ServicioPublico {
     private TipoDeTransporte tipoDeTransporte;
-    private Linea linea;
+    private List<Linea> lineas;
 
-    public ServicioPublico(TipoDeTransporte tipoDeTransporte, Linea linea) {
+    public ServicioPublico(TipoDeTransporte tipoDeTransporte) {
         this.tipoDeTransporte = tipoDeTransporte;
-        this.linea = linea;
+        this.lineas=new ArrayList<>();
     }
 }

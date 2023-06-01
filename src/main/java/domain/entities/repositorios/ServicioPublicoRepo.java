@@ -11,20 +11,29 @@ import java.util.Optional;
 public class ServicioPublicoRepo {
     private List<ServicioPublico> serviciosPublicos;
 
-    public ServicioPublico buscar(String tipoDeTransporte, String linea){
+    private static ServicioPublicoRepo instance;
+
+    private ServicioPublicoRepo() {
+        this.serviciosPublicos = new ArrayList<>();
+    }
+
+    public static ServicioPublicoRepo getInstance() {
+        if (instance == null) {
+            instance = new ServicioPublicoRepo();
+        }
+        return instance;
+    }
+
+    public ServicioPublico buscar(String tipoDeTransporte){
 
         Optional<ServicioPublico> servicioEncontrado = serviciosPublicos.stream()
                 .filter(servicio -> servicio.getTipoDeTransporte()
-                        .toString().equals(tipoDeTransporte)
-                        && servicio.getLinea().getNombre().equals(linea)).findFirst();
+                        .toString().equals(tipoDeTransporte)).findFirst();
         if (servicioEncontrado.isPresent()){
             return servicioEncontrado.get();
         }else return null;
     }
 
-    public ServicioPublicoRepo() {
-        this.serviciosPublicos = new ArrayList<>();
-    }
 
     public void agregarServicio(ServicioPublico servicio) {
         serviciosPublicos.add(servicio);

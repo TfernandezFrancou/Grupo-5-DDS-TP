@@ -1,6 +1,6 @@
-Raul SA,propietario,COLECTIVO,54
-Jorge SRL,propietario, SUBTE, H
-UTN,organismo de control, banio, hombre
-Lopez SA,propietario, TREN, sarmiento
-Messi SRL,organismo de control, rivadavia, escalera
-Roberto SA,organismo de control, alberdi, ascensor
+Raul SA,propietario,COLECTIVO
+Jorge SRL,propietario,SUBTE
+UTN,organismo de control,Organizacion1,organizacion
+Lopez SA,propietario,TREN
+Messi SRL,organismo de control,7,COLECTIVO
+Roberto SA,organismo de control,A,SUBTE

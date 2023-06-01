@@ -48,6 +48,7 @@ public class CargaDatosTest {
         for (OrganismoDeControl org : organismos) {
             System.out.println(org.getNombre());
             System.out.println(org.getEntidad().getNombre());
+            System.out.println(org.getEntidad().getTipoDeTransporte());
         }
 
         Assert.assertEquals(propietarios.size(),3);

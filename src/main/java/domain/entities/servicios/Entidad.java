@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-public abstract class Entidad {
+public abstract class Entidad extends Rankeable {
     protected String nombre;
     @Setter
     protected Localizacion localizacion;

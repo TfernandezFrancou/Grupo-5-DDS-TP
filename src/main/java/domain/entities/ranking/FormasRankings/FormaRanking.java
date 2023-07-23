@@ -1,4 +1,4 @@
-package domain.entities.ranking;
+package domain.entities.ranking.FormasRankings;
 
 public abstract class FormaRanking {
 

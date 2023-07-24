@@ -7,6 +7,8 @@ import lombok.Setter;
 @Setter
 public class Linea extends Entidad{
     private TipoDeTransporte tipoDeTransporte;
+    private Establecimiento estacionOrigen;
+    private Establecimiento estacionFinal;
 
     public Linea(String nombre,TipoDeTransporte tipoDeTransporte) {
         this.nombre = nombre;

@@ -3,9 +3,10 @@ package domain.entities.actores.miembros;
 import domain.entities.actores.Usuario;
 import domain.entities.services.georef.entities.Localizacion;
 import domain.entities.servicios.Entidad;
+import lombok.Getter;
 
 import java.util.List;
-
+@Getter
 public class Miembro {
 
     private String nombre;

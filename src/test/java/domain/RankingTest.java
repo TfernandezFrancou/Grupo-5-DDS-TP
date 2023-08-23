@@ -1,16 +1,14 @@
 package domain;
 
-import domain.entities.ranking.GeneradorDeRankings;
+//import domain.entities.ranking.GeneradorDeRankings;
 import domain.entities.repositorios.LineaRepo;
 import domain.entities.repositorios.OrganizacionesRepo;
 import domain.entities.servicios.Linea;
 import domain.entities.servicios.Organizacion;
 import domain.entities.servicios.TipoDeTransporte;
 import org.junit.Before;
-import org.junit.Test;
-
 public class RankingTest {
-    GeneradorDeRankings rankings = new GeneradorDeRankings();
+    //GeneradorDeRankings rankings = new GeneradorDeRankings();
     @Before
     public void init(){
         //Creo 5 lineas y las agrego al repo

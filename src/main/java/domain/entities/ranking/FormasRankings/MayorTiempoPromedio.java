@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
 
 public class MayorTiempoPromedio extends FormaRanking{
     @Override
-    public void generar(){
-        List<Incidente> listaIncidentes = IncidentesRepo.getInstance().buscarIncidentesResueltosSemana(LocalDateTime.now());
+    public void generar(LocalDateTime fecha){
+        List<Incidente> listaIncidentes = IncidentesRepo.getInstance().buscarIncidentesResueltosSemana(fecha);
 
         Map<Entidad, List<Incidente>> incidentesPorEntidad = listaIncidentes.stream()
                 .collect(Collectors.groupingBy(incidente -> incidente.getEstablecimiento().getEntidad()));

@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 public class MayorCantidadIncidentes extends FormaRanking{
     @Override
-    public void generar() {
-        List<Incidente> listaIncidentes = IncidentesRepo.getInstance().buscarIncidentesSemana(LocalDateTime.now());
+    public void generar(LocalDateTime fecha) {
+        List<Incidente> listaIncidentes = IncidentesRepo.getInstance().buscarIncidentesSemana(fecha);
 
         int horasRango = 24;
 

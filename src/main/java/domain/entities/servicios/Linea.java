@@ -3,6 +3,8 @@ package domain.entities.servicios;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+
 @Getter
 @Setter
 public class Linea extends Entidad{
@@ -11,7 +13,9 @@ public class Linea extends Entidad{
     private Establecimiento estacionFinal;
 
     public Linea(String nombre,TipoDeTransporte tipoDeTransporte) {
+        super();
         this.nombre = nombre;
         this.tipoDeTransporte = tipoDeTransporte;
     }
+
 }

@@ -19,9 +19,10 @@ public abstract class Incidente {
     private LocalDateTime fechaRealizacion;
     private LocalDateTime fechaCierre;
 
-    public Incidente(String descripcion, LocalDateTime fechaRealizacion) {
+    public Incidente(String descripcion, LocalDateTime fechaRealizacion,Establecimiento establecimiento) {
         this.descripcion = descripcion;
         this.fechaRealizacion = fechaRealizacion;
+        this.establecimiento = establecimiento;
     }
     public boolean esRepetidoEnRango(Incidente otroIncidente, int horasRango) {
         long horasEntreIncidentes = ChronoUnit.HOURS.between(this.getFechaCierre(), otroIncidente.getFechaRealizacion());

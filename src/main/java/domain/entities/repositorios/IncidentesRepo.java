@@ -1,6 +1,8 @@
 package domain.entities.repositorios;
 
 import domain.entities.incidentes.Incidente;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Getter
 public class IncidentesRepo {
     private static IncidentesRepo instance;
     private List<Incidente> incidentes;

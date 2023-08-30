@@ -33,6 +33,7 @@ public abstract class Incidente {
     }
     public void cerrarIncidente(LocalDateTime fechaCierre){
         this.fechaCierre=fechaCierre;
+
     }
     public abstract List<Miembro> obtenerContactos();
     public abstract void notificar();

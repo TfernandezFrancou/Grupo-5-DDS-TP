@@ -8,7 +8,7 @@ public class ServicioCompuesto extends Servicio {
     private List<ServicioBase> servicios;
 
     public ServicioCompuesto(Establecimiento establecimiento,AgrupacionServicio agrupacionServicio){
-        super((establecimiento));
+        this.establecimiento = establecimiento;
         this.agrupacionServicio =  agrupacionServicio;
     }
 }

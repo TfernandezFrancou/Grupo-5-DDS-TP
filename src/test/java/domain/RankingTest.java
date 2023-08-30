@@ -3,6 +3,7 @@ package domain;
 import domain.entities.actores.Comunidad;
 import domain.entities.actores.miembros.Miembro;
 import domain.entities.actores.miembros.MiembroPorComunidad;
+import domain.entities.incidentes.Incidente;
 import domain.entities.incidentes.IncidenteMiembro;
 import domain.entities.ranking.FormasRankings.MayorCantidadIncidentes;
 import domain.entities.ranking.GeneradorDeRankings;
@@ -79,6 +80,23 @@ public class RankingTest {
         rankings.setFechaRealizacion(LocalDateTime.of(2023,8,27,0,0));
         //Creo un miembro por comunidad
         juan = new MiembroPorComunidad(new Miembro("j","c","d","a"),new Comunidad());
+
+    }
+    @Test
+    public void inicidenteRepetido(){
+        Incidente i1 = new IncidenteMiembro("Incidente e EscaleraPlata 1", escaleraPlata, LocalDateTime.of(2023, 8, 21, 0, 0), paradaPlata, juan);
+        Incidente i2 = new IncidenteMiembro("Incidente e EscaleraPlata 1", escaleraPlata, LocalDateTime.of(2023, 8, 21, 12, 0), paradaPlata, juan);
+
+        Assert.assertTrue(i1.esRepetidoEnRango(i2,24));
+        Assert.assertTrue(i2.esRepetidoEnRango(i1,24));
+    }
+    @Test
+    public void incidenteNoRepetido(){
+        Incidente i1 = new IncidenteMiembro("Incidente e EscaleraPlata 1", escaleraPlata, LocalDateTime.of(2023, 8, 21, 0, 0), paradaPlata, juan);
+        Incidente i2 = new IncidenteMiembro("Incidente e EscaleraPlata 1", escaleraPlata, LocalDateTime.of(2023, 8, 23, 12, 0), paradaPlata, juan);
+
+        Assert.assertFalse(i1.esRepetidoEnRango(i2,24));
+        Assert.assertFalse(i2.esRepetidoEnRango(i1,24));
 
     }
     @Test

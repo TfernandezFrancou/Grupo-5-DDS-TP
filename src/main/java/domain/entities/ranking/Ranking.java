@@ -17,5 +17,8 @@ public class Ranking {
         this.tipoRanking = tipoRanking;
         this.fecha = fecha;
     }
+    public Rankeable obtenerPrimerLugar(){
+        return this.ranking.get(0);
+    }
 
 }

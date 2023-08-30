@@ -39,7 +39,7 @@ public class MayorTiempoPromedio extends FormaRanking{
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
 
-        Ranking ranking = new Ranking(entidadesOrdenadas,new TipoRanking("Mayor Tiempo Promedio"), LocalDateTime.now());
+        Ranking ranking = new Ranking(entidadesOrdenadas,new TipoRanking("Mayor Tiempo Promedio"), fecha);
         RankingsRepo.getInstance().agregarRanking(ranking);
 
     }

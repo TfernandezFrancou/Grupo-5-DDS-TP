@@ -23,4 +23,7 @@ public class RankingsRepo {
     }
 
     public void agregarRanking(Ranking ranking){this.rankings.add(ranking);}
+    public Ranking obtenerRanking(int posicion){
+        return this.rankings.get(posicion);
+    }
 }

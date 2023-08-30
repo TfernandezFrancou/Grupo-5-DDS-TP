@@ -1,8 +1,12 @@
 package domain.entities.ranking.FormasRankings;
 
 import domain.entities.incidentes.Incidente;
+import domain.entities.ranking.Ranking;
+import domain.entities.ranking.TipoRanking;
 import domain.entities.repositorios.IncidentesRepo;
+import domain.entities.repositorios.RankingsRepo;
 import domain.entities.servicios.Entidad;
+import domain.entities.servicios.Rankeable;
 import domain.entities.servicios.Servicio;
 
 import java.time.LocalDateTime;
@@ -45,9 +49,11 @@ public class MayorCantidadIncidentes extends FormaRanking{
         }
 
         // Ordenar las entidades según la cantidad de incidentes
-        List<Entidad> entidadesOrdenadas = rankingEntidades.entrySet().stream()
+        List<Rankeable> entidadesOrdenadas = rankingEntidades.entrySet().stream()
                 .sorted(Map.Entry.<Entidad, Integer>comparingByValue().reversed())
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
+        Ranking ranking = new Ranking(entidadesOrdenadas,new TipoRanking("Mayor cantidad de incidentes"), fecha);
+        RankingsRepo.getInstance().agregarRanking(ranking);
     }
 }

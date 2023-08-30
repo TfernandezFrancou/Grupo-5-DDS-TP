@@ -24,9 +24,10 @@ public abstract class Incidente {
         this.servicio = servicio;
         this.fechaRealizacion = fechaRealizacion;
         this.establecimiento = establecimiento;
+        this.resuelto=Boolean.FALSE;
     }
     public boolean esRepetidoEnRango(Incidente otroIncidente, int horasRango) {
-        long horasEntreIncidentes = ChronoUnit.HOURS.between(this.getFechaCierre(), otroIncidente.getFechaRealizacion());
+        long horasEntreIncidentes = ChronoUnit.HOURS.between(this.getFechaRealizacion(), otroIncidente.getFechaRealizacion());
         return this.getServicio().equals(otroIncidente.getServicio()) && horasEntreIncidentes <= horasRango;
     }
     public abstract List<Miembro> obtenerContactos();

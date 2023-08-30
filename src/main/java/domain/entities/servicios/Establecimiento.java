@@ -14,10 +14,11 @@ public class Establecimiento {
     @Getter
     private Entidad entidad;
 
-    public Establecimiento(String nombre, TipoDeEstablecimiento tipoDeEstablecimiento){
+    public Establecimiento(String nombre, TipoDeEstablecimiento tipoDeEstablecimiento, Entidad entidad){
         this.servicios = new ArrayList<>();
         this.nombre = nombre;
         this.tipoDeEstablecimiento= tipoDeEstablecimiento;
+        this.entidad = entidad;
     }
     public void agregarServicio(Servicio servicio){
         this.servicios.add(servicio);

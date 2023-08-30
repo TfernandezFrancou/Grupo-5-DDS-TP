@@ -28,4 +28,7 @@ public class GeneradorDeRankings {
             formaRanking.generar(this.fechaRealizacion);
         }
     }
+    public void agregarFormaRanking(FormaRanking formaRanking){
+        this.formasRanking.add(formaRanking);
+    }
 }

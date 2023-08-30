@@ -19,8 +19,9 @@ public abstract class Incidente {
     private LocalDateTime fechaRealizacion;
     private LocalDateTime fechaCierre;
 
-    public Incidente(String descripcion, LocalDateTime fechaRealizacion,Establecimiento establecimiento) {
+    public Incidente(String descripcion,Servicio servicio, LocalDateTime fechaRealizacion,Establecimiento establecimiento) {
         this.descripcion = descripcion;
+        this.servicio = servicio;
         this.fechaRealizacion = fechaRealizacion;
         this.establecimiento = establecimiento;
     }

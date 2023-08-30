@@ -19,4 +19,7 @@ public class Establecimiento {
         this.nombre = nombre;
         this.tipoDeEstablecimiento= tipoDeEstablecimiento;
     }
+    public void agregarServicio(Servicio servicio){
+        this.servicios.add(servicio);
+    }
 }

@@ -13,8 +13,9 @@ public class MiembroPorComunidad {
     private TipoDeMiembro tipoDeMiembro;
     private Boolean esAdmin;
 
-    public MiembroPorComunidad(Miembro miembro) {
+    public MiembroPorComunidad(Miembro miembro,Comunidad comunidad) {
         this.miembro = miembro;
+        this.comunidad = comunidad;
     }
 /* public Boolean esAfectado(){
 

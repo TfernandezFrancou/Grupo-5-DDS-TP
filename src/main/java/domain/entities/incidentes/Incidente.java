@@ -27,11 +27,12 @@ public abstract class Incidente {
         this.resuelto=Boolean.FALSE;
     }
     public boolean esRepetidoEnRango(Incidente otroIncidente, int horasRango) {
-        long horasEntreIncidentes = ChronoUnit.HOURS.between(this.getFechaRealizacion(), otroIncidente.getFechaRealizacion());
-        if(this.fechaRealizacion.getDayOfMonth() == otroIncidente.fechaRealizacion.getDayOfMonth()) {
-            return this.getServicio().equals(otroIncidente.getServicio()) && horasEntreIncidentes <= horasRango;
-        }
-        return Boolean.FALSE;
+        long horasEntreIncidentes = Math.abs(ChronoUnit.HOURS.between(this.getFechaRealizacion(), otroIncidente.getFechaRealizacion()));
+
+        return this.getServicio().equals(otroIncidente.getServicio()) && horasEntreIncidentes <= horasRango;
+    }
+    public void cerrarIncidente(LocalDateTime fechaCierre){
+        this.fechaCierre=fechaCierre;
     }
     public abstract List<Miembro> obtenerContactos();
     public abstract void notificar();

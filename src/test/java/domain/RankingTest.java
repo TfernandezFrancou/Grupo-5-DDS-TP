@@ -83,9 +83,17 @@ public class RankingTest {
 
     }
     @Test
-    public void inicidenteRepetido(){
-        Incidente i1 = new IncidenteMiembro("Incidente e EscaleraPlata 1", escaleraPlata, LocalDateTime.of(2023, 8, 21, 0, 0), paradaPlata, juan);
-        Incidente i2 = new IncidenteMiembro("Incidente e EscaleraPlata 1", escaleraPlata, LocalDateTime.of(2023, 8, 21, 12, 0), paradaPlata, juan);
+    public void inicidenteRepetidoEnElMismoDia(){
+        Incidente i1 = new IncidenteMiembro("Incidente e EscaleraPlata 1", escaleraPlata, LocalDateTime.of(2023, 8, 21, 10, 0), paradaPlata, juan);
+        Incidente i2 = new IncidenteMiembro("Incidente e EscaleraPlata 1", escaleraPlata, LocalDateTime.of(2023, 8, 21, 0, 0), paradaPlata, juan);
+
+        Assert.assertTrue(i1.esRepetidoEnRango(i2,24));
+        Assert.assertTrue(i2.esRepetidoEnRango(i1,24));
+    }
+    @Test
+    public void incidenteRepetidoEnRangoHorario(){
+        Incidente i1 = new IncidenteMiembro("Incidente e EscaleraPlata 1", escaleraPlata, LocalDateTime.of(2023, 8, 20, 10, 0), paradaPlata, juan);
+        Incidente i2 = new IncidenteMiembro("Incidente e EscaleraPlata 1", escaleraPlata, LocalDateTime.of(2023, 8, 21, 0, 0), paradaPlata, juan);
 
         Assert.assertTrue(i1.esRepetidoEnRango(i2,24));
         Assert.assertTrue(i2.esRepetidoEnRango(i1,24));

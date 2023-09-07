@@ -14,7 +14,7 @@ public class Comunidad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int comunidad_codigo;
 
-    @OneToMany(mappedBy = "MiembroPorComunidad", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
+    @OneToMany(mappedBy = "comunidad", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @Getter
     private List<MiembroPorComunidad> miembros;
     @Column

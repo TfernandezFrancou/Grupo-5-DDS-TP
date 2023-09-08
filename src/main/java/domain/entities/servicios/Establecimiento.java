@@ -14,16 +14,19 @@ public class Establecimiento {
     private int establecimiento_codigo;
     @Column
     private String nombre;
-    @Transient
+    @OneToMany(mappedBy = "establecimiento", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     private List<Servicio> servicios;
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "tipoDeEstablecimiento_codigo", referencedColumnName = "tipoDeEstablecimiento_codigo")
     private TipoDeEstablecimiento tipoDeEstablecimiento;
-    @Transient
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "localizacion_codigo", referencedColumnName = "localizacion_codigo")
     private Localizacion localizacion;
 
-    @Transient
+
     @Getter
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "codigo", referencedColumnName = "codigo")
     private Entidad entidad;
 
     public Establecimiento(String nombre, TipoDeEstablecimiento tipoDeEstablecimiento, Entidad entidad){

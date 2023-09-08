@@ -17,10 +17,12 @@ public class OrganismoDeControl {
     @Column
     private String nombre;
 
-    @Transient
+    @OneToOne(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "organismoDeControl_codigo", referencedColumnName = "organismoDeControl_codigo")
     private Entidad entidad;
 
-    @Transient
+    @OneToOne(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_codigo", referencedColumnName = "usuario_codigo")
     private Usuario usuario;
 
     public OrganismoDeControl(String nombre, Entidad entidad) {

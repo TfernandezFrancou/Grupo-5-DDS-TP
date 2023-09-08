@@ -19,7 +19,8 @@ public class Comunidad {
     private List<MiembroPorComunidad> miembros;
     @Column
     private String objetivo;
-    @Transient
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
+    @JoinColumn(name = "comunidad_codigo", referencedColumnName = "comunidad_codigo")
     private List<Incidente> incidentes;
 
 

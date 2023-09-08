@@ -5,17 +5,28 @@ import domain.entities.actores.miembros.MiembroPorComunidad;
 import domain.entities.servicios.Establecimiento;
 import domain.entities.servicios.Servicio;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
+@Entity
 public class IncidenteMiembro extends Incidente{
+    /*@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int incidenteMiembro_codigo;*/
 
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "miembroPorComunidad_codigo", referencedColumnName = "miembroPorComunidad_codigo")
     private MiembroPorComunidad miembro;
 
     public IncidenteMiembro(String descripcion, Servicio servicio, LocalDateTime fechaRealizacion, Establecimiento establecimiento, MiembroPorComunidad miembro) {
         super(descripcion,servicio, fechaRealizacion,establecimiento);
         this.miembro = miembro;
+    }
+
+    public IncidenteMiembro() {
+
     }
 
     @Override

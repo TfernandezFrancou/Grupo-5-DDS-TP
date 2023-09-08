@@ -22,7 +22,8 @@ public class ServicioPublico {
     @Column
     private TipoDeTransporte tipoDeTransporte;
 
-    @Transient
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
+    @JoinColumn(name = "servicioPublico_codigo", referencedColumnName = "servicioPublico_codigo")
     private List<Linea> lineas;
 
     public ServicioPublico(TipoDeTransporte tipoDeTransporte) {

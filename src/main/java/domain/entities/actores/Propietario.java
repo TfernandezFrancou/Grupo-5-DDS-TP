@@ -17,10 +17,12 @@ public class Propietario {
     @Column
     private String nombre;
 
-    @Transient
+    @OneToOne(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "propietario_codigo", referencedColumnName = "propietario_codigo")
     private ServicioPublico servicioPublico;
 
-    @Transient
+    @OneToOne(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_codigo", referencedColumnName = "usuario_codigo")
     private Usuario usuario;
 
     public Propietario(String nombre, ServicioPublico servicioPublico) {

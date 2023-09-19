@@ -18,7 +18,7 @@ public class Ranking {
     private int ranking_codigo;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
-    private List<Rankeable> ranking;
+    private List<PuestoRanking> ranking;
 
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "tipoRanking_codigo", referencedColumnName = "tipoRanking_codigo")
@@ -26,7 +26,7 @@ public class Ranking {
     @Column
     private LocalDateTime fecha;
 
-    public Ranking(List<Rankeable> ranking, TipoRanking tipoRanking, LocalDateTime fecha){
+    public Ranking(List<PuestoRanking> ranking, TipoRanking tipoRanking, LocalDateTime fecha){
         this.ranking = ranking;
         this.tipoRanking = tipoRanking;
         this.fecha = fecha;
@@ -37,7 +37,7 @@ public class Ranking {
     }
 
     public Rankeable obtenerPrimerLugar(){
-        return this.ranking.get(0);
+        return this.ranking.get(0).getOcupadoPor();
     }
 
 }

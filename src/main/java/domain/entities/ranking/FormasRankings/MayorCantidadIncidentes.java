@@ -1,6 +1,7 @@
 package domain.entities.ranking.FormasRankings;
 
 import domain.entities.incidentes.Incidente;
+import domain.entities.ranking.PuestoRanking;
 import domain.entities.ranking.Ranking;
 import domain.entities.ranking.TipoRanking;
 import domain.entities.repositorios.IncidentesRepo;
@@ -9,17 +10,14 @@ import domain.entities.servicios.Entidad;
 import domain.entities.servicios.Rankeable;
 import domain.entities.servicios.Servicio;
 
+import java.util.*;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MayorCantidadIncidentes extends FormaRanking{
     @Override
     public void generar(LocalDateTime fecha) {
         List<Incidente> listaIncidentes = IncidentesRepo.getInstance().buscarIncidentesSemana(fecha);
-
         int horasRango = 24;
 
         // Agrupar los incidentes por entidad y servicio asociado
@@ -28,8 +26,10 @@ public class MayorCantidadIncidentes extends FormaRanking{
                 .collect(Collectors.groupingBy(incidente -> incidente.getEstablecimiento().getEntidad(),
                         Collectors.groupingBy(Incidente::getServicio)));
 
+        // Crear una lista de PuestoRanking para mantener el orden y el motivo del ranking
+        List<PuestoRanking> puestosRanking = new ArrayList<>();
+
         // Obtener la cantidad de incidentes por entidad, sin contar los servicios duplicados en un rango de 24 horas
-        Map<Entidad, Integer> rankingEntidades = new HashMap<>();
         for (Map.Entry<Entidad, Map<Servicio, List<Incidente>>> entidadEntry : incidentesPorEntidadYServicio.entrySet()) {
             int incidentesContados = 0;
             for (List<Incidente> incidentes : entidadEntry.getValue().values()) {
@@ -45,15 +45,22 @@ public class MayorCantidadIncidentes extends FormaRanking{
                     }
                 }
             }
-            rankingEntidades.put(entidadEntry.getKey(), incidentesContados);
+
+            // Agregar un nuevo PuestoRanking con el motivo (cantidad de incidentes) y la entidad correspondiente
+            puestosRanking.add(new PuestoRanking(0, entidadEntry.getKey(), incidentesContados));
         }
 
-        // Ordenar las entidades según la cantidad de incidentes
-        List<Rankeable> entidadesOrdenadas = rankingEntidades.entrySet().stream()
-                .sorted(Map.Entry.<Entidad, Integer>comparingByValue().reversed())
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
-        Ranking ranking = new Ranking(entidadesOrdenadas,new TipoRanking("Mayor cantidad de incidentes"), fecha);
+        // Ordenar la lista de PuestoRanking por motivo (cantidad de incidentes)
+        puestosRanking.sort(Comparator.comparingDouble(PuestoRanking::getMotivo).reversed());
+
+        // Asignar los puestos en el ranking en función de la posición en la lista
+        for (int i = 0; i < puestosRanking.size(); i++) {
+            puestosRanking.get(i).setPuesto(i + 1);
+        }
+
+
+        Ranking ranking = new Ranking(puestosRanking,new TipoRanking("Mayor cantidad de incidentes"), fecha);
         RankingsRepo.getInstance().agregarRanking(ranking);
     }
+
 }

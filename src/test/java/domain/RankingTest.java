@@ -187,7 +187,6 @@ public class RankingTest {
         IncidentesRepo.getInstance().agregarIncidente(incidenteEscaleraPlata1);
 
         rankings.generarRanking();
-        //Assert.assertEquals("Linea E",RankingsRepo.getInstance().obtenerRanking(0).obtenerPrimerLugar().getNombre());
         Assert.assertEquals(1,rankings.getFormasRanking().size());
     }
 

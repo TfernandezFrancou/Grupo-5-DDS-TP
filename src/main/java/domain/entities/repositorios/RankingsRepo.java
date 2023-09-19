@@ -1,11 +1,12 @@
 package domain.entities.repositorios;
 
-import domain.entities.incidentes.Incidente;
 import domain.entities.ranking.Ranking;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class RankingsRepo {
     private static RankingsRepo instance;
     private List<Ranking> rankings;

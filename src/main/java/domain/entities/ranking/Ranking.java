@@ -1,10 +1,10 @@
 package domain.entities.ranking;
 
+import domain.entities.ranking.Puestos.PuestoRanking;
 import domain.entities.servicios.Rankeable;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 //todo: cuando nos expliquen persistencia no relacional, meterlo en un txt
@@ -36,8 +36,9 @@ public class Ranking {
 
     }
 
-    public Rankeable obtenerPrimerLugar(){
-        return this.ranking.get(0).getOcupadoPor();
+    public PuestoRanking obtenerPrimerLugar(){
+
+        return this.ranking.get(0);
     }
 
 }

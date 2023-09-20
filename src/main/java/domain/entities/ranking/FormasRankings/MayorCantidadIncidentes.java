@@ -1,13 +1,13 @@
 package domain.entities.ranking.FormasRankings;
 
 import domain.entities.incidentes.Incidente;
-import domain.entities.ranking.PuestoRanking;
+import domain.entities.ranking.Puestos.PuestoRanking;
+import domain.entities.ranking.Puestos.PuestosRankingEntidad;
 import domain.entities.ranking.Ranking;
 import domain.entities.ranking.TipoRanking;
 import domain.entities.repositorios.IncidentesRepo;
 import domain.entities.repositorios.RankingsRepo;
 import domain.entities.servicios.Entidad;
-import domain.entities.servicios.Rankeable;
 import domain.entities.servicios.Servicio;
 
 import java.util.*;
@@ -47,7 +47,7 @@ public class MayorCantidadIncidentes extends FormaRanking{
             }
 
             // Agregar un nuevo PuestoRanking con el motivo (cantidad de incidentes) y la entidad correspondiente
-            puestosRanking.add(new PuestoRanking(0, entidadEntry.getKey(), incidentesContados));
+            puestosRanking.add(new PuestosRankingEntidad(0, entidadEntry.getKey(), incidentesContados));
         }
 
         // Ordenar la lista de PuestoRanking por motivo (cantidad de incidentes)

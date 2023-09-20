@@ -142,7 +142,7 @@ public class RankingTest {
 
         rankings.generarRanking();
         //5 incidentes para la linea B y 7 para la linea E de los cuales solo cuentan 4
-        Assert.assertEquals("Linea B",RankingsRepo.getInstance().obtenerRanking(0).obtenerPrimerLugar().getNombre());
+        Assert.assertEquals("Linea B",RankingsRepo.getInstance().obtenerRanking(0).obtenerPrimerLugar().ocupadoPor());
 
     }
     @Test
@@ -187,7 +187,7 @@ public class RankingTest {
         IncidentesRepo.getInstance().agregarIncidente(incidenteEscaleraPlata1);
 
         rankings.generarRanking();
-        Assert.assertEquals(1,rankings.getFormasRanking().size());
+        Assert.assertEquals("Linea E",RankingsRepo.getInstance().obtenerRanking(0).obtenerPrimerLugar().ocupadoPor());
     }
 
 }

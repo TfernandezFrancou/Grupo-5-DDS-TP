@@ -55,6 +55,7 @@ public abstract class Incidente {
 
     public void cerrarIncidente(LocalDateTime fechaCierre) {
         this.fechaCierre = fechaCierre;
+        this.resuelto=Boolean.TRUE;
 
     }
 

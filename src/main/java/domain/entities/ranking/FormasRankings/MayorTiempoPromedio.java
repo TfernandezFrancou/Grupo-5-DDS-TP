@@ -52,14 +52,7 @@ public class MayorTiempoPromedio extends FormaRanking {
             puestosRanking.get(i).setPuesto(i + 1);
         }
 
-        // Crear un ranking a partir de la lista de PuestoRanking
-        Ranking ranking = new Ranking(
-                puestosRanking,
-                new TipoRanking("Mayor Tiempo Promedio"),
-                fecha
-        );
-
-        // Agregar el ranking al repositorio de rankings
+        Ranking ranking = new Ranking(puestosRanking, new TipoRanking("Mayor Tiempo Promedio"), fecha);
         RankingsRepo.getInstance().agregarRanking(ranking);
     }
 }

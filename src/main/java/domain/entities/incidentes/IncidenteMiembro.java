@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class IncidenteMiembro extends Incidente{
@@ -31,7 +32,7 @@ public class IncidenteMiembro extends Incidente{
 
     @Override
     public List<Miembro> obtenerContactos() {
-        return null;
+        return miembro.getComunidad().getMiembros().stream().map(m->m.getMiembro()).collect(Collectors.toList());
     }
 
     @Override

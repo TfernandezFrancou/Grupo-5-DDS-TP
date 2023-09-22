@@ -23,7 +23,7 @@ public abstract class Incidente {
     @JoinColumn(name = "establecimiento_codigo", referencedColumnName = "establecimiento_codigo")
     private Establecimiento establecimiento;
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "codigo", referencedColumnName = "codigo")
+    @JoinColumn(name = "servicio_codigo", referencedColumnName = "servicio_codigo")
     private Servicio servicio;
     @Column
     private String descripcion;
@@ -62,5 +62,6 @@ public abstract class Incidente {
     public abstract List<Miembro> obtenerContactos();
 
     public abstract void notificar();
+
 
 }

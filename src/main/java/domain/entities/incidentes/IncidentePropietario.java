@@ -29,7 +29,7 @@ public class IncidentePropietario extends Incidente {
 
     }
 
-
+    //todo: ver a quien se notifica esto
     @Override
     public List<Miembro> obtenerContactos() {
         return null;

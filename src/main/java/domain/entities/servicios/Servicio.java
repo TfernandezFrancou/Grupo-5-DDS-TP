@@ -1,10 +1,15 @@
 package domain.entities.servicios;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Getter
+@Setter
 public abstract class Servicio{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,4 +18,5 @@ public abstract class Servicio{
     @JoinColumn(name = "establecimiento_codigo", referencedColumnName = "establecimiento_codigo")
     protected Establecimiento establecimiento;
 
+    public Servicio(){}
 }

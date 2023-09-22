@@ -26,7 +26,7 @@ public class Establecimiento {
 
     @Getter
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "codigo", referencedColumnName = "codigo")
+    @JoinColumn(name = "entidad_codigo", referencedColumnName = "entidad_codigo")
     private Entidad entidad;
 
     public Establecimiento(String nombre, TipoDeEstablecimiento tipoDeEstablecimiento, Entidad entidad){

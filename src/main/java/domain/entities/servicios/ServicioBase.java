@@ -4,7 +4,9 @@ package domain.entities.servicios;
 import javax.persistence.*;
 
 @Entity
+
 public class ServicioBase extends Servicio{
+
 
     @Column
     private Boolean estaHabilitado;

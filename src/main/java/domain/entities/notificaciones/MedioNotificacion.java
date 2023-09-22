@@ -1,9 +1,15 @@
 package domain.entities.notificaciones;
 
+import domain.entities.actores.miembros.Miembro;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Table
+@Getter
+@Setter
 public class MedioNotificacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,4 +17,18 @@ public class MedioNotificacion {
 
     @Column
     private String medioNotificacion;
+
+    @Transient
+    private EstrategiaNotificar estrategiaNotificar;
+
+    public void notificar(Notificacion notificacion, Miembro miembro) {
+        if(medioNotificacion.equals("email")){
+            estrategiaNotificar= new EstrategiaEmail();
+        }
+        if(medioNotificacion.equals("whatsapp")){
+            estrategiaNotificar = new EstrategiaWhatsapp();
+        }
+
+        estrategiaNotificar.notificar(notificacion,miembro);
+    }
 }

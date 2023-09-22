@@ -1,14 +1,19 @@
 package domain.entities.actores.miembros;
 
 import domain.entities.actores.Usuario;
+import domain.entities.notificaciones.HorarioNotificacion;
 import domain.entities.notificaciones.MedioNotificacion;
+import domain.entities.notificaciones.Notificacion;
 import domain.entities.services.georef.entities.Localizacion;
 import domain.entities.servicios.Entidad;
 import lombok.Getter;
 
 import javax.persistence.*;
 import javax.transaction.TransactionScoped;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Entity
 @Table(name = "Miembros")
 @Getter
@@ -49,6 +54,9 @@ public class Miembro {
     private MedioNotificacion medioNotificacion;
 
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
+    private List<HorarioNotificacion> horarios;
+
     public Miembro(String nombre, String apellido, String email, String telefono) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -58,5 +66,13 @@ public class Miembro {
 
     public Miembro() {
 
+    }
+
+    public boolean tieneRangoHorario(LocalDateTime hora) {
+        return !this.horarios.stream().filter(r -> r.equals(hora)).collect(Collectors.toList()).isEmpty();
+    }
+
+    public void notificar(Notificacion notificacion){
+        this.getMedioNotificacion().notificar(notificacion,this);
     }
 }

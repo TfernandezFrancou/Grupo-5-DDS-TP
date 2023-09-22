@@ -1,7 +1,6 @@
 package domain.entities.ranking;
 
 import domain.entities.ranking.Puestos.PuestoRanking;
-import domain.entities.servicios.Rankeable;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -17,7 +16,7 @@ public class Ranking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ranking_codigo;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     private List<PuestoRanking> ranking;
 
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE}, fetch = FetchType.LAZY)

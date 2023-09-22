@@ -13,11 +13,11 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table
 @Setter
-public abstract class Entidad extends Rankeable {
+public abstract class Entidad {
 
-    /*@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int entidad_codigo;*/
+    private int entidad_codigo;
     @Column
     protected String nombre;
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE}, fetch = FetchType.LAZY)

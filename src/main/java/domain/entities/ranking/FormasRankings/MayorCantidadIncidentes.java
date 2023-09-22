@@ -51,7 +51,7 @@ public class MayorCantidadIncidentes extends FormaRanking{
         }
 
         // Ordenar la lista de PuestoRanking por motivo (cantidad de incidentes)
-        puestosRanking.sort(Comparator.comparingDouble(PuestoRanking::getMotivo).reversed());
+        puestosRanking.sort(Comparator.comparingDouble(PuestoRanking::getPuntaje).reversed());
 
         // Asignar los puestos en el ranking en función de la posición en la lista
         for (int i = 0; i < puestosRanking.size(); i++) {

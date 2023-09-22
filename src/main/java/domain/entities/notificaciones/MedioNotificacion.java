@@ -25,7 +25,7 @@ public class MedioNotificacion {
         if(medioNotificacion.equals("email")){
             estrategiaNotificar= new EstrategiaEmail();
         }
-        if(medioNotificacion.equals("whatsapp")){
+        if(medioNotificacion.equals("whatsapp")) {
             estrategiaNotificar = new EstrategiaWhatsapp();
         }
 

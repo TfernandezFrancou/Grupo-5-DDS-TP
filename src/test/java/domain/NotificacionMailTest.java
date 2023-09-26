@@ -1,15 +1,16 @@
 package domain;
 
 import domain.entities.actores.miembros.Miembro;
+import domain.entities.notificaciones.EstrategiaEmail;
 import domain.entities.notificaciones.EstrategiaWhatsapp;
 import domain.entities.notificaciones.Notificacion;
 import org.junit.Before;
 import org.junit.Test;
 
-public class NotificacionWppTest {
+public class NotificacionMailTest {
 
     Miembro miembro1;
-    EstrategiaWhatsapp wpp;
+    EstrategiaEmail email;
     Notificacion notificacion;
 
 
@@ -17,17 +18,17 @@ public class NotificacionWppTest {
     public void init(){
         miembro1 = new Miembro("Ignacio",
                 "Bisio",
-                "ignacio.bisio8780@gmail.com",
+                "dominomas2000@gmail.com",
                 "+5491165334565");
 
         notificacion = new Notificacion();
-        wpp = new EstrategiaWhatsapp();
+        email = new EstrategiaEmail();
     }
 
     @Test
-    public void NotificarPorWpp(){
+    public void NotificarPorEmial(){
 
-        wpp.notificar(notificacion,miembro1);
+        email.notificar(notificacion,miembro1);
 
     }
 }

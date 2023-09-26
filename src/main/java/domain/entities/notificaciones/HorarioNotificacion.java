@@ -1,8 +1,10 @@
 package domain.entities.notificaciones;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
-
+@Getter
 @Entity
 public class HorarioNotificacion {
     @Id

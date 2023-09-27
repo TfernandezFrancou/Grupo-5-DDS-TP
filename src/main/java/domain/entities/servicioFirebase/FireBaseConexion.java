@@ -4,6 +4,7 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.cloud.FirestoreClient;
 
 import java.io.FileInputStream;
@@ -12,18 +13,19 @@ import java.io.IOException;
 
 public class FireBaseConexion {
 
-    static Firestore db;
-    public static void conectarFirebase() throws IOException {
-        FileInputStream serviceAccount =
-                new FileInputStream("resources/firebase.json");
 
+    public void conectar() throws IOException {
+
+        // Inicializa FirebaseApp con la configuración de tu proyecto Firebase.
+        FileInputStream serviceAccount = new FileInputStream("src/main/resources/firebase.json");
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                .setDatabaseUrl("https://tu-proyecto.firebaseio.com")
                 .build();
-
         FirebaseApp.initializeApp(options);
-        db = FirestoreClient.getFirestore();
-        System.out.println("La conexion fue exitosa");
 
+        // Inicializa FirebaseAuth
+        FirebaseAuth auth = FirebaseAuth.getInstance();
     }
+
 }

@@ -27,8 +27,8 @@ public class EstrategiaWhatsapp extends EstrategiaNotificar {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message message = Message.creator(
                 new com.twilio.type.PhoneNumber("whatsapp:".concat(miembro.getTelefono())), // Receptor
-                new com.twilio.type.PhoneNumber("whatsapp:+14155238886"),   // Enviador
-                "Independiente se va a ir a la B")          // Mensaje
+                new com.twilio.type.PhoneNumber("whatsapp:+14155238886"),   // Mensajero
+                notificacion.getIncidente().getDescripcion())          // Mensaje
                 .create();
         System.out.println(message.getSid());
     }

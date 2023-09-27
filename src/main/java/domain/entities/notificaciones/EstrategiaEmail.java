@@ -40,8 +40,8 @@ public class EstrategiaEmail extends EstrategiaNotificar{
             message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username));
             message.addRecipients(Message.RecipientType.TO, InternetAddress.parse(miembro.getEmail()));
-            message.setSubject("Incidentes Reportados");
-            message.setText("Descripcion del incidente"); // TODO: Modificar
+            message.setSubject("Nuevo incidente reportado");
+            message.setText(notificacion.getIncidente().getDescripcion());
 
 
             Transport mTransport = session.getTransport("smtp");

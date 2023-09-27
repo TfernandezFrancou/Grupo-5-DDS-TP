@@ -23,5 +23,8 @@ public class Comunidad {
     @JoinColumn(name = "comunidad_codigo", referencedColumnName = "comunidad_codigo")
     private List<Incidente> incidentes;
 
+    @Column
+    private Double puntaje;
+
 
 }

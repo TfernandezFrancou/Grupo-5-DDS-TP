@@ -6,25 +6,31 @@ import lombok.Getter;
 import org.quartz.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Getter
 public class GeneradorScheduelerNotificacion {
-    private List<HorarioNotificacion> horariosNotificacion;
-    public void generar() throws SchedulerException {
-        HorarioNotificacionRepo.getInstance().getHorarios().forEach(this::agregarHorario);
-        comenzar();
+    private List<Integer> minutosNotificacion;
+    public GeneradorScheduelerNotificacion(){
+        this.minutosNotificacion=new ArrayList<>();
+        HorarioNotificacionRepo.getInstance().getHorarios().forEach(this::obtenerMinuto);
     }
-    public void agregarHorario(HorarioNotificacion horario){
-        horariosNotificacion.add(horario);
-    }
-    private String armarCron(){
-        return "Hola";
-    }
-    public String armarUnCron(LocalDateTime horario){
-        //Devuelve un cron para todos los dias en el horario recibido
-        return ""+ horario.getSecond() + " " + horario.getMinute() + " "+horario.getHour() + " * * ? *";
+    public void obtenerMinuto(HorarioNotificacion horario){
 
+        if(minutosNotificacion.contains(horario.getHorario().getMinute())){
+            return;
+        }
+        minutosNotificacion.add(horario.getHorario().getMinute());
     }
+    public String armarCron(){
+        String minutos = minutosNotificacion.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(","));
+        return "0 " + minutos + " * 1/1 * ? *";
+    }
+
     private void comenzar() throws SchedulerException {
         // Creacion del scheduler
         SchedulerFactory schedFactory = new org.quartz.impl.StdSchedulerFactory();
@@ -35,6 +41,15 @@ public class GeneradorScheduelerNotificacion {
         JobDetail jobDetail = jobBuilder.withIdentity("JobNotificar").build();
 
         //Creacion del triger
+        Trigger trigger = TriggerBuilder.newTrigger()
+                .withIdentity("TemporizadorNotificaciones")
+                .startNow()
+                .withSchedule(CronScheduleBuilder.cronSchedule(armarCron()))
+                .build();
+
+        //Asigno el trabajo y el trigger al schedueler
+        scheduler.scheduleJob(jobDetail, trigger);
+        scheduler.start();
 
     }
 }

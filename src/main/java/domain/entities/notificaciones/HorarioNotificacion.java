@@ -12,4 +12,10 @@ public class HorarioNotificacion {
     private int horario_codigo;
     @Column
     private LocalDateTime horario;
+
+    public HorarioNotificacion(){
+    }
+    public HorarioNotificacion(LocalDateTime horario){
+        this.horario=horario;
+    }
 }

@@ -31,4 +31,8 @@ public class MedioNotificacion {
 
         estrategiaNotificar.notificar(notificacion,miembro);
     }
+
+    public MedioNotificacion(String medioNotificacion) {
+        this.medioNotificacion = medioNotificacion;
+    }
 }

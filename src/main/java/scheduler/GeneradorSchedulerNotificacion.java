@@ -1,21 +1,26 @@
 package scheduler;
 
 import domain.entities.notificaciones.HorarioNotificacion;
-import domain.entities.repositorios.HorarioNotificacionRepo;
 import lombok.Getter;
 import org.quartz.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
-public class GeneradorScheduelerNotificacion {
+public class GeneradorSchedulerNotificacion {
     private List<Integer> minutosNotificacion;
-    public GeneradorScheduelerNotificacion(){
+    private  List<Integer> horasNotificacion;
+    public GeneradorSchedulerNotificacion(){
         this.minutosNotificacion=new ArrayList<>();
-        HorarioNotificacionRepo.getInstance().getHorarios().forEach(this::obtenerMinuto);
+        this.horasNotificacion=new ArrayList<>();
+       // HorarioNotificacionRepo.getInstance().getHorarios().forEach(this::obtenerHorarios);
+    }
+
+    public void obtenerHorario(HorarioNotificacion horario){
+        obtenerMinuto(horario);
+        obtenerHora(horario);
     }
     public void obtenerMinuto(HorarioNotificacion horario){
 
@@ -24,14 +29,23 @@ public class GeneradorScheduelerNotificacion {
         }
         minutosNotificacion.add(horario.getHorario().getMinute());
     }
+    public void obtenerHora(HorarioNotificacion horario){
+        if(horasNotificacion.contains(horario.getHorario().getHour())){
+            return;
+        }
+        horasNotificacion.add(horario.getHorario().getHour());
+    }
     public String armarCron(){
         String minutos = minutosNotificacion.stream()
                 .map(Object::toString)
                 .collect(Collectors.joining(","));
-        return "0 " + minutos + " * 1/1 * ? *";
+        String horas = horasNotificacion.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(","));
+        return "0 " + minutos +" "+ horas+" 1/1 * ? *";
     }
 
-    private void comenzar() throws SchedulerException {
+    public void comenzar() throws SchedulerException {
         // Creacion del scheduler
         SchedulerFactory schedFactory = new org.quartz.impl.StdSchedulerFactory();
         Scheduler scheduler = schedFactory.getScheduler();

@@ -32,8 +32,6 @@ public class ContextTest extends AbstractPersistenceTest implements WithGlobalEn
         withTransaction(() -> {});
     }
 
-
-
     @Test
     public void init(){
         EntityManager em = BDUtils.getEntityManager();

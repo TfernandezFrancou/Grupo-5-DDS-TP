@@ -6,13 +6,22 @@ import domain.entities.incidentes.Incidente;
 import domain.entities.incidentes.IncidenteMiembro;
 import lombok.Getter;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Entity
+@Table
+@Getter
 public class Notificacion {
-    @Getter
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int notificacion_codigo;
+
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "incidente_codigo", referencedColumnName = "incidente_codigo")
     private Incidente incidente;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     private List<Miembro> miembros;
 
     public Notificacion(Incidente incidente, List<Miembro> miembros){

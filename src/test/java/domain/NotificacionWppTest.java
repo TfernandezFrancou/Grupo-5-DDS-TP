@@ -3,14 +3,16 @@ package domain;
 import domain.entities.actores.miembros.Miembro;
 import domain.entities.actores.miembros.MiembroPorComunidad;
 import domain.entities.incidentes.IncidenteMiembro;
-import domain.entities.notificaciones.EstrategiaEmail;
-import domain.entities.notificaciones.EstrategiaWhatsapp;
-import domain.entities.notificaciones.Notificacion;
+import domain.entities.notificaciones.*;
 import domain.entities.servicios.Establecimiento;
 import domain.entities.servicios.Servicio;
 import org.junit.Before;
 import org.junit.Test;
+import org.quartz.SchedulerException;
+import scheduler.GeneradorSchedulerNotificacion;
+import utils.BDUtils;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -37,8 +39,15 @@ public class NotificacionWppTest {
         incidente = new IncidenteMiembro("Los baños de la linea A no funcionan",
                 servicio,fecha,establecimiento,miembroPorComunidad);
 
+        EntityManager em = BDUtils.getEntityManager();
+        BDUtils.comenzarTransaccion(em);
+        em.persist(incidente);
+        BDUtils.commit(em);
+
         notificacion = new Notificacion(incidente,miembros);
+        MedioNotificacion nwp= new MedioNotificacion("whatsapp");
         wpp = new EstrategiaWhatsapp();
+        miembro1.setMedioNotificacion(nwp);
     }
 
     @Test
@@ -46,5 +55,17 @@ public class NotificacionWppTest {
 
         wpp.notificar(notificacion,miembro1);
 
+    }
+    @Test
+    public void NotificacionConScheduler() throws InterruptedException {
+        GeneradorSchedulerNotificacion generador = new GeneradorSchedulerNotificacion();
+        HorarioNotificacion horario = new HorarioNotificacion(LocalDateTime.now().plusSeconds(5));
+        generador.obtenerHorario(horario);
+        try {
+            generador.comenzar();
+        } catch (SchedulerException e) {
+            throw new RuntimeException(e);
+        }
+        Thread.sleep(30000);
     }
 }

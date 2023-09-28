@@ -59,13 +59,13 @@ public class NotificacionWppTest {
     @Test
     public void NotificacionConScheduler() throws InterruptedException {
         GeneradorSchedulerNotificacion generador = new GeneradorSchedulerNotificacion();
-        HorarioNotificacion horario = new HorarioNotificacion(LocalDateTime.now().plusSeconds(5));
+        HorarioNotificacion horario = new HorarioNotificacion(LocalDateTime.now().plusMinutes(1));
         generador.obtenerHorario(horario);
         try {
             generador.comenzar();
         } catch (SchedulerException e) {
             throw new RuntimeException(e);
         }
-        Thread.sleep(30000);
+        Thread.sleep(120000);
     }
 }

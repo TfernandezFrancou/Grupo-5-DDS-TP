@@ -1,5 +1,6 @@
 package domain;
 
+import domain.entities.actores.Comunidad;
 import domain.entities.actores.miembros.Miembro;
 import domain.entities.actores.miembros.MiembroPorComunidad;
 import domain.entities.incidentes.IncidenteMiembro;
@@ -26,7 +27,7 @@ public class NotificacionWppTest {
     LocalDateTime fecha = LocalDateTime.of(2023, 9, 27, 15, 00);
     Establecimiento establecimiento;
     MiembroPorComunidad miembroPorComunidad;
-
+    Comunidad comunidad;
 
     @Before
     public void init(){
@@ -35,18 +36,14 @@ public class NotificacionWppTest {
                 "ignacio.bisio8780@gmail.com",
                 "+5491131772043");
 
+        comunidad= new Comunidad();
+        miembroPorComunidad= new MiembroPorComunidad(miembro1,comunidad);
         incidente = new IncidenteMiembro("Los baños de la linea A no funcionan",
                 servicio,fecha,establecimiento,miembroPorComunidad);
 
-        EntityManager em = BDUtils.getEntityManager();
-        BDUtils.comenzarTransaccion(em);
-        em.persist(incidente);
-        BDUtils.commit(em);
 
         notificacion = new Notificacion(incidente);
-        MedioNotificacion nwp= new MedioNotificacion("whatsapp");
         wpp = new EstrategiaWhatsapp();
-        miembro1.setMedioNotificacion(nwp);
     }
 
     @Test

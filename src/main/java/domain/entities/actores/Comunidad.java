@@ -2,9 +2,11 @@ package domain.entities.actores;
 
 import domain.entities.actores.miembros.MiembroPorComunidad;
 import domain.entities.incidentes.Incidente;
+import javassist.expr.NewArray;
 import lombok.Getter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,6 +27,10 @@ public class Comunidad {
 
     @Column
     private Double puntaje;
+
+    public Comunidad(){
+        miembros= new ArrayList<>();
+    }
 
 
 }

@@ -34,6 +34,10 @@ public class MiembroPorComunidad {
     public MiembroPorComunidad(Miembro miembro,Comunidad comunidad) {
         this.miembro = miembro;
         this.comunidad = comunidad;
+
+        if(!comunidad.getMiembros().contains(this)){
+            comunidad.getMiembros().add(this);
+        }
     }
 
     public MiembroPorComunidad() {

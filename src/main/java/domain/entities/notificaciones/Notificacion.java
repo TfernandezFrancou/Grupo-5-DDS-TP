@@ -24,9 +24,9 @@ public class Notificacion {
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     private List<Miembro> miembros;
 
-    public Notificacion(Incidente incidente, List<Miembro> miembros){
+    public Notificacion(Incidente incidente){
         this.incidente = incidente;
-        this.miembros = miembros;
+        this.miembros = incidente.obtenerContactos();
     }
     public Notificacion(){
 

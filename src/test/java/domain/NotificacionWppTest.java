@@ -26,7 +26,6 @@ public class NotificacionWppTest {
     LocalDateTime fecha = LocalDateTime.of(2023, 9, 27, 15, 00);
     Establecimiento establecimiento;
     MiembroPorComunidad miembroPorComunidad;
-    List<Miembro> miembros;
 
 
     @Before
@@ -44,7 +43,7 @@ public class NotificacionWppTest {
         em.persist(incidente);
         BDUtils.commit(em);
 
-        notificacion = new Notificacion(incidente,miembros);
+        notificacion = new Notificacion(incidente);
         MedioNotificacion nwp= new MedioNotificacion("whatsapp");
         wpp = new EstrategiaWhatsapp();
         miembro1.setMedioNotificacion(nwp);
@@ -56,16 +55,5 @@ public class NotificacionWppTest {
         wpp.notificar(notificacion,miembro1);
 
     }
-    @Test
-    public void NotificacionConScheduler() throws InterruptedException {
-        GeneradorSchedulerNotificacion generador = new GeneradorSchedulerNotificacion();
-        HorarioNotificacion horario = new HorarioNotificacion(LocalDateTime.now().plusMinutes(1));
-        generador.obtenerHorario(horario);
-        try {
-            generador.comenzar();
-        } catch (SchedulerException e) {
-            throw new RuntimeException(e);
-        }
-        Thread.sleep(120000);
-    }
+
 }

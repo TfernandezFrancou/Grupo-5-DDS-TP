@@ -38,7 +38,7 @@ public class NotificacionMailTest {
 
         incidente = new IncidenteMiembro("Los baños de la linea A no funcionan",
                                         servicio,fecha,establecimiento,miembroPorComunidad);
-        notificacion = new Notificacion(incidente,miembros);
+        notificacion = new Notificacion(incidente);
 
         email = new EstrategiaEmail();
     }

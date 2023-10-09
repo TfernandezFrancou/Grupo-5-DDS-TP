@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
 import scheduler.GeneradorSchedulerNotificacion;
 
 import java.time.LocalDateTime;
@@ -29,6 +30,18 @@ public class ScheduelTest {
         // Esperar un tiempo suficiente para que el trabajo se ejecute (aquí estamos esperando 2 minutos)
         Thread.sleep(120000); // 2 minutos en milisegundos
 
+    }
+    @Test
+    public void NotificacionConScheduler() throws InterruptedException {
+        GeneradorSchedulerNotificacion generador = new GeneradorSchedulerNotificacion();
+        HorarioNotificacion horario = new HorarioNotificacion(LocalDateTime.now().plusMinutes(1));
+        generador.obtenerHorario(horario);
+        try {
+            generador.comenzar();
+        } catch (SchedulerException e) {
+            throw new RuntimeException(e);
+        }
+        Thread.sleep(120000);
     }
 }
 

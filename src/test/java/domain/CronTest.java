@@ -8,7 +8,7 @@ import scheduler.GeneradorSchedulerNotificacion;
 
 import java.time.LocalDateTime;
 
-public class CronoTest {
+public class CronTest {
     GeneradorSchedulerNotificacion generador;
 
     @Before

@@ -15,7 +15,7 @@ public class EstrategiaEmail extends EstrategiaNotificar{
     MimeMessage message;
 
     String username = "ignacio.bisio8780@gmail.com";
-    String password = ""; // TODO: Cargar con un .properties
+    String password = "fvztifumthqaujlm"; // TODO: Cargar con un .properties
 
     public EstrategiaEmail() {
     }

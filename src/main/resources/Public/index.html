@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Subir Archivo</title>
+    <!-- Agregar Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles.css"> <!-- Agregar archivo de estilos personalizados -->
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Subir Archivo</h1>
+        <p>Por favor, siga las instrucciones a continuación para subir su archivo:</p>
+        <ol>
+            <li>Haga clic en el botón de abajo para seleccionar el archivo.</li>
+            <li>O arrastre y suelte el archivo en la zona punteada a continuación.</li>
+            <li>Haga clic en el botón "Subir" para cargar el archivo.</li>
+            <t>Tener en cuenta que si:
+                <ul>
+                    <li>Si es un organismo de control, debe tener 4 columnas: 
+                        <ol>
+                            <li>Nombre de la organizacion</li>
+                            <li>Tipo de organizacion</li>
+                            <li>Servicio especifico</li>
+                            <li>Servicio</li>
+                        </ol>
+                    </li>
+                    <li>Si es un propietario, debe tener 3 columnas: 
+                        <ol>
+                            <li>Nombre de la organizacion</li>
+                            <li>Tipo</li>
+                            <li>Medio de transporte</li>
+                        </ol>
+                    </li>
+                </ul>
+            </t>
+            
+        </ol>
+        <div class="upload-btn-wrapper mt-4 text-center">
+            <button class="btn btn-upload">Seleccionar archivo</button>
+            <input type="file" name="file" id="file" accept=".pdf, .doc, .docx, .txt">
+        </div>
+        <p id="file-name">Ningún archivo seleccionado</p>
+        <div class="dropzone mt-4 text-center">
+            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+            <p>Suelte el archivo aquí o haga clic para seleccionar uno</p>
+        </div>
+        <button id="upload-button" class="btn btn-upload mt-4" disabled>Subir</button>
+    </div>
+
+    <!-- Agregar Bootstrap JavaScript y jQuery (opcional) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <!-- Agregar FontAwesome (para el icono de la flecha de carga) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!-- Agregar archivo de JavaScript personalizado -->
+    <script src="script.js"></script>
+</body>
+</html>

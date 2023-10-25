@@ -28,4 +28,8 @@ dropzone.addEventListener('drop', function (e) {
     dropzone.classList.remove('bg-light'); // Restaura el fondo
     const file = e.dataTransfer.files[0];
     if (file) {
-       
+        fileName.textContent = 'Archivo seleccionado: ' + file.name;
+        uploadButton.removeAttribute('disabled');
+    }});
+
+

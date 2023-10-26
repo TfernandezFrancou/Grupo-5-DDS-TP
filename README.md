@@ -4,4 +4,4 @@
 
 [Documento de entrega](https://docs.google.com/document/d/1t-8gzrmkRD8hoECocfHSi5JKWmO7Byrmb9I2-0sgPiU/edit)
 
-[Maquetados web]([https://docs.google.com/document/d/1t-8gzrmkRD8hoECocfHSi5JKWmO7Byrmb9I2-0sgPiU/edit](https://www.figma.com/file/K2MAkkZ1NWrBknuaBmbtbD/TP-DDS-2023?type=design&node-id=11%3A7&mode=design&t=CzosNlUbfBAAGilp-1)https://www.figma.com/file/K2MAkkZ1NWrBknuaBmbtbD/TP-DDS-2023?type=design&node-id=11%3A7&mode=design&t=CzosNlUbfBAAGilp-1)
+[Maquetas web](https://www.figma.com/file/K2MAkkZ1NWrBknuaBmbtbD/TP-DDS-2023?type=design&node-id=11%3A7&mode=design&t=CzosNlUbfBAAGilp-1)

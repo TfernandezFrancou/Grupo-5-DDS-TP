@@ -29,13 +29,54 @@
 								<li class="nav-item"> <a href="#" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="top" title data-bs-original-title="Grid" aria-label="Grid"><i class="bx bx-grid-alt"></i></a></li>
 							</ul>
 						</div>
-						<div> <a href="#" data-bs-toggle="modal" data-bs-target=".add-new" class="btn btn-primary"><i class="bx bx-plus me-1"></i> Agregar Incidente</a></div>
+						<div> <a href="#" data-bs-toggle="modal" class="btn btn-primary" data-bs-target="#exampleModal"><i class="bx bx-plus me-1"></i> Agregar Incidente</a></div>
 						<div class="dropdown"> <a class="btn btn-link text-muted py-1 font-size-16 shadow-none dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-horizontal-rounded"></i></a>
 							<ul class="dropdown-menu dropdown-menu-end">
 								<li><a class="dropdown-item" href="#">Action</a></li>
 								<li><a class="dropdown-item" href="#">Another action</a></li>
 								<li><a class="dropdown-item" href="#">Something else here</a></li>
 							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal" id="exampleModal" >
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Crear Incidente</h5>
+							<button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<form>
+		
+								<div>
+									<label for="Servicio" class="form-label">Elegir servicio</label>
+									<select class="form-select" id="Servicio" aria-label="Default select example">
+									<option selected>Servicio</option>
+									<option value="1">One</option>
+									<option value="2">Two</option>
+									<option value="3">Three</option>
+								  </select>
+								</div>
+								<div>
+									<label for="Establecimiento" class="form-label">Elegir establecimiento</label>
+									<select class="form-select" aria-label="Default select example" id="Establecimiento">
+									<option selected>Establecimiento</option>
+									<option value="1">One</option>
+									<option value="2">Two</option>
+									<option value="3">Three</option>
+								  </select>
+								</div>
+								<div class="mb-3">
+									<label for="exampleFormControlTextarea1" class="form-label">Descripcion</label>
+									<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+								  </div>
+							  </form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+							<button type="button" class="btn btn-primary">Agregar Incidente</button>
 						</div>
 					</div>
 				</div>
@@ -274,6 +315,21 @@
 			        background-color: rgba(59,118,225,.25)!important;
 			    }/*]]>*/
 		</style>
+		<script async src="https://cdn.jsdelivr.net/npm/es-module-shims@1/dist/es-module-shims.min.js" crossorigin="anonymous"></script>
+		<script type="importmap">
+		{
+		  "imports": {
+			"@popperjs/core": "https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/esm/popper.min.js",
+			"bootstrap": "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.esm.min.js"
+		  }
+		}
+		</script>
+		<script type="module">
+		  import * as bootstrap from 'bootstrap'
+	
+		  new bootstrap.Popover(document.getElementById('popoverButton'))
+		</script>
+		</body>
 		<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 		<script type="text/javascript"></script>
 		<style>
@@ -290,5 +346,6 @@
 		    
 		            gtag('config', 'G-F1RTS0P1CD');
 	</script>
+	
 </body>
 </html>

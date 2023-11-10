@@ -1,9 +1,12 @@
 package domain.entities.repositorios;
 
+import domain.entities.actores.miembros.MiembroPorComunidad;
 import domain.entities.incidentes.Incidente;
+import domain.entities.incidentes.IncidenteMiembro;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -44,5 +47,9 @@ public class IncidentesRepo {
                 incidente ->
                         incidente.getFechaRealizacion().isBefore(finSemana) &&
                         incidente.getFechaRealizacion().isAfter(inicioSemana)).collect(Collectors.toList());
+    }
+    public List<IncidenteMiembro> buscarIncidentes() {
+        EntityManager em = utils.BDUtils.getEntityManager();
+        return em.createQuery("select i from IncidenteMiembro i ", IncidenteMiembro.class).getResultList();
     }
 }

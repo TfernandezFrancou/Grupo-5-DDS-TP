@@ -41,8 +41,6 @@ public class RankingTest {
         //Creo 2 lineas y las agrego al repo
         linea1 = new Linea("Linea B",TipoDeTransporte.SUBTE);
         linea2 = new Linea("Linea E",TipoDeTransporte.SUBTE);
-        //El repo no se usa en los metodos, al menos el de lineas pero lo dejo por si en el futuro si
-        //LineaRepo.getInstance().agregar(linea1);
 
         //Creo 1 tipos de establecimieto
         TipoDeEstablecimiento tipoA = new TipoDeEstablecimiento("Estacion");

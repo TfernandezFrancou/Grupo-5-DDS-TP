@@ -1,5 +1,6 @@
 package domain.entities.servicios;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import domain.entities.services.georef.entities.Localizacion;
 import lombok.Getter;
 
@@ -38,6 +39,10 @@ public class Establecimiento {
 
     public Establecimiento() {
 
+    }
+    public Establecimiento(String nombre){
+        this.servicios = new ArrayList<>();
+        this.nombre = nombre;
     }
 
     public void agregarServicio(Servicio servicio){

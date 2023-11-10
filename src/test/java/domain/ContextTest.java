@@ -46,7 +46,8 @@ public class ContextTest extends AbstractPersistenceTest implements WithGlobalEn
         em.persist(miembro1);
         ServicioBase servicioBase1 = new ServicioBase();
         em.persist(servicioBase1);
-        Establecimiento establecimiento1 = new Establecimiento();
+        Establecimiento establecimiento1 = new Establecimiento("Chau");
+        establecimiento1.agregarServicio(servicioBase1);
         em.persist(establecimiento1);
         IncidenteMiembro incidenteMiembro1 =
                 new IncidenteMiembro("incidente 1", servicioBase1, LocalDateTime.now(),establecimiento1,miembroPorComunidad1);

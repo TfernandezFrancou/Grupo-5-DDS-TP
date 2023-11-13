@@ -1,6 +1,5 @@
-package presentacion;
+package dto;
 
-import domain.entities.incidentes.Incidente;
 import domain.entities.incidentes.IncidenteMiembro;
 import lombok.Getter;
 

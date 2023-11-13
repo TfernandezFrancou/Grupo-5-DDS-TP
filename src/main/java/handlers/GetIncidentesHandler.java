@@ -1,12 +1,11 @@
 package handlers;
 
-import domain.entities.incidentes.Incidente;
 import domain.entities.incidentes.IncidenteMiembro;
 import domain.entities.repositorios.IncidentesRepo;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
-import presentacion.IncidentePresentacion;
+import dto.IncidentePresentacion;
 
 import java.util.ArrayList;
 import java.util.List;

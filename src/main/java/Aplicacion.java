@@ -9,6 +9,7 @@ import org.quartz.SchedulerException;
 public class Aplicacion {
     public static void main(String[] args) throws SchedulerException {
         Javalin app = Javalin.create(javalinConfig -> {
+                    javalinConfig.plugins.enableCors(cors -> {cors.add(it -> it.anyHost());}); // para poder hacer requests de un dominio a otro
                     javalinConfig.staticFiles.add("/"); // recursos estáticos (HTML, CSS, JS, IMG)
                     javalinConfig.jsonMapper(new JavalinJackson().updateMapper(mapper ->
                             mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)));

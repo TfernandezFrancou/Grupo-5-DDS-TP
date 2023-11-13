@@ -104,7 +104,10 @@
 												<li class="list-inline-item"> <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-secondary"><i class="bx bx-pencil font-size-18"></i></a></li>
 											</ul>
 										</td>
-										<td>{{incidente.descripcion}}</td>
+										<td>{{incidente.establecimiento}}</td>
+										<td>{{incidente.servicio}}</td>
+										<td>{{incidente.estado}}</td>
+										<td>{{incidente.fechaCreacion}}</td>
 									</tr>
 
 								</tbody>
@@ -251,7 +254,7 @@
 				incidentes: []
 			},
 			created() {
-				fetch('http://localhost:8080/incidentes')
+				fetch('http://localhost:4567/incidentes')
 						.then(response => response.json())
 						.then(data => {
 							this.incidentes = data

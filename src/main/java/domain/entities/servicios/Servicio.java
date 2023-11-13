@@ -1,5 +1,6 @@
 package domain.entities.servicios;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +15,7 @@ public abstract class Servicio{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int servicio_codigo;
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "establecimiento_codigo", referencedColumnName = "establecimiento_codigo")
     protected Establecimiento establecimiento;

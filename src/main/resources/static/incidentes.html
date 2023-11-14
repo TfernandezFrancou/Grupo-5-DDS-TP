@@ -77,7 +77,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-							<button type="submit" class="btn btn-primary">Agregar Incidente</button>
+							<button type="button" class="btn btn-primary" @click="submitForm" data-bs-dismiss="modal">Agregar Incidente</button>
 						</div>
 					</div>
 				</div>
@@ -231,7 +231,7 @@
 		</script>
 	</div>
 		</body>
-		<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
 		<script type="text/javascript"></script>
 		<style>
 			#bsaHolder{right:10px;position:absolute;top:0;width:345px;z-index:10}
@@ -262,7 +262,8 @@
 			}
 		})
 	</script>
-	<script>
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
 		var app2 = new Vue({
 			el: "#agregarIncidente",
 			data: {
@@ -274,12 +275,41 @@
 			},
 			methods: {
 				submitForm() {
-					// Aquí puedes acceder a this.formData.servicio, this.formData.establecimiento, etc.
-					// y realizar la lógica para enviar al servidor.
-					console.log("Datos del formulario:", this.formData);
+
+					const fechaActualISO = new Date().toISOString();
+					// Crear un objeto con los datos del formulario
+					const incidenteData = {
+						servicio: this.formData.servicio,
+						establecimiento: this.formData.establecimiento,
+						descripcion: this.formData.descripcion,
+						fechaCreacion: fechaActualISO
+					};
+
+					// Realizar la solicitud POST
+					fetch('http://localhost:4567/agregarIncidente', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(incidenteData)
+					})
+							.then(response => {
+								if (!response.ok) {
+									throw new Error('Error al enviar el incidente');
+								}
+								return response.json();
+							})
+							.then(data => {
+								console.log('Respuesta del servidor:', data);
+								// Aquí puedes manejar la respuesta del servidor si es necesario.
+							})
+							.catch(error => {
+								console.error('Error:', error);
+							});
 				}
 			}
 		});
-	</script>
+	});
+</script>
 </body>
 </html>

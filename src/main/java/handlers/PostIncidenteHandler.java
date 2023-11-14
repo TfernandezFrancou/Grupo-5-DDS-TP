@@ -18,6 +18,8 @@ public class PostIncidenteHandler implements Handler {
 
         //Aca hay que crear el incidente miembro, pero como requiere un miembro por comunidad y no esta hecho lo de
         // sesion entonces lo hacemos desp por ahora printea lo que recibe
+        context.status(200);
+        context.result("Incidente recibido correctamente");
 
     }
 }

@@ -1,5 +1,6 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import handlers.GetRankingsHandler;
 import handlers.PostIncidenteHandler;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
@@ -22,6 +23,7 @@ public class Aplicacion {
 
         // Handlers
         app.get("/incidentes", new GetIncidentesHandler());
+        app.get("/rankings", new GetRankingsHandler());
         app.post("/agregarIncidente", new PostIncidenteHandler());
     }
 }

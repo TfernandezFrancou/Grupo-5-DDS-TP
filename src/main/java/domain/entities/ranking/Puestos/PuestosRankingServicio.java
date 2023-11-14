@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 public class PuestosRankingServicio extends PuestoRanking{
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "servicio_codigo", referencedColumnName = "servicio_codigo")
     private Servicio ocupadoPor;
     public PuestosRankingServicio(int puesto, Servicio ocupadoPor, double motivo){

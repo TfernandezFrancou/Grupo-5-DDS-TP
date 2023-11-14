@@ -16,17 +16,17 @@ public class Ranking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ranking_codigo;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
-    private List<PuestoRanking> ranking;
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    private List<PuestoRanking> puestosRanking;
 
-    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "tipoRanking_codigo", referencedColumnName = "tipoRanking_codigo")
     private TipoRanking tipoRanking;
     @Column
     private LocalDateTime fecha;
 
-    public Ranking(List<PuestoRanking> ranking, TipoRanking tipoRanking, LocalDateTime fecha){
-        this.ranking = ranking;
+    public Ranking(List<PuestoRanking> puestosRanking, TipoRanking tipoRanking, LocalDateTime fecha){
+        this.puestosRanking = puestosRanking;
         this.tipoRanking = tipoRanking;
         this.fecha = fecha;
     }
@@ -37,7 +37,7 @@ public class Ranking {
 
     public PuestoRanking obtenerPrimerLugar(){
 
-        return this.ranking.get(0);
+        return this.puestosRanking.get(0);
     }
 
 }

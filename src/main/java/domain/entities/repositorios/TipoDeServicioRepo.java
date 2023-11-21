@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Getter
 public class TipoDeServicioRepo {
-
+    private static TipoDeServicioRepo instance;
     private List<TipoDeServicio> tiposDeServicios;
 
     public TipoDeServicio buscar(String agrupacionServicio, String tipoServicio){
@@ -22,8 +22,15 @@ public class TipoDeServicioRepo {
         else return null;
     }
 
-    public TipoDeServicioRepo() {
+    private TipoDeServicioRepo() {
         this.tiposDeServicios = new ArrayList<>();
+    }
+
+    public static TipoDeServicioRepo getInstance () {
+        if (instance == null) {
+            instance = new TipoDeServicioRepo();
+        }
+        return instance;
     }
 
     public void agregar(TipoDeServicio tipoDeServicio){

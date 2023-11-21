@@ -10,7 +10,7 @@ public class ServicioBase extends Servicio{
 
     @Column
     private Boolean estaHabilitado;
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "tipoDeServicio_codigo", referencedColumnName = "tipoDeServicio_codigo")
     private TipoDeServicio tipoDeServicio;
 

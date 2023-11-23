@@ -1,10 +1,14 @@
 package domain.entities.ranking;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Getter;
+
 import javax.persistence.*;
 
 @Entity
 @Table
+@Getter
 public class TipoRanking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

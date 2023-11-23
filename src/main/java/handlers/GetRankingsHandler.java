@@ -15,9 +15,6 @@ public class GetRankingsHandler implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
         List<Ranking> rankings = RankingsRepo.getInstance().buscarRankings(); // Método para obtener los datos
-        ObjectMapper objectMapper = new ObjectMapper();
-        String listaRankingsJSON = "";
-        listaRankingsJSON = objectMapper.writeValueAsString(rankings);
-        context.json(listaRankingsJSON);
+        context.json(rankings);
     }
 }

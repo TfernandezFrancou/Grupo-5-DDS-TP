@@ -60,6 +60,7 @@ public class MayorCantidadIncidentes extends FormaRanking{
 
 
         Ranking ranking = new Ranking(puestosRanking,new TipoRanking("Mayor cantidad de incidentes"), fecha);
+        ranking.getPuestosRanking().forEach(x->x.setRanking(ranking));
         RankingsRepo.getInstance().agregarRanking(ranking);
     }
 

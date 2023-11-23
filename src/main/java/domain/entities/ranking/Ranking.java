@@ -1,6 +1,9 @@
 package domain.entities.ranking;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import domain.entities.ranking.Puestos.PuestoRanking;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,16 +13,18 @@ import java.util.List;
 
 @Entity
 @Table
+@Getter
 public class Ranking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ranking_codigo;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+
+    @OneToMany(mappedBy = "ranking", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private List<PuestoRanking> puestosRanking;
 
-    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinColumn(name = "tipoRanking_codigo", referencedColumnName = "tipoRanking_codigo")
     private TipoRanking tipoRanking;
     @Column
@@ -36,8 +41,12 @@ public class Ranking {
     }
 
     public PuestoRanking obtenerPrimerLugar(){
-
-        return this.puestosRanking.get(0);
+        return this.puestosRanking.stream().filter(x -> x.getPuesto() == 1).findFirst().get();
     }
+
+    public PuestoRanking obtenerPuesto(int i){
+        return this.puestosRanking.stream().filter(x -> x.getPuesto() == i).findFirst().get();
+    }
+
 
 }

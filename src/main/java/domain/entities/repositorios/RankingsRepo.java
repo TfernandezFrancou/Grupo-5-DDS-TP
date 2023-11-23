@@ -28,7 +28,7 @@ public class RankingsRepo {
         this.rankings.add(ranking);
 
         //que lo persista
-        //persistirRanking(ranking);
+        persistirRanking(ranking);
     }
 
     public void persistirRanking(Ranking ranking){

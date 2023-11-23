@@ -29,7 +29,7 @@ public class MayorTiempoPromedio extends FormaRanking {
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
                         e -> e.getValue().stream()
-                                .mapToDouble(incidente -> Duration.between(incidente.getFechaRealizacion(), incidente.getFechaCierre()).toDays())
+                                .mapToDouble(incidente -> Duration.between(incidente.getFechaRealizacion(), incidente.getFechaCierre()).toMinutes())
                                 .average()
                                 .orElse(0)
                 ));
@@ -49,10 +49,11 @@ public class MayorTiempoPromedio extends FormaRanking {
 
         // Asignar los puestos en el ranking en función de la posición en la lista
         for (int i = 0; i < puestosRanking.size(); i++) {
-            puestosRanking.get(i).setPuesto(i + 1);
+            puestosRanking.get(i).setPuesto(puestosRanking.size() - i);
         }
 
         Ranking ranking = new Ranking(puestosRanking, new TipoRanking("Mayor Tiempo Promedio"), fecha);
+        ranking.getPuestosRanking().forEach(x->x.setRanking(ranking));
         RankingsRepo.getInstance().agregarRanking(ranking);
     }
 }

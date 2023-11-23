@@ -1,5 +1,7 @@
 package domain.entities.ranking.Puestos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import domain.entities.ranking.Ranking;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +20,11 @@ public abstract class PuestoRanking {
     private int puesto;
     @Column
     private double puntaje;
+    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ranking_codigo", referencedColumnName = "ranking_codigo")
+    @Setter
+    @JsonIgnore
+    private Ranking ranking;
 
    public PuestoRanking(int puesto, double puntaje){
         this.puesto=puesto;
@@ -27,5 +34,6 @@ public abstract class PuestoRanking {
     public String ocupadoPor(){
         return "No valido";
     }
+
 
 }

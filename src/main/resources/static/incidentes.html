@@ -18,26 +18,11 @@
 			<div class="row align-items-center">
 				<div class="col-md-6">
 					<div class="mb-3">
-						<h5 class="card-title">Incidentes <span class="text-muted fw-normal ms-2">(9)</span></h5></div>
+						<h5 class="card-title">Incidentes </h5></div>
 				</div>
 				<div class="col-md-6">
 					<div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
-						<div>
-							<ul class="nav nav-pills">
-								<li class="nav-item">
-									<a aria-current="page" href="#" class="router-link-active router-link-exact-active nav-link active" data-bs-toggle="tooltip" data-bs-placement="top" title data-bs-original-title="List" aria-label="List"> <i class="bx bx-list-ul"></i> </a>
-								</li>
-								<li class="nav-item"> <a href="#" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="top" title data-bs-original-title="Grid" aria-label="Grid"><i class="bx bx-grid-alt"></i></a></li>
-							</ul>
-						</div>
 						<div> <a href="#" data-bs-toggle="modal" class="btn btn-primary" data-bs-target="#exampleModal"><i class="bx bx-plus me-1"></i> Agregar Incidente</a></div>
-						<div class="dropdown"> <a class="btn btn-link text-muted py-1 font-size-16 shadow-none dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-horizontal-rounded"></i></a>
-							<ul class="dropdown-menu dropdown-menu-end">
-								<li><a class="dropdown-item" href="#">Action</a></li>
-								<li><a class="dropdown-item" href="#">Another action</a></li>
-								<li><a class="dropdown-item" href="#">Something else here</a></li>
-							</ul>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -52,18 +37,18 @@
 							<form @submit.prevent="submitForm">
 
 								<div>
-									<label for="Servicio" class="form-label">Elegir servicio</label>
-									<select class="form-select" v-model="formData.servicio" id="Servicio" aria-label="Default select example">
-									<option selected>Servicio</option>
+									<label for="Servicio" class="form-label">Elegir establecimiento</label>
+									<select class="form-select" v-model="formData.establecimiento" id="Servicio" aria-label="Default select example">
+									<option selected>Establecimiento</option>
 									<option value="1">One</option>
 									<option value="2">Two</option>
 									<option value="3">Three</option>
 								  </select>
 								</div>
 								<div>
-									<label for="Establecimiento" class="form-label">Elegir establecimiento</label>
-									<select class="form-select" v-model="formData.establecimiento"aria-label="Default select example" id="Establecimiento">
-									<option selected>Establecimiento</option>
+									<label for="Establecimiento" class="form-label">Elegir servicio</label>
+									<select class="form-select" v-model="formData.servicio"aria-label="Default select example" id="Establecimiento">
+									<option selected>Servicio</option>
 									<option value="1">One</option>
 									<option value="2">Two</option>
 									<option value="3">Three</option>
@@ -113,26 +98,6 @@
 								</tbody>
 							</table>
 						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row g-0 align-items-center pb-4">
-				<div class="col-sm-6">
-					<div>
-						<p class="mb-sm-0">Showing 1 to 10 of 57 entries</p>
-					</div>
-				</div>
-				<div class="col-sm-6">
-					<div class="float-sm-end">
-						<ul class="pagination mb-sm-0">
-							<li class="page-item disabled"> <a href="#" class="page-link"><i class="mdi mdi-chevron-left"></i></a></li>
-							<li class="page-item active"><a href="#" class="page-link">1</a></li>
-							<li class="page-item"><a href="#" class="page-link">2</a></li>
-							<li class="page-item"><a href="#" class="page-link">3</a></li>
-							<li class="page-item"><a href="#" class="page-link">4</a></li>
-							<li class="page-item"><a href="#" class="page-link">5</a></li>
-							<li class="page-item"> <a href="#" class="page-link"><i class="mdi mdi-chevron-right"></i></a></li>
-						</ul>
 					</div>
 				</div>
 			</div>
@@ -275,7 +240,6 @@
 			},
 			methods: {
 				submitForm() {
-
 					const fechaActualISO = new Date().toISOString();
 					// Crear un objeto con los datos del formulario
 					const incidenteData = {

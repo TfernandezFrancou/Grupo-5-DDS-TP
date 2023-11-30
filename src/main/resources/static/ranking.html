@@ -31,81 +31,26 @@
 			<div class="row align-items-center">
 				<div class="col-md-6">
 					<div class="mb-3">
-						<h5 class="card-title">Incidentes</h5></div>
-				</div>
-				<div class="col-md-6">
-					<div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
-						<div> <a href="#" data-bs-toggle="modal" class="btn btn-primary" data-bs-target="#exampleModal"><i class="bx bx-plus me-1"></i> Agregar Incidente</a></div>
-					</div>
-				</div>
-			</div>
-			<div class="modal" id="exampleModal" >
-				<div class="modal-dialog">
-					<div class="modal-content" id="agregarIncidente">
-						<div class="modal-header">
-							<h5 class="modal-title">Crear Incidente</h5>
-							<button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<form @submit.prevent="submitForm">
-
-								<div>
-									<label for="Servicio" class="form-label">Elegir establecimiento</label>
-									<select class="form-select" v-model="formData.establecimiento" id="Servicio" aria-label="Default select example">
-									<option selected>Establecimiento</option>
-									<option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option>
-								  </select>
-								</div>
-								<div>
-									<label for="Establecimiento" class="form-label">Elegir servicio</label>
-									<select class="form-select" v-model="formData.servicio"aria-label="Default select example" id="Establecimiento">
-									<option selected>Servicio</option>
-									<option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option>
-								  </select>
-								</div>
-								<div class="mb-3">
-									<label for="exampleFormControlTextarea1" class="form-label">Descripcion</label>
-									<textarea class="form-control" v-model="formData.descripcion" id="exampleFormControlTextarea1" rows="3"></textarea>
-								  </div>
-							  </form>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-							<button type="button" class="btn btn-primary" @click="submitForm" data-bs-dismiss="modal">Agregar Incidente</button>
-						</div>
-					</div>
+						<h5 class="card-title">Ranking Semanal</h5></div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
 					<div class>
-						<div class="table-responsive" id="incidentesConVue">
+						<div class="table-responsive" id="rankingConVue">
 							<table class="table project-list-table table-nowrap align-middle table-borderless">
 								<thead>
 									<tr>
-										<th scope="col">Acciones</th>
+										<th scope="col">Puesto</th>
 										<th scope="col">Establecimiento</th>
-										<th scope="col">Servicio</th>
-										<th scope="col">Estado</th>
-										<th scope="col" style="width: 200px;">Fecha Creacion</th>
+										<th scope="col">{{definirQueEsPuntaje()}}</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr v-for="incidente in incidentes">
-                                        <td>
-											<ul class="list-inline mb-0">
-												<li class="list-inline-item"> <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="View" class="px-2 text-primary"><i class="bi bi-eye font-size-18"></i></a></li>
-												<li class="list-inline-item"> <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-secondary"><i class="bx bx-pencil font-size-18"></i></a></li>
-											</ul>
-										</td>
-										<td>{{incidente.establecimiento}}</td>
-										<td>{{incidente.servicio}}</td>
-										<td>{{incidente.estado}}</td>
-										<td>{{incidente.fechaCreacion}}</td>
+									<tr v-for="puestoRanking in ranking.puestosRanking">
+										<td>{{puestoRanking.puesto}}</td>
+										<td>{{puestoRanking.ocupadoPor}}</td>
+										<td>{{puestoRanking.puntaje}}</td>
 									</tr>
 
 								</tbody>
@@ -226,67 +171,41 @@
 	</script>
 	<script>
 		var app = new Vue({
-			el: "#incidentesConVue",
+			el: "#rankingConVue",
 			data: {
-				incidentes: []
+				ranking: [],
+				codigoRanking: null
 			},
 			created() {
-				fetch('http://localhost:4567/api/incidentes')
-						.then(response => response.json())
-						.then(data => {
-							this.incidentes = data
-						})
-			}
-		})
-	</script>
-    <script>
-	document.addEventListener('DOMContentLoaded', function () {
-		var app2 = new Vue({
-			el: "#agregarIncidente",
-			data: {
-				formData: {
-					servicio: null,
-					establecimiento: null,
-					descripcion: ""
+				// Actualizar codigoRanking después de que el componente Vue ha sido creado
+				this.codigoRanking = localStorage.getItem('rankingId');
+				localStorage.removeItem('rankingId');
+				// Realizar la solicitud de fetch solo si se tiene un código de ranking
+				if (this.codigoRanking) {
+					this.fetchData();
 				}
 			},
 			methods: {
-				submitForm() {
-					const fechaActualISO = new Date().toISOString();
-					// Crear un objeto con los datos del formulario
-					const incidenteData = {
-						servicio: this.formData.servicio,
-						establecimiento: this.formData.establecimiento,
-						descripcion: this.formData.descripcion,
-						fechaCreacion: fechaActualISO
-					};
-
-					// Realizar la solicitud POST
-					fetch('http://localhost:4567/api/agregarIncidente', {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify(incidenteData)
-					})
-							.then(response => {
-								if (!response.ok) {
-									throw new Error('Error al enviar el incidente');
-								}
-								return response.json();
-							})
+				fetchData() {
+					fetch('http://localhost:4567/api/ranking/' + this.codigoRanking)
+							.then(response => response.json())
 							.then(data => {
-								console.log('Respuesta del servidor:', data);
-								// Aquí puedes manejar la respuesta del servidor si es necesario.
+								this.ranking = data;
 							})
-							.catch(error => {
-								console.error('Error:', error);
-							});
-				}
+							.catch(error => console.error('Error fetching data:', error));
+				},
+				definirQueEsPuntaje() {
+					if (this.ranking.tipoRanking === 'Mayor Cantidad de Incidentes') {
+						return 'Cantidad de Incidentes';
+					} else if (this.ranking.tipoRanking === 'Mayor Tiempo Promedio') {
+						return 'Tiempo Promedio(min)';
+					} else {
+						return 'Puntaje';
+					}
+				},
 			}
 		});
-	});
-    </script>
+	</script>
     <footer class="text-center py-4 bg-dark" style="position: fixed; bottom: 0; width: 100vw">
         <div class="container">
           <div class="row row-cols-1 row-cols-lg-3">

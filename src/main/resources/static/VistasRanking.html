@@ -78,7 +78,7 @@
               <tbody v-for="ranking in rankingsCantidadDeIncidentes">
               <tr>
                 <td>
-                  <button class="btn btn-primary" type="button">Ver</button>
+                  <button class="btn btn-primary" type="button" @click="verRanking(ranking.codigo)">Ver</button>
                 </td>
                 <td> {{ranking.fecha}}</td>
               </tr>
@@ -111,7 +111,7 @@
               <tbody v-for="ranking in rankingsTiempoPromedio">
               <tr>
                 <td>
-                  <button class="btn btn-primary" type="button">Ver</button>
+                  <button class="btn btn-primary" type="button" @click="verRanking(ranking.codigo)">Ver</button>
                 </td>
                 <td> {{ranking.fecha}}</td>
               </tr>
@@ -144,7 +144,7 @@
               <tbody v-for="ranking in rankings">
               <tr>
                 <td>
-                  <button class="btn btn-primary" type="button">Ver</button>
+                  <button class="btn btn-primary" type="button" @click="verRanking(ranking.codigo)">Ver</button>
                 </td>
                 <td> {{ranking.fecha}}</td>
               </tr>
@@ -185,6 +185,12 @@
   </div>
 </footer>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <style>
+    .btn-primary a {
+      color: white; /* Color del texto blanco */
+      text-decoration: none; /* Sin subrayado */
+    }
+  </style>
 <script>
   var app = new Vue({
     el: "#rankingsConVue",
@@ -192,7 +198,7 @@
       rankings: []
     },
     created() {
-      fetch('http://localhost:4567/rankings')
+      fetch('http://localhost:4567/api/rankings')
               .then(response => response.json())
               .then(data => {
                 this.rankings = data
@@ -200,10 +206,19 @@
     },
     computed: {
       rankingsTiempoPromedio() {
-        return this.rankings.filter(ranking => ranking.tipoRanking.nombre === 'Mayor Tiempo Promedio');
+        return this.rankings.filter(ranking => ranking.tipoRanking === 'Mayor Tiempo Promedio');
       },
       rankingsCantidadDeIncidentes() {
-        return this.rankings.filter(ranking => ranking.tipoRanking.nombre === 'Mayor cantidad de incidentes');
+        return this.rankings.filter(ranking => ranking.tipoRanking === 'Mayor Cantidad de Incidentes');
+      }
+    },
+    methods: {
+      verRanking(id) {
+        // Guardamos el ID del ranking en el localStorage
+        localStorage.setItem('rankingId', id);
+
+        // Redirigir a la página de ranking.html
+        window.location.href = './ranking.html';
       }
     }
   });

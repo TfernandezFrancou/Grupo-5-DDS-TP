@@ -1,5 +1,6 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import handlers.GetRankingHandler;
 import handlers.GetRankingsHandler;
 import handlers.PostIncidenteHandler;
 import io.javalin.Javalin;
@@ -22,8 +23,9 @@ public class Aplicacion {
         System.out.println("Visit http://localhost:4567/static/loginPage.html");
 
         // Handlers
-        app.get("/incidentes", new GetIncidentesHandler());
-        app.get("/rankings", new GetRankingsHandler());
-        app.post("/agregarIncidente", new PostIncidenteHandler());
+        app.get("/api/incidentes", new GetIncidentesHandler());
+        app.get("/api/rankings", new GetRankingsHandler());
+        app.post("/api/agregarIncidente", new PostIncidenteHandler());
+        app.get("api/ranking/{id}",new GetRankingHandler());
     }
 }

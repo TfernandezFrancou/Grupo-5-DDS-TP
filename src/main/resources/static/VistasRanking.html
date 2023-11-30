@@ -76,11 +76,11 @@
               </tr>
               </thead>
               <tbody v-for="ranking in rankingsCantidadDeIncidentes">
-              <tr v-for="puestoRanking in ranking.puestosRanking">
+              <tr>
                 <td>
                   <button class="btn btn-primary" type="button">Ver</button>
                 </td>
-                <td> {{puestoRanking.puntaje}}</td>
+                <td> {{ranking.fecha}}</td>
               </tr>
               </tbody>
             </table>
@@ -109,11 +109,11 @@
               </tr>
               </thead>
               <tbody v-for="ranking in rankingsTiempoPromedio">
-              <tr v-for="puestoRanking in ranking.puestosRanking">
+              <tr>
                 <td>
                   <button class="btn btn-primary" type="button">Ver</button>
                 </td>
-                <td> {{puestoRanking.puntaje}}</td>
+                <td> {{ranking.fecha}}</td>
               </tr>
               </tbody>
             </table>
@@ -142,11 +142,11 @@
               </tr>
               </thead>
               <tbody v-for="ranking in rankings">
-              <tr v-for="puestoRanking in ranking.puestosRanking">
+              <tr>
                 <td>
                   <button class="btn btn-primary" type="button">Ver</button>
                 </td>
-                <td> {{puestoRanking.puntaje}}</td>
+                <td> {{ranking.fecha}}</td>
               </tr>
               </tbody>
             </table>

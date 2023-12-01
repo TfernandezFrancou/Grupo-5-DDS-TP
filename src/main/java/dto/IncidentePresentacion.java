@@ -20,7 +20,7 @@ public class IncidentePresentacion {
     public IncidentePresentacion(IncidenteMiembro incidente){
         this.creador= incidente.getMiembro().getMiembro().getNombre() + ", "+ incidente.getMiembro().getMiembro().getApellido();
         this.establecimiento= incidente.getEstablecimiento().getNombre();
-        this.servicio= "Banio/hardcore";
+        this.servicio= incidente.getServicio().obtenerDescripcion();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm - dd/MM/yy");
         if(incidente.getResuelto()){
             this.estado="Resuelto/Cerrado";

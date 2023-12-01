@@ -1,6 +1,8 @@
 package db;
 
 import domain.entities.actores.Comunidad;
+import domain.entities.actores.Rol;
+import domain.entities.actores.Usuario;
 import domain.entities.actores.miembros.Miembro;
 import domain.entities.actores.miembros.MiembroPorComunidad;
 import domain.entities.incidentes.IncidenteMiembro;
@@ -22,13 +24,15 @@ public class ContextTestInit extends AbstractPersistenceTest implements WithGlob
     public void init(){
         EntityManager em = BDUtils.getEntityManager();
         BDUtils.comenzarTransaccion(em);
-
+        Usuario usuario1 = new Usuario("jorge","123", Rol.MIEMBRO);
+        em.persist(usuario1);
         Miembro miembro1 = new Miembro("Jorge","Perez","hola@gmail.com","123");
         Comunidad comunidad1 = new Comunidad();
         em.persist(comunidad1);
         MiembroPorComunidad miembroPorComunidad1 = new MiembroPorComunidad(miembro1, comunidad1);
         em.persist(miembroPorComunidad1);
         miembro1.setComunidades(Collections.singletonList(miembroPorComunidad1));
+        miembro1.setUsuario(usuario1);
         em.persist(miembro1);
         ServicioBase servicioBase1 = new ServicioBase();
         em.persist(servicioBase1);

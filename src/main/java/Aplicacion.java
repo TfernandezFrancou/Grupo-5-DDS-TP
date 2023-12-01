@@ -25,5 +25,6 @@ public class Aplicacion {
         app.post("/api/agregarIncidente", new PostIncidenteHandler());
         app.get("/api/ranking/{id}",new GetRankingHandler());
         app.get("/api/establecimientos", new GetEstablecimientosHandler());
+        app.post("/api/login", new LoginHandler());
     }
 }

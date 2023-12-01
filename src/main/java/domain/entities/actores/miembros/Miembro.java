@@ -74,6 +74,9 @@ public class Miembro {
         this.gradoConfianza = new ConfiableNivel1(5.0);
     }
 
+    public Miembro(Integer id){
+        this.miembro_codigo = id;
+    }
     public Miembro() {
 
     }

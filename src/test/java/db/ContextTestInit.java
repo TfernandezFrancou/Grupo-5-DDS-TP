@@ -1,4 +1,4 @@
-package domain;
+package db;
 
 import domain.entities.actores.Comunidad;
 import domain.entities.actores.miembros.Miembro;

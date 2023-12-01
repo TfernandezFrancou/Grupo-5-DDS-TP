@@ -9,24 +9,27 @@ import java.time.format.DateTimeFormatter;
 
 @Getter
 public class IncidentePresentacion {
+    private  String creador;
     private String establecimiento;
     private  String servicio;
     private  String estado;
     private  String fechaCreacion;
     private  String descripcion;
+    private  String fechaCierre;
 
     public IncidentePresentacion(IncidenteMiembro incidente){
+        this.creador= incidente.getMiembro().getMiembro().getNombre() + ", "+ incidente.getMiembro().getMiembro().getApellido();
         this.establecimiento= incidente.getEstablecimiento().getNombre();
         this.servicio= "Banio/hardcore";
-
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm - dd/MM/yy");
         if(incidente.getResuelto()){
             this.estado="Resuelto/Cerrado";
+            this.fechaCierre=incidente.getFechaCierre().format(formatter);
         }else{
             this.estado="Abierto";
         }
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
         this.fechaCreacion=incidente.getFechaRealizacion().format(formatter);
+        this.descripcion= incidente.getDescripcion();
     }
     @JsonCreator
     public IncidentePresentacion(@JsonProperty("servicio") String servicio,

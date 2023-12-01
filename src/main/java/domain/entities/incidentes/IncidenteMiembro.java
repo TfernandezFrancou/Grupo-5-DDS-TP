@@ -4,6 +4,7 @@ import domain.entities.actores.miembros.Miembro;
 import domain.entities.actores.miembros.MiembroPorComunidad;
 import domain.entities.servicios.Establecimiento;
 import domain.entities.servicios.Servicio;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table
+@Getter
 public class IncidenteMiembro extends Incidente{
     /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -80,26 +80,35 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class>
-						<div class="table-responsive" id="incidentesConVue">
-							<table class="table project-list-table table-nowrap align-middle table-borderless">
-								<thead>
-									<tr>
-										<th scope="col">Acciones</th>
-										<th scope="col">Establecimiento</th>
-										<th scope="col">Servicio</th>
-										<th scope="col">Estado</th>
-										<th scope="col" style="width: 200px;">Fecha Creacion</th>
-									</tr>
-								</thead>
-								<tbody>
+			<div id="incidentesConVue" >
+				<div class="row">
+					<div class="col-lg-12">
+						<div class>
+							<div class="table-responsive" >
+								<table class="table project-list-table table-nowrap align-middle table-borderless">
+									<thead>
+										<tr>
+											<th scope="col">Acciones</th>
+											<th scope="col">Establecimiento</th>
+											<th scope="col">Servicio</th>
+											<th scope="col">Estado</th>
+											<th scope="col" style="width: 200px;">Fecha Creacion</th>
+										</tr>
+									</thead>
+									<tbody>
 									<tr v-for="incidente in incidentes">
-                                        <td>
+										<td>
 											<ul class="list-inline mb-0">
-												<li class="list-inline-item"> <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="View" class="px-2 text-primary"><i class="bi bi-eye font-size-18"></i></a></li>
-												<li class="list-inline-item"> <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-secondary"><i class="bx bx-pencil font-size-18"></i></a></li>
+												<li class="list-inline-item">
+													<a href="javascript:void(0);" data-bs-target="#modal-1" data-bs-toggle="modal" data-bs-placement="top" title="Ver" class="px-2 text-primary" @click="verIncidente(incidente)">
+														<i class="bi bi-eye font-size-18"></i>
+													</a>
+												</li>
+												<li class="list-inline-item">
+													<a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-secondary">
+														<i class="bx bx-pencil font-size-18"></i>
+													</a>
+												</li>
 											</ul>
 										</td>
 										<td>{{incidente.establecimiento}}</td>
@@ -108,8 +117,55 @@
 										<td>{{incidente.fechaCreacion}}</td>
 									</tr>
 
-								</tbody>
-							</table>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title">Incidente</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+							</div>
+							<div class="modal-body">
+								<div class="table-responsive">
+									<table class="table">
+										<thead>
+										<tr>
+											<th>Creador:</th>
+											<th><span style="font-weight: normal !important;">{{incidenteSeleccionado.creador}}</span></th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr>
+											<td><strong>Estado:</strong></td>
+											<td style="margin-right: -251px;padding-left: 8px;">{{incidenteSeleccionado.estado}}</td>
+										</tr>
+										<tr>
+											<td><strong>Servicio:</strong></td>
+											<td style="margin-right: 0px;margin-left: 3px;padding-left: 8px;padding-right: 169px;">{{incidenteSeleccionado.servicio}}</td>
+										</tr>
+										<tr>
+											<td style="padding-right: 0px;"><strong>Establecimiento:</strong></td>
+											<td>{{incidenteSeleccionado.establecimiento}}</td>
+										</tr>
+										<tr>
+											<td><strong>Fecha Creación:</strong></td>
+											<td>{{incidenteSeleccionado.fechaCreacion}}</td>
+										</tr>
+										<tr v-if="incidenteSeleccionado.fechaCierre !== null">
+											<td><strong>Fecha Cierre:</strong></td>
+											<td>{{ incidenteSeleccionado.fechaCierre }}</td>
+										</tr>
+										</tbody>
+									</table>
+								</div>
+								<h5 style="padding-left: 6px;">Descripcion:</h5>
+								<p style="padding-left: 6px;">{{incidenteSeleccionado.descripcion}}</p>
+							</div>
+							<div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Cerrar</button></div>
 						</div>
 					</div>
 				</div>
@@ -228,7 +284,8 @@
 		var app = new Vue({
 			el: "#incidentesConVue",
 			data: {
-				incidentes: []
+				incidentes: [],
+				incidenteSeleccionado: {}
 			},
 			created() {
 				fetch('http://localhost:4567/api/incidentes')
@@ -236,6 +293,11 @@
 						.then(data => {
 							this.incidentes = data
 						})
+			},
+			methods:{
+				verIncidente(incidente){
+					this.incidenteSeleccionado=JSON.parse(JSON.stringify(incidente));
+				},
 			}
 		})
 	</script>

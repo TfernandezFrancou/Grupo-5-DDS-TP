@@ -3,6 +3,8 @@ package db;
 import domain.entities.actores.Comunidad;
 import domain.entities.actores.miembros.Miembro;
 import domain.entities.actores.miembros.MiembroPorComunidad;
+import domain.entities.incidentes.Incidente;
+import domain.entities.incidentes.IncidenteMiembro;
 import domain.entities.ranking.GeneradorDeRankings;
 import domain.entities.repositorios.IncidentesRepo;
 import domain.entities.repositorios.RankingsRepo;
@@ -36,6 +38,10 @@ public class BDInit {
     TipoDeServicio banioMujeres;
     TipoDeServicio acceso;
     TipoDeEstablecimiento tipoA;
+
+    Incidente incidente1;
+    Incidente incidente2;
+    Incidente incidente3;
 
     @Before
     public void init(){
@@ -83,6 +89,12 @@ public class BDInit {
         viajeros = new Comunidad();
         juan = new Miembro("Juan Francisco","Caceres","jucaceres@frba.utn.edu.ar","11123");
         juanDeViajeros = new MiembroPorComunidad(juan,viajeros);
+
+        //creo incidentes
+        incidente1 = new IncidenteMiembro("Incidente en EscaleraPlata 1", escaleraPlata, LocalDateTime.of(2023, 8, 21, 10, 0), paradaPlata, juanDeViajeros);
+        incidente2 = new IncidenteMiembro("Incidente en Medrano", banioHMedrano, LocalDateTime.of(2023, 8, 21, 0, 0), paradaMedrano, juanDeViajeros);
+        incidente3 = new IncidenteMiembro("Incidente en Carlos", banioMCarlos, LocalDateTime.of(2023, 8, 21, 0, 0), paradaCarlos, juanDeViajeros);
+        incidente1.cerrarIncidente(LocalDateTime.of(2023, 8, 21, 2, 0));
     }
     @Test
     public void persistir(){
@@ -107,6 +119,9 @@ public class BDInit {
         em.persist(viajeros);
         em.persist(juan);
         em.persist(juanDeViajeros);
+        em.persist(incidente1);
+        em.persist(incidente2);
+        em.persist(incidente3);
 
         BDUtils.commit(em);
     }

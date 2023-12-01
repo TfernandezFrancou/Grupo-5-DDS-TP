@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Incidentes</title>
+    <title>Ranking</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.min.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -42,7 +42,7 @@
 								<thead>
 									<tr>
 										<th scope="col">Puesto</th>
-										<th scope="col">Establecimiento</th>
+										<th scope="col">{{definirEstablecimientoOServ()}}</th>
 										<th scope="col">{{definirQueEsPuntaje()}}</th>
 									</tr>
 								</thead>
@@ -203,6 +203,15 @@
 						return 'Puntaje';
 					}
 				},
+				definirEstablecimientoOServ(){
+					if (this.ranking.tipoRanking === 'Mayor Cantidad de Incidentes') {
+						return 'Establecimiento';
+					} else if (this.ranking.tipoRanking === 'Mayor Tiempo Promedio') {
+						return 'Establecimiento';
+					} else {
+						return 'Servicio';
+					}
+				}
 			}
 		});
 	</script>

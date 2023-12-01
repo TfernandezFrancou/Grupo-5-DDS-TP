@@ -15,6 +15,7 @@ public class PostIncidenteHandler implements Handler {
         System.out.println(incidentePost.getEstablecimiento());
         System.out.println(incidentePost.getServicio());
         System.out.println(incidentePost.getFechaCreacion());
+        System.out.println(incidentePost.getDescripcion());
 
         //Aca hay que crear el incidente miembro, pero como requiere un miembro por comunidad y no esta hecho lo de
         // sesion entonces lo hacemos desp por ahora printea lo que recibe

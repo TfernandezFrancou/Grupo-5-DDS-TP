@@ -1,11 +1,8 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import handlers.GetRankingHandler;
-import handlers.GetRankingsHandler;
-import handlers.PostIncidenteHandler;
+import handlers.*;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
-import handlers.GetIncidentesHandler;
 import io.javalin.json.JavalinJackson;
 import org.quartz.SchedulerException;
 
@@ -26,6 +23,7 @@ public class Aplicacion {
         app.get("/api/incidentes", new GetIncidentesHandler());
         app.get("/api/rankings", new GetRankingsHandler());
         app.post("/api/agregarIncidente", new PostIncidenteHandler());
-        app.get("api/ranking/{id}",new GetRankingHandler());
+        app.get("/api/ranking/{id}",new GetRankingHandler());
+        app.get("/api/establecimientos", new GetEstablecimientosHandler());
     }
 }

@@ -28,6 +28,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css"/>
 		<div class="container">
+			<div id="agregarIncidente">
 			<div class="row align-items-center">
 				<div class="col-md-6">
 					<div class="mb-3">
@@ -35,13 +36,13 @@
 				</div>
 				<div class="col-md-6">
 					<div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
-						<div> <a href="#" data-bs-toggle="modal" class="btn btn-primary" data-bs-target="#exampleModal"><i class="bx bx-plus me-1"></i> Agregar Incidente</a></div>
+						<div> <a href="#" data-bs-toggle="modal" class="btn btn-primary" data-bs-target="#exampleModal" @click="buscarEstablecimientos()"><i class="bx bx-plus me-1"></i> Agregar Incidente</a></div>
 					</div>
 				</div>
 			</div>
 			<div class="modal" id="exampleModal" >
 				<div class="modal-dialog">
-					<div class="modal-content" id="agregarIncidente">
+					<div class="modal-content" >
 						<div class="modal-header">
 							<h5 class="modal-title">Crear Incidente</h5>
 							<button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -51,20 +52,15 @@
 
 								<div>
 									<label for="Servicio" class="form-label">Elegir establecimiento</label>
-									<select class="form-select" v-model="formData.establecimiento" id="Servicio" aria-label="Default select example">
-									<option selected>Establecimiento</option>
-									<option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option>
+									<select class="form-select" v-model="formData.establecimiento" id="Servicio" aria-label="Default select example" @change="filtrarServiciosPorEstablecimiento">
+										<option v-for="establecimiento in establecimientos">{{establecimiento.descripcion}}</option>
+
 								  </select>
 								</div>
 								<div>
 									<label for="Establecimiento" class="form-label">Elegir servicio</label>
 									<select class="form-select" v-model="formData.servicio"aria-label="Default select example" id="Establecimiento">
-									<option selected>Servicio</option>
-									<option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option>
+									<option v-for="servicio in serciciosDelEstablecimiento">{{servicio.descripcion}}</option>
 								  </select>
 								</div>
 								<div class="mb-3">
@@ -80,6 +76,7 @@
 					</div>
 				</div>
 			</div>
+		</div>
 			<div id="incidentesConVue" >
 				<div class="row">
 					<div class="col-lg-12">
@@ -310,7 +307,9 @@
 					servicio: null,
 					establecimiento: null,
 					descripcion: ""
-				}
+				},
+				establecimientos:[],
+				serciciosDelEstablecimiento:[]
 			},
 			methods: {
 				submitForm() {
@@ -344,7 +343,18 @@
 							.catch(error => {
 								console.error('Error:', error);
 							});
-				}
+				},
+				buscarEstablecimientos(){
+					fetch('http://localhost:4567/api/establecimientos')
+							.then(response => response.json())
+							.then(data => {
+								this.establecimientos = data
+							})
+				},
+				filtrarServiciosPorEstablecimiento() {
+					const establecimientoSeleccionado = this.establecimientos.find(e => e.descripcion === this.formData.establecimiento);
+					this.serciciosDelEstablecimiento = establecimientoSeleccionado ? establecimientoSeleccionado.servicios : [];
+				},
 			}
 		});
 	});

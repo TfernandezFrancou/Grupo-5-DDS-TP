@@ -2,7 +2,6 @@ package dto;
 
 import domain.entities.ranking.Puestos.PuestoRanking;
 import domain.entities.ranking.Ranking;
-import domain.entities.ranking.TipoRanking;
 import lombok.Getter;
 
 import java.time.format.DateTimeFormatter;

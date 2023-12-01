@@ -1,5 +1,6 @@
 package domain.entities.servicios;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import domain.entities.services.georef.entities.Localizacion;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +25,7 @@ public abstract class Entidad {
     @JoinColumn(name = "localizacion_codigo", referencedColumnName = "localizacion_codigo")
     protected Localizacion localizacion;
     @OneToMany(mappedBy = "entidad", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
+    @JsonIgnore
     private List<Establecimiento> sucursales;
 
     public  Entidad(){this.sucursales = new ArrayList<>();};

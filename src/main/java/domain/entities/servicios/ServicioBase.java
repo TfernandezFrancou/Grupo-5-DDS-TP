@@ -1,10 +1,12 @@
 package domain.entities.servicios;
 
 
+import lombok.Getter;
+
 import javax.persistence.*;
 
 @Entity
-
+@Getter
 public class ServicioBase extends Servicio{
 
 
@@ -23,4 +25,7 @@ public class ServicioBase extends Servicio{
     public ServicioBase() {
 
     }
+   public String obtenerDescripcion(){
+        return this.tipoDeServicio.getAgrupacion().getAgrupacion()+", "+this.tipoDeServicio.getTipoDeServicio();
+   }
 }

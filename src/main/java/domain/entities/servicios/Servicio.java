@@ -21,4 +21,6 @@ public abstract class Servicio{
     protected Establecimiento establecimiento;
 
     public Servicio(){}
+
+    public String obtenerDescripcion(){return "";}
 }

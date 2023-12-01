@@ -1,9 +1,12 @@
 package domain.entities.servicios;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Getter
 public class ServicioCompuesto extends Servicio {
 
 
@@ -23,5 +26,8 @@ public class ServicioCompuesto extends Servicio {
 
     public ServicioCompuesto() {
 
+    }
+    public String obtenerDescripcion(){
+        return this.agrupacionServicio.getAgrupacion();
     }
 }

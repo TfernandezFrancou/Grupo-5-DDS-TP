@@ -7,8 +7,9 @@ import lombok.Getter;
 import javax.persistence.*;
 
 @Entity
+@Getter
 public class PuestosRankingServicio extends PuestoRanking{
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @JoinColumn(name = "servicio_codigo", referencedColumnName = "servicio_codigo")
     private Servicio ocupadoPor;
     public PuestosRankingServicio(int puesto, Servicio ocupadoPor, double motivo){
@@ -19,7 +20,8 @@ public class PuestosRankingServicio extends PuestoRanking{
     public PuestosRankingServicio() {
 
     }
-   /* public String ocupadoPor(){
-        return this.ocupadoPor.getNombre();
-    }*/
+    @Override
+    public String ocupadoPor(){
+        return this.ocupadoPor.getNombreEstablecimiento();
+    }
 }

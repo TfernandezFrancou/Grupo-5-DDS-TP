@@ -45,15 +45,14 @@
                                 <th scope="col">Establecimiento</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr v-for={{puestosRanking.size}}>
-                                {{#each puestosRanking}}
-                                <td>{{puesto}}</td>
-                                <td>{{ocupadoPor}}</td>
-                                <td>{{puntaje}}</td>
-                                {{/each}}
+                            <tbody v-for={{size}}>
+                            {{#each puestosRanking}}
+                            <tr>
+                                    <td>{{puesto}}</td>
+                                    <td>{{puntaje}}</td>
+                                    <td>{{ocupadoPor}}</td>
                             </tr>
-
+                            {{/each}}
                             </tbody>
                         </table>
                     </div>

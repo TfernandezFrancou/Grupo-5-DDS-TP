@@ -20,6 +20,11 @@ public abstract class Servicio{
     @JoinColumn(name = "establecimiento_codigo", referencedColumnName = "establecimiento_codigo")
     protected Establecimiento establecimiento;
 
+
+    public String getNombreEstablecimiento () {
+        return establecimiento.getNombre();
+    }
+
     public Servicio(){}
 
     public String obtenerDescripcion(){return "";}

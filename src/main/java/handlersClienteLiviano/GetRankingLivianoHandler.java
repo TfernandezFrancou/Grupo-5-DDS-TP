@@ -1,5 +1,6 @@
 package handlersClienteLiviano;
 
+import domain.entities.comparadores.ComparaPuestoRanking;
 import domain.entities.ranking.Puestos.PuestoRanking;
 import domain.entities.ranking.Ranking;
 import domain.entities.ranking.TipoRanking;
@@ -7,10 +8,7 @@ import domain.entities.repositorios.RankingsRepo;
 
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,21 +36,36 @@ public class GetRankingLivianoHandler implements Handler {
         Integer idBuscado = ctx.pathParamAsClass("id", Integer.class).get();
         List<Ranking> rankings = repo.buscarRankings();
         Optional<Ranking> ranking= rankings.stream().filter(r->r.getRanking_codigo()==idBuscado).findFirst();
-        String tipoRanking=ranking.get().getTipoRanking().getNombre();
-        System.out.println(tipoRanking);
+        TipoRanking tipoRanking=ranking.get().getTipoRanking();
         List<PuestoRanking> puestosRanking=ranking.get().getPuestosRanking();
-        model.put("puestosranking", puestosRanking);
-        if(tipoRanking=="Mayor Cantidad de Incidentes"){
-            ctx.render("ranking.hbs", model);
-        } else if(tipoRanking=="Mayor Tiempo Promedio"){
-            ctx.render("ranking2.hbs", model);
-        }else{
-            ctx.render("ranking3.hbs", model);
+        System.out.println(puestosRanking.size());
+        Collections.sort(puestosRanking,new ComparaPuestoRanking());
+
+        for(PuestoRanking puesto:puestosRanking){
+            System.out.println(puesto.getPuesto());
+            System.out.println(puesto.getPuntaje());
+            System.out.println(puesto.ocupadoPor());
+        }
+
+
+        model.put("puestosRanking", puestosRanking);
+        switch(tipoRanking.getTipoRanking_codigo()){
+            case 1:
+                ctx.render("ranking2.hbs", model);
+            break;
+            case 2:
+                ctx.render("ranking.hbs", model);
+            break;
+            case 3:
+                ctx.render("ranking3.hbs", model);
+            break;
         }
 
 
 
 
 
+    }
 
-    }}
+
+}

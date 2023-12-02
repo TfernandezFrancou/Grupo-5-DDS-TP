@@ -73,7 +73,7 @@
                                     <th>Fecha Creacion</th>
                                 </tr>
                                 </thead>
-                                <tbody v-for={{rankings.size}}>
+                                <tbody v-for={{size}}>
                                 {{#each rankings}}
                                 <tr>
                                     <td>
@@ -158,7 +158,7 @@
                                         <!--@click="verRanking(ranking.codigo)"-->
                                         </a>
                                     </td>
-                                    <td> {{ranking.fecha}}</td>
+                                    <td> {{fecha}}</td>
                                 </tr>
                                 {{/each}}
                                 </tbody>

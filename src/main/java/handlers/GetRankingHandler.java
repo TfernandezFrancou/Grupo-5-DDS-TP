@@ -24,4 +24,4 @@ public class GetRankingHandler implements Handler {
         }
     }
 }
-0
+

@@ -8,7 +8,7 @@
 </head>
 <body style="background-color:#eee;">
 <nav class="navbar navbar-expand-md bg-dark py-3" data-bs-theme="dark">
-    <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><span>Grupo 5</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+    <div class="container"><a class="navbar-brand d-flex align-items-center" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><span>Grupo 5</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navcol-5">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="./incidentes.html">Incidentes</a></li>
@@ -77,8 +77,10 @@
                                 {{#each rankings}}
                                 <tr>
                                     <td>
-                                        <button class="btn btn-primary" type="button" href="http://localhost:4567/api/rankingLiviano/{{codigo}}">Ver</button>
+                                        <a href="http://localhost:4567/api/rankingLiviano/{{ranking_codigo}}">
+                                        <button class="btn btn-primary" type="button" >Ver</button>
                                         <<!--@click="verRanking(ranking.codigo)"-->
+                                        </a>
                                     </td>
                                     <td> {{fecha}}</td>
                                 </tr>
@@ -113,8 +115,10 @@
                                 {{#each rankings}}
                                 <tr>
                                     <td>
+                                        <a href="http://localhost:4567/api/rankingLiviano/{{ranking_codigo}}">
                                         <button class="btn btn-primary" type="button" >Ver</button>
                                         <!--@click="verRanking(ranking.codigo)"-->
+                                        </a>
                                     </td>
                                     <td> {{fecha}}</td>
                                 </tr>
@@ -149,8 +153,10 @@
                                 {{#each rankings}}
                                 <tr>
                                     <td>
-                                        <button class="btn btn-primary" type="button" >Ver</button>
+                                        <a href="http://localhost:4567/api/rankingLiviano/{{ranking_codigo}}">
+                                        <button class="btn btn-primary" type="button">Ver</button>
                                         <!--@click="verRanking(ranking.codigo)"-->
+                                        </a>
                                     </td>
                                     <td> {{ranking.fecha}}</td>
                                 </tr>

@@ -41,16 +41,16 @@
                             <thead>
                             <tr>
                                 <th scope="col">Puesto</th>
-                                <th scope="col">Puntaje</th>
                                 <th scope="col">Servicio</th>
+                                <th scope="col">Puntaje</th>
                             </tr>
                             </thead>
                             <tbody v-for={{size}}>
                             {{#each puestosRanking}}
                                 <tr>
                                     <td>{{puesto}}</td>
-                                    <td>{{puntaje}}</td>
                                     <td>{{ocupadoPor}}</td>
+                                    <td>{{puntaje}}</td>
                                 </tr>
                             {{/each}}
                             </tbody>

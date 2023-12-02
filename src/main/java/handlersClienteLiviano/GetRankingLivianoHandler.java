@@ -17,6 +17,7 @@ import java.util.Optional;
 
 import domain.entities.ranking.Ranking;
 import domain.entities.repositorios.RankingsRepo;
+import dto.PuestoRankingPresentacion;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
@@ -37,14 +38,17 @@ public class GetRankingLivianoHandler implements Handler {
         List<Ranking> rankings = repo.buscarRankings();
         Optional<Ranking> ranking= rankings.stream().filter(r->r.getRanking_codigo()==idBuscado).findFirst();
         TipoRanking tipoRanking=ranking.get().getTipoRanking();
-        List<PuestoRanking> puestosRanking=ranking.get().getPuestosRanking();
-        System.out.println(puestosRanking.size());
-        Collections.sort(puestosRanking,new ComparaPuestoRanking());
+        List<PuestoRanking> puestosRankingInicial=ranking.get().getPuestosRanking();
+        System.out.println(puestosRankingInicial.size());
+        Collections.sort(puestosRankingInicial,new ComparaPuestoRanking());
+        List<PuestoRankingPresentacion> puestosRanking=new ArrayList<>();
 
-        for(PuestoRanking puesto:puestosRanking){
+        for(PuestoRanking puesto:puestosRankingInicial){
+            PuestoRankingPresentacion a= new PuestoRankingPresentacion(puesto);
             System.out.println(puesto.getPuesto());
             System.out.println(puesto.getPuntaje());
             System.out.println(puesto.ocupadoPor());
+            puestosRanking.add(a);
         }
 
 

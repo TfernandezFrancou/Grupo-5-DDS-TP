@@ -38,8 +38,8 @@ public class Aplicacion {
         app.get("/api/establecimientos", new GetEstablecimientosHandler());
         app.post("/api/login", new LoginHandler());
         //Cliente Liviano
-        app.get("/api/rankingsLiviano",new GetRankingsLivianoHandler());
-        app.get("/api/rankingLiviano/{id}",new GetRankingLivianoHandler());
+        app.get("/rankingsLiviano",new GetRankingsLivianoHandler());
+        app.get("/rankingLiviano/{id}",new GetRankingLivianoHandler());
 
     }
     private static void initTemplateEngine() {

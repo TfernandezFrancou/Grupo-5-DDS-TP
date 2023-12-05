@@ -18,6 +18,7 @@ import java.util.Optional;
 import domain.entities.ranking.Ranking;
 import domain.entities.repositorios.RankingsRepo;
 import dto.PuestoRankingPresentacion;
+import dto.RankingPresentacion;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
@@ -37,30 +38,18 @@ public class GetRankingLivianoHandler implements Handler {
         Integer idBuscado = ctx.pathParamAsClass("id", Integer.class).get();
         List<Ranking> rankings = repo.buscarRankings();
         Optional<Ranking> ranking= rankings.stream().filter(r->r.getRanking_codigo()==idBuscado).findFirst();
-        TipoRanking tipoRanking=ranking.get().getTipoRanking();
-        List<PuestoRanking> puestosRankingInicial=ranking.get().getPuestosRanking();
-        System.out.println(puestosRankingInicial.size());
-        Collections.sort(puestosRankingInicial,new ComparaPuestoRanking());
-        List<PuestoRankingPresentacion> puestosRanking=new ArrayList<>();
-
-        for(PuestoRanking puesto:puestosRankingInicial){
-            PuestoRankingPresentacion a= new PuestoRankingPresentacion(puesto);
-            System.out.println(puesto.getPuesto());
-            System.out.println(puesto.getPuntaje());
-            System.out.println(puesto.ocupadoPor());
-            puestosRanking.add(a);
-        }
-
+        RankingPresentacion unRanking = new RankingPresentacion(ranking.get());
+        List<PuestoRankingPresentacion> puestosRanking = unRanking.getPuestosRanking();
 
         model.put("puestosRanking", puestosRanking);
-        switch(tipoRanking.getTipoRanking_codigo()){
-            case 1:
+        switch(unRanking.getTipoRanking()){
+            case "Mayor Tiempo Promedio":
                 ctx.render("ranking2.hbs", model);
             break;
-            case 2:
+            case "Mayor Cantidad de Incidentes":
                 ctx.render("ranking.hbs", model);
             break;
-            case 3:
+            case "Mayor Grado de Impacto":
                 ctx.render("ranking3.hbs", model);
             break;
         }

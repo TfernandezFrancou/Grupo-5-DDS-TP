@@ -1,12 +1,10 @@
 package handlersClienteLiviano;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import domain.entities.ranking.Ranking;
 import domain.entities.repositorios.RankingsRepo;
+import dto.RankingPresentacion;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
@@ -24,9 +22,13 @@ public class GetRankingsLivianoHandler implements Handler {
     public void handle(@NotNull Context ctx) throws Exception {
         Map<String, Object> model = new HashMap<>();
         List<Ranking> rankings = repo.buscarRankings();
+        List<RankingPresentacion> rankingsPresentacion = new ArrayList<>();
+        for(Ranking ranking: rankings){
+            RankingPresentacion unRanking = new RankingPresentacion(ranking);
+            rankingsPresentacion.add(unRanking);
+        }
 
-
-        model.put("rankings", rankings);
+        model.put("rankings", rankingsPresentacion);
         ctx.render("VistasRanking.hbs", model);
 
     }

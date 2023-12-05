@@ -23,4 +23,8 @@ public class ComunidadTest {
     public void tomaIncidentesDeLaComunidad(){
         Assert.assertTrue(this.comunidades.get(0).getIncidentes().size()>=1 || this.comunidades.get(0).getIncidentes().isEmpty() );
     }
+    @Test
+    public void buscarComunidadEspecifica(){
+        Assert.assertEquals(1,ComunidadesRepo.getInstance().buscarComunidadPorId(1).getComunidad_codigo());
+    }
 }

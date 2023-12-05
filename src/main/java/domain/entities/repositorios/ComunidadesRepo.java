@@ -24,4 +24,13 @@ public class ComunidadesRepo {
         EntityManager em = utils.BDUtils.getEntityManager();
         return em.createQuery("select c from Comunidad c ", Comunidad.class).getResultList();
     }
+    public Comunidad buscarComunidadPorId(int codigoComunidad) {
+        EntityManager em = utils.BDUtils.getEntityManager();
+        List<Comunidad> comunidades = em.createQuery("SELECT c FROM Comunidad c WHERE c.comunidad_codigo = :codigoComunidad", Comunidad.class)
+                .setParameter("codigoComunidad", codigoComunidad)
+                .getResultList();
+
+        return comunidades.get(0);
+
+    }
 }

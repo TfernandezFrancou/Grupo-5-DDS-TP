@@ -1,5 +1,6 @@
 package domain.entities.incidentes;
 
+import domain.entities.actores.Comunidad;
 import domain.entities.actores.miembros.Miembro;
 import domain.entities.actores.miembros.MiembroPorComunidad;
 import domain.entities.servicios.Establecimiento;
@@ -27,6 +28,7 @@ public class IncidenteMiembro extends Incidente{
     public IncidenteMiembro(String descripcion, Servicio servicio, LocalDateTime fechaRealizacion, Establecimiento establecimiento, MiembroPorComunidad miembro) {
         super(descripcion,servicio, fechaRealizacion,establecimiento);
         this.miembro = miembro;
+        this.comunidad=miembro.getComunidad();
     }
 
     public IncidenteMiembro() {

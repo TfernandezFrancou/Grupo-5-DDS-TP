@@ -11,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Table
+@Getter
 public class Comunidad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,8 +22,7 @@ public class Comunidad {
     private List<MiembroPorComunidad> miembros;
     @Column
     private String objetivo;
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
-    @JoinColumn(name = "comunidad_codigo", referencedColumnName = "comunidad_codigo")
+    @OneToMany(mappedBy = "comunidad", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     private List<Incidente> incidentes;
 
     @Column

@@ -1,5 +1,6 @@
 package domain.entities.incidentes;
 
+import domain.entities.actores.Comunidad;
 import domain.entities.actores.miembros.Miembro;
 import domain.entities.servicios.Establecimiento;
 import domain.entities.servicios.Servicio;
@@ -33,6 +34,9 @@ public abstract class Incidente {
     private LocalDateTime fechaRealizacion;
     @Column
     private LocalDateTime fechaCierre;
+    @ManyToOne
+    @JoinColumn(name = "comunidad_codigo", referencedColumnName = "comunidad_codigo")
+    protected Comunidad comunidad;
 
 
     public Incidente(String descripcion, Servicio servicio, LocalDateTime fechaRealizacion, Establecimiento establecimiento) {

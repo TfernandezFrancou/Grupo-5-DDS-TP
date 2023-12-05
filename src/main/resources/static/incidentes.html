@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.min.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body style="margin: 0;">
     <nav class="navbar navbar-expand-md bg-dark py-3" data-bs-theme="dark" style="margin-bottom: 50px;">
@@ -88,7 +91,18 @@
 											<th scope="col">Acciones</th>
 											<th scope="col">Establecimiento</th>
 											<th scope="col">Servicio</th>
-											<th scope="col">Estado</th>
+											<th scope="col" style="cursor: pointer;">
+												<div class="dropdown">
+													<div id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+														Estado ↓
+													</div>
+													<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+														<a class="dropdown-item" href="#" @click="mostrarIncidentes('Abierto')">Abierto</a>
+														<a class="dropdown-item" href="#" @click="mostrarIncidentes('Cerrado')">Cerrado</a>
+														<a class="dropdown-item" href="#" @click="mostrarIncidentes('Ambos')">Ambos</a>
+													</div>
+												</div>
+											</th>
 											<th scope="col" style="width: 200px;">Fecha Creacion</th>
 										</tr>
 									</thead>
@@ -138,14 +152,14 @@
 										<tbody>
 										<tr>
 											<td><strong>Estado:</strong></td>
-											<td style="margin-right: -251px;padding-left: 8px;">{{incidenteSeleccionado.estado}}</td>
+											<td>{{incidenteSeleccionado.estado}}</td>
 										</tr>
 										<tr>
 											<td><strong>Servicio:</strong></td>
-											<td style="margin-right: 0px;margin-left: 3px;padding-left: 8px;padding-right: 169px;">{{incidenteSeleccionado.servicio}}</td>
+											<td>{{incidenteSeleccionado.servicio}}</td>
 										</tr>
 										<tr>
-											<td style="padding-right: 0px;"><strong>Establecimiento:</strong></td>
+											<td><strong>Establecimiento:</strong></td>
 											<td>{{incidenteSeleccionado.establecimiento}}</td>
 										</tr>
 										<tr>
@@ -282,19 +296,33 @@
 			el: "#incidentesConVue",
 			data: {
 				incidentes: [],
-				incidenteSeleccionado: {}
+				incidenteSeleccionado: {},
+				incidetesOriginales:[]
 			},
 			created() {
 				fetch('http://localhost:4567/api/incidentes')
 						.then(response => response.json())
 						.then(data => {
-							this.incidentes = data
+							this.incidentes = data;
+							this.incidetesOriginales =data;
 						})
+				this.incidetesOriginales=this.incidentes;
 			},
 			methods:{
 				verIncidente(incidente){
 					this.incidenteSeleccionado=JSON.parse(JSON.stringify(incidente));
 				},
+				mostrarIncidentes(estado){
+					if(estado==='Abierto'){
+						this.incidentes= this.incidetesOriginales.filter(i => i.estado ==="Abierto");
+					}
+					if(estado==='Cerrado'){
+						this.incidentes= this.incidetesOriginales.filter(i => i.estado ==="Resuelto/Cerrado");
+					}
+					if(estado==='Ambos'){
+						this.incidentes= this.incidetesOriginales;
+					}
+				}
 			}
 		})
 	</script>

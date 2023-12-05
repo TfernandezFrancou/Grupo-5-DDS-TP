@@ -30,6 +30,9 @@ public class LoginHandler implements Handler {
 
         sesionManager.agregarAtributo(idSesion, "fechaInicio", LocalDateTime.now());
         sesionManager.agregarAtributo(idSesion, "rol", miembroObtenido.getUsuario().getRol());
+        System.out.println("Login: " + loginRequest);
+        System.out.println("Login: " + miembroObtenido.getNombre());
+        System.out.println("Login: " + idSesion);
 
         context.json(new LoginResponse(idSesion));
 

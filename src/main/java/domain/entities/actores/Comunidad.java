@@ -21,6 +21,8 @@ public class Comunidad {
     @Getter
     private List<MiembroPorComunidad> miembros;
     @Column
+    private String nombre;
+    @Column
     private String objetivo;
     @OneToMany(mappedBy = "comunidad", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     private List<Incidente> incidentes;
@@ -30,6 +32,12 @@ public class Comunidad {
 
     public Comunidad(){
         miembros= new ArrayList<>();
+    }
+    public Comunidad(String nombre,String objetivo){
+        miembros= new ArrayList<>();
+        this.nombre=nombre;
+        this.objetivo=objetivo;
+
     }
 
 

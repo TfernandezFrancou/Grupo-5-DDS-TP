@@ -86,7 +86,7 @@ public class BDInit {
         paradaJujuy.agregarServicio(banioJujuy);
 
         //Creo un miembro por comunidad
-        viajeros = new Comunidad();
+        viajeros = new Comunidad("Viajeros","Reportar incidentes del subte");
         juan = new Miembro("Juan Francisco","Caceres","jucaceres@frba.utn.edu.ar","11123");
         juanDeViajeros = new MiembroPorComunidad(juan,viajeros);
 

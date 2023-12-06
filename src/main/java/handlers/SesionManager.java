@@ -1,5 +1,7 @@
 package handlers;
 
+import domain.entities.actores.miembros.Miembro;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -54,6 +56,13 @@ public class SesionManager {
     public Map<String, Object> eliminar(String id) {
         //esto no elimina la cookie del frontend
         return this.sesiones.remove(id);
+    }
+    public Miembro obtenerMiembro(String idSesion) {
+        Map<String, Object> atributos = this.sesiones.get(idSesion);
+        if (atributos != null) {
+            return (Miembro) atributos.get("usuario");
+        }
+        return null;
     }
 
 }

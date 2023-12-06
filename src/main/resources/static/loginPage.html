@@ -28,7 +28,7 @@
                             <form class="text-center" method="post" @submit.prevent="submitLoginForm">
                                 <div class="mb-3"><input v-model="formData.username" class="form-control form-control form-control" type="text" name="text" placeholder="Usuario"></div>
                                 <div class="mb-3"><input v-model="formData.password" class="form-control form-control form-control" type="password" name="password" placeholder="Contraseña"></div>
-                                <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit" @click="submitLoginForm">Iniciar sesión</button></div>
+                                <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Iniciar sesión</button></div>
                                 <p class="text-muted">Olvidaste tu contraseña?</p>
                             </form>
                         </div>
@@ -72,7 +72,7 @@
                             .then(data => {
                                 console.log('Respuesta del servidor:', data);
                                 localStorage.setItem('idSesion',data.idSesion);
-                                window.location.href='./perfil.html'
+                                window.location.href = `http://localhost:4567/perfil/${data.idSesion}`;
                             })
                             .catch(error => {
                                 console.error('Error:', error);

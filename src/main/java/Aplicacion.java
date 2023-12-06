@@ -1,6 +1,7 @@
 import com.fasterxml.jackson.databind.SerializationFeature;
 import handlers.*;
 import handlersClienteLiviano.GetComunidadHandler;
+import handlersClienteLiviano.GetPerfilMiembroHandler;
 import handlersClienteLiviano.GetRankingLivianoHandler;
 import handlersClienteLiviano.GetRankingsLivianoHandler;
 import io.javalin.Javalin;
@@ -37,6 +38,7 @@ public class Aplicacion {
         app.get("/rankingsLiviano",new GetRankingsLivianoHandler());
         app.get("/rankingLiviano/{id}",new GetRankingLivianoHandler());
         app.get("/comunidad/{id}",new GetComunidadHandler());
+        app.get("/perfil/{idSesion}",new GetPerfilMiembroHandler());
     }
     private static void initTemplateEngine() {
         JavalinRenderer.register(

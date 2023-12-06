@@ -1,5 +1,6 @@
 package dto;
 
+import domain.entities.actores.miembros.Miembro;
 import domain.entities.actores.miembros.MiembroPorComunidad;
 import lombok.Getter;
 
@@ -19,5 +20,11 @@ public class MiembroPresentacion {
         this.telefono=miembro.getMiembro().getTelefono();
         this.tipoDeMiembro=miembro.getTipoDeMiembro().getTipoDeMiembro();
         this.esAdmin=miembro.getEsAdmin();
+    }
+    public MiembroPresentacion(Miembro miembro){
+        this.nombre=miembro.getNombre();
+        this.apellido=miembro.getApellido();
+        this.email=miembro.getEmail();
+        this.telefono=miembro.getTelefono();
     }
 }

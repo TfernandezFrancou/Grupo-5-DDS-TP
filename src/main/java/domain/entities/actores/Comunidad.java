@@ -1,5 +1,6 @@
 package domain.entities.actores;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import domain.entities.actores.miembros.MiembroPorComunidad;
 import domain.entities.incidentes.Incidente;
 import javassist.expr.NewArray;
@@ -19,12 +20,14 @@ public class Comunidad {
 
     @OneToMany(mappedBy = "comunidad", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @Getter
+    @JsonIgnore
     private List<MiembroPorComunidad> miembros;
     @Column
     private String nombre;
     @Column
     private String objetivo;
     @OneToMany(mappedBy = "comunidad", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
+    @JsonIgnore
     private List<Incidente> incidentes;
 
     @Column

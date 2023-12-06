@@ -40,4 +40,7 @@ public class IncidentePropietario extends Incidente {
     public void notificar() {
 
     }
+    public String obtenerCreador(){
+        return this.propietario.getNombre();
+    }
 }

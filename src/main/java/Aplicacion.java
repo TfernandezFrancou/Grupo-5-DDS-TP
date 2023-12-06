@@ -1,10 +1,8 @@
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import handlers.*;
 import handlersClienteLiviano.GetRankingLivianoHandler;
 import handlersClienteLiviano.GetRankingsLivianoHandler;
 import io.javalin.Javalin;
-import io.javalin.config.JavalinConfig;
 import io.javalin.json.JavalinJackson;
 import org.quartz.SchedulerException;
 import com.github.jknack.handlebars.Handlebars;
@@ -31,7 +29,7 @@ public class Aplicacion {
 
         // Handlers
         // Cliente Pesado
-        app.get("/api/incidentes", new GetIncidentesHandler());
+        app.get("/api/incidentes/comunidad/{id}", new GetIncidentesComunidadHandler());
         app.get("/api/rankings", new GetRankingsHandler());
         app.post("/api/agregarIncidente", new PostIncidenteHandler());
         app.get("/api/ranking/{id}",new GetRankingHandler());

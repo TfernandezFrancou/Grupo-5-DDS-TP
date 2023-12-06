@@ -44,4 +44,7 @@ public class IncidenteMiembro extends Incidente{
     public void notificar() {
 
     }
+    public String obtenerCreador(){
+        return this.miembro.getMiembro().getNombre() + ", "+ this.miembro.getMiembro().getApellido();
+    }
 }

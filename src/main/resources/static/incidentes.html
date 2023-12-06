@@ -301,18 +301,26 @@
 			incidentes: [],
 			incidenteSeleccionado: {},
 			incidetesOriginales:[],
-			modificarIncidenteSeleccionado:false
+			modificarIncidenteSeleccionado:false,
+			comunidadCodigo: null
 		},
 		created() {
-			fetch('http://localhost:4567/api/incidentes')
-					.then(response => response.json())
-					.then(data => {
-						this.incidentes = data;
-						this.incidetesOriginales =data;
-					})
-			this.incidetesOriginales=this.incidentes;
+			this.comunidadCodigo= localStorage.getItem('comunidadId');
+			localStorage.removeItem('comunidadId');
+
+			if (this.comunidadCodigo) {
+				this.fetchData();
+			}
 		},
 		methods:{
+			fetchData(){
+				fetch('http://localhost:4567/api/incidentes/comunidad/'+ this.comunidadCodigo)
+						.then(response => response.json())
+						.then(data => {
+							this.incidentes = data;
+							this.incidetesOriginales =data;
+						})
+			},
 			verIncidente(incidente){
 				this.incidenteSeleccionado=JSON.parse(JSON.stringify(incidente));
 			},

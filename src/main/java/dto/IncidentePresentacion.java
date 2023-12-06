@@ -2,6 +2,7 @@ package dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import domain.entities.incidentes.Incidente;
 import domain.entities.incidentes.IncidenteMiembro;
 import lombok.Getter;
 
@@ -17,8 +18,8 @@ public class IncidentePresentacion {
     private  String descripcion;
     private  String fechaCierre;
 
-    public IncidentePresentacion(IncidenteMiembro incidente){
-        this.creador= incidente.getMiembro().getMiembro().getNombre() + ", "+ incidente.getMiembro().getMiembro().getApellido();
+    public IncidentePresentacion(Incidente incidente){
+        this.creador= incidente.obtenerCreador();
         this.establecimiento= incidente.getEstablecimiento().getNombre();
         this.servicio= incidente.getServicio().obtenerDescripcion();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm - dd/MM/yy");

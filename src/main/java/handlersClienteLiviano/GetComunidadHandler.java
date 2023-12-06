@@ -23,6 +23,7 @@ public class GetComunidadHandler implements Handler {
         // Agregar la información relevante al modelo
         model.put("nombreComunidad", comunidad.getNombre());
         model.put("objetivoComunidad", comunidad.getObjetivo());
+        model.put("codigoComunidad",idBuscado);
 
         // Lista de miembros con sus nombres
         List<String> nombresMiembros = new ArrayList<>();

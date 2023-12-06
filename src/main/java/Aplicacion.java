@@ -10,7 +10,6 @@ import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 import io.javalin.http.HttpStatus;
 import io.javalin.rendering.JavalinRenderer;
-
 import java.io.IOException;
 
 
@@ -40,7 +39,6 @@ public class Aplicacion {
         app.get("/rankingsLiviano",new GetRankingsLivianoHandler());
         app.get("/rankingLiviano/{id}",new GetRankingLivianoHandler());
         app.get("/comunidad/{id}",new GetComunidadHandler());
-
     }
     private static void initTemplateEngine() {
         JavalinRenderer.register(

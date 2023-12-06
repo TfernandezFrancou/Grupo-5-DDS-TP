@@ -69,10 +69,11 @@
                             <h5 class="my-2">Incedentes de la comunidad:</h5>
                          </div>
                          <div class="row mb-3">
-                            <li class=" centerIncidentes">
-                                <a> Ver Incidentes de la comunidad </a> <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2  text-secondary"><i class="bi bi-arrow-return-right"></i></a>
-                            </li>
-                        </div>
+                             <li class="centerIncidentes" id="verIncidentesLi">
+                                 <a>Ver Incidentes de la comunidad</a>
+                                 <a href="#" onclick="redirectToIncidentes()" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-secondary"><i class="bi bi-arrow-return-right"></i></a>
+                             </li>
+                         </div>
                      </div>
 
                </div>
@@ -206,7 +207,25 @@
          gtag('js', new Date());
          
          gtag('config', 'G-F1RTS0P1CD');
-      </script> 
+      </script>
+          <script>
+              document.addEventListener('DOMContentLoaded', function () {
+                  // Función para redirigir y almacenar en localStorage
+                  function redirectToIncidentes() {
+                      // Obtener el código de la comunidad desde el modelo o donde sea que lo tengas
+                      var codigoComunidad = "{{codigoComunidad}}";
+
+                      localStorage.setItem('comunidadId', codigoComunidad);
+
+                      window.location.href = '../static/incidentes.html';
+                  }
+                  // Obtener el elemento li por su ID
+                  var verIncidentesLi = document.getElementById('verIncidentesLi');
+
+                  // Agregar un event listener para el clic en el elemento li
+                  verIncidentesLi.addEventListener('click', redirectToIncidentes);
+              });
+          </script>
 
       </div>
    </body>

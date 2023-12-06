@@ -25,8 +25,6 @@ public class Aplicacion {
                 ).get("/", ctx -> ctx.result("Hello World"))
                 .start(4567);
 
-        System.out.println("Visit http://localhost:4567/static/loginPage.html");
-
         // Handlers
         // Cliente Pesado
         app.get("/api/incidentes/comunidad/{id}", new GetIncidentesComunidadHandler());

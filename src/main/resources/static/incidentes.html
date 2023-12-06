@@ -306,8 +306,6 @@
 		},
 		created() {
 			this.comunidadCodigo= localStorage.getItem('comunidadId');
-			localStorage.removeItem('comunidadId');
-
 			if (this.comunidadCodigo) {
 				this.fetchData();
 			}

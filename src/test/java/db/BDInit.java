@@ -1,6 +1,8 @@
 package db;
 
 import domain.entities.actores.Comunidad;
+import domain.entities.actores.Rol;
+import domain.entities.actores.Usuario;
 import domain.entities.actores.miembros.Miembro;
 import domain.entities.actores.miembros.MiembroPorComunidad;
 import domain.entities.actores.miembros.TipoDeMiembro;
@@ -44,9 +46,11 @@ public class BDInit {
     Incidente incidente1;
     Incidente incidente2;
     Incidente incidente3;
+    Usuario usuario1;
 
     @Before
     public void init(){
+         usuario1 = new Usuario("jorge","123", Rol.MIEMBRO);
         //Creo 2 lineas y las agrego al repo
         linea1 = new Linea("Linea B", TipoDeTransporte.SUBTE);
         linea2 = new Linea("Linea E",TipoDeTransporte.SUBTE);
@@ -102,12 +106,14 @@ public class BDInit {
         observador= new TipoDeMiembro("Observador");
         noObservador= new TipoDeMiembro("Usuarios de servicio");
 
+        juan.setUsuario(usuario1);
         juanDeViajeros.setTipoDeMiembro(noObservador);
     }
     @Test
     public void persistir(){
         EntityManager em = BDUtils.getEntityManager();
         BDUtils.comenzarTransaccion(em);
+        em.persist(usuario1);
         em.persist(observador);
         em.persist(noObservador);
         em.persist(tipoA);

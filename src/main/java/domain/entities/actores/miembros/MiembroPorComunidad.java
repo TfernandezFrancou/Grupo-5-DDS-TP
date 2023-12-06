@@ -3,6 +3,7 @@ package domain.entities.actores.miembros;
 import domain.entities.actores.Comunidad;
 import domain.entities.actores.miembros.Miembro;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -25,6 +26,7 @@ public class MiembroPorComunidad {
 
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "tipoDeMiembro_codigo", referencedColumnName = "tipoDeMiembro_codigo")
+    @Setter
     private TipoDeMiembro tipoDeMiembro;
 
     @Column

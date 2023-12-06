@@ -3,6 +3,7 @@ package db;
 import domain.entities.actores.Comunidad;
 import domain.entities.actores.miembros.Miembro;
 import domain.entities.actores.miembros.MiembroPorComunidad;
+import domain.entities.actores.miembros.TipoDeMiembro;
 import domain.entities.incidentes.Incidente;
 import domain.entities.incidentes.IncidenteMiembro;
 import domain.entities.ranking.GeneradorDeRankings;
@@ -38,7 +39,8 @@ public class BDInit {
     TipoDeServicio banioMujeres;
     TipoDeServicio acceso;
     TipoDeEstablecimiento tipoA;
-
+    TipoDeMiembro observador;
+    TipoDeMiembro noObservador;
     Incidente incidente1;
     Incidente incidente2;
     Incidente incidente3;
@@ -95,12 +97,19 @@ public class BDInit {
         incidente2 = new IncidenteMiembro("Incidente en Medrano", banioHMedrano, LocalDateTime.of(2023, 8, 21, 0, 0), paradaMedrano, juanDeViajeros);
         incidente3 = new IncidenteMiembro("Incidente en Carlos", banioMCarlos, LocalDateTime.of(2023, 8, 21, 0, 0), paradaCarlos, juanDeViajeros);
         incidente1.cerrarIncidente(LocalDateTime.of(2023, 8, 21, 2, 0));
+
+        //Creo los dos tipos de miembros
+        observador= new TipoDeMiembro("Observador");
+        noObservador= new TipoDeMiembro("Usuarios de servicio");
+
+        juanDeViajeros.setTipoDeMiembro(noObservador);
     }
     @Test
     public void persistir(){
         EntityManager em = BDUtils.getEntityManager();
         BDUtils.comenzarTransaccion(em);
-
+        em.persist(observador);
+        em.persist(noObservador);
         em.persist(tipoA);
         em.persist(linea1);
         em.persist(linea2);

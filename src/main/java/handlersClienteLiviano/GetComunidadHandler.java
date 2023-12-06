@@ -1,8 +1,10 @@
 package handlersClienteLiviano;
 
 import domain.entities.actores.Comunidad;
+import domain.entities.actores.miembros.Miembro;
 import domain.entities.actores.miembros.MiembroPorComunidad;
 import domain.entities.repositorios.ComunidadesRepo;
+import dto.MiembroPresentacion;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
@@ -25,27 +27,21 @@ public class GetComunidadHandler implements Handler {
         model.put("objetivoComunidad", comunidad.getObjetivo());
         model.put("codigoComunidad",idBuscado);
 
-        // Lista de miembros con sus nombres
-        List<String> nombresMiembros = new ArrayList<>();
-        for (MiembroPorComunidad miembrosPorComunidad : comunidad.getMiembros()) {
-            nombresMiembros.add(miembrosPorComunidad.getMiembro().getNombre()+", "+ miembrosPorComunidad.getMiembro().getApellido());
+        // Lista de miembros
+        List<MiembroPresentacion> miembrosDeComunidad = new ArrayList<>();
+        for (MiembroPorComunidad miembro : comunidad.getMiembros()) {
+            MiembroPresentacion unMiembro = new MiembroPresentacion(miembro);
+            miembrosDeComunidad.add(unMiembro);
         }
-        if(nombresMiembros.isEmpty()){
-            nombresMiembros.add("No hay miembros por el momento");
-        }
-        model.put("nombresMiembros", nombresMiembros);
+        model.put("miembros", miembrosDeComunidad);
 
-        // Lista de administradores con sus nombres
-        List<String> nombresAdministradores = new ArrayList<>();
-
+        // Lista de administradores
+        List<MiembroPresentacion> miembrosAdministradores = new ArrayList<>();
         for (MiembroPorComunidad admin : comunidad.getMiembros().stream().filter(MiembroPorComunidad::getEsAdmin).collect(Collectors.toList())) {
-                nombresAdministradores.add(admin.getMiembro().getNombre()+", "+ admin.getMiembro().getApellido());
+            MiembroPresentacion unMiembro = new MiembroPresentacion(admin);
+            miembrosAdministradores.add(unMiembro);
         }
-
-        if(nombresAdministradores.isEmpty()){
-            nombresAdministradores.add("No hay administradores por el momento");
-        }
-        model.put("nombresAdministradores", nombresAdministradores);
+        model.put("miembrosAdministradores", miembrosAdministradores);
 
 
         context.render("perfil_comunidad.hbs", model);

@@ -35,13 +35,17 @@
                                 <h4 class="my-2">Miembros de la comunidad:</h4>
                              </div>
                             <div class="row mb-2">
-                                {{#each nombresMiembros}}
-                                    <li class="centerLeft"><span>✔</span>
-                                        <a style="text-decoration: none; color: black" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-miembro" data-bs-toggle="modal">
-                                            {{this}}
-                                        </a>
-                                    </li>
-                                {{/each}}
+                                {{#if miembros}}
+                                    {{#each miembros}}
+                                        <li class="centerLeft"><span>✔</span>
+                                            <a style="text-decoration: none; color: black" href="#" data-bs-toggle="modal" data-bs-target="#modal-miembro" onclick="mostrarDetallesMiembro('{{nombre}}', '{{apellido}}', '{{tipoDeMiembro}}')">
+                                                {{nombre}}, {{apellido}}
+                                            </a>
+                                        </li>
+                                    {{/each}}
+                                {{else}}
+                                    <p>No hay miembros</p>
+                                {{/if}}
                             </div>
                         </div>
                      </div>
@@ -54,13 +58,18 @@
                                 <h5 class="my-2">Administradores:</h5>
                              </div>
                             <div class="row mb-3">
-                                {{#each nombresAdministradores}}
-                                    <li class="centerLeft"><span>✅</span>
-                                        <a style="text-decoration: none; color: black" href="#"data-bs-toggle="modal" data-bs-target="#modal-miembro" data-bs-toggle="modal">
-                                            {{this}}
-                                        </a>
-                                    </li>
-                                {{/each}}
+                                {{#if miembrosAdministradores}}
+                                    {{#each miembrosAdministradores}}
+                                        <li class="centerLeft">
+                                            <span>✅</span>
+                                            <a style="text-decoration: none; color: black" href="#" data-bs-toggle="modal" data-bs-target="#modal-miembro" onclick="mostrarDetallesMiembro('{{nombre}}', '{{apellido}}', '{{tipoDeMiembro}}')">
+                                                {{nombre}}, {{apellido}}
+                                            </a>
+                                        </li>
+                                    {{/each}}
+                                {{else}}
+                                    <p>No hay administradores por el momento</p>
+                                {{/if}}
                             </div>
                         </div>
                      </div>
@@ -88,20 +97,18 @@
                     <div class="modal-body">
                         <div class="table-responsive">
                             <table class="table">
-                                <thead>
-                                </thead>
                                 <tbody>
                                 <tr>
                                     <td><strong>Nombre:</strong></td>
-                                    <td>AcaDatoNombre</td>
+                                    <td id="nombreMiembro"></td>
                                 </tr>
                                 <tr>
                                     <td><strong>Apellido:</strong></td>
-                                    <td>AcaDatoApellido</td>
+                                    <td id="apellidoMiembro"></td>
                                 </tr>
                                 <tr>
                                     <td><strong>Tipo Usuario:</strong></td>
-                                    <td>AcaDatoTipoUser</td>
+                                    <td id="tipoUsuarioMiembro"></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -225,6 +232,14 @@
                   // Agregar un event listener para el clic en el elemento li
                   verIncidentesLi.addEventListener('click', redirectToIncidentes);
               });
+          </script>
+          <script>
+              function mostrarDetallesMiembro(nombre, apellido, tipoDeMiembro) {
+                  // Rellenar dinámicamente los campos del modal
+                  document.getElementById('nombreMiembro').innerText = nombre;
+                  document.getElementById('apellidoMiembro').innerText = apellido;
+                  document.getElementById('tipoUsuarioMiembro').innerText = tipoDeMiembro;
+              }
           </script>
 
       </div>

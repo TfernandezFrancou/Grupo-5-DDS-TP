@@ -184,6 +184,12 @@
          gtag('js', new Date());
          
          gtag('config', 'G-F1RTS0P1CD');
-      </script> 
+      </script>
+      <script>
+              document.addEventListener('DOMContentLoaded', function () {
+                  let id_sesion = "{{id}}";
+                  localStorage.setItem('id_sesion', id_sesion);
+              });
+        </script>
    </body>
 </html>

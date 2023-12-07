@@ -1,9 +1,6 @@
 import com.fasterxml.jackson.databind.SerializationFeature;
 import handlers.*;
-import handlersClienteLiviano.GetComunidadHandler;
-import handlersClienteLiviano.GetPerfilMiembroHandler;
-import handlersClienteLiviano.GetRankingLivianoHandler;
-import handlersClienteLiviano.GetRankingsLivianoHandler;
+import handlersClienteLiviano.*;
 import io.javalin.Javalin;
 import io.javalin.json.JavalinJackson;
 import org.quartz.SchedulerException;
@@ -39,6 +36,9 @@ public class Aplicacion {
         app.get("/rankingLiviano/{id}",new GetRankingLivianoHandler());
         app.get("/comunidad/{id}",new GetComunidadHandler());
         app.get("/perfil/{idSesion}",new GetPerfilMiembroHandler());
+        app.get("/login",new GetLoginLiv());
+        app.post("/loginLiv",new PostLogin());
+        app.get("/loginFail", new GetLoginErrado());
     }
     private static void initTemplateEngine() {
         JavalinRenderer.register(

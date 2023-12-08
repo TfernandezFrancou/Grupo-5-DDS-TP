@@ -37,9 +37,21 @@ public class ComunidadesRepo {
     public List<Comunidad> bucarComunidadesMimebro(String idSesion){
        List<Comunidad> comunidades = new ArrayList<>();
         Miembro miembro= SesionManager.get().obtenerMiembro(idSesion);
-        for(MiembroPorComunidad miembroPorComunidad: miembro.getComunidades() ){
-            comunidades.add(miembroPorComunidad.getComunidad());
+        if(miembro != null){
+            for(MiembroPorComunidad miembroPorComunidad: miembro.getComunidades() ){
+                comunidades.add(miembroPorComunidad.getComunidad());
+            }
         }
        return comunidades;
     }
+    public MiembroPorComunidad obtenerMiembroPorComunidad(int idMiembro,int idComunidad){
+        EntityManager em = utils.BDUtils.getEntityManager();
+        List<MiembroPorComunidad> miembros = em.createQuery("select m from MiembroPorComunidad m where m.miembro.id = ?1 AND m.comunidad.id=?2", MiembroPorComunidad.class)
+                .setParameter(1,idMiembro)
+                .setParameter(2,idComunidad)
+                .getResultList();
+        if(miembros.isEmpty()) {return null;}
+        return miembros.stream().findFirst().get();
+    }
+
 }

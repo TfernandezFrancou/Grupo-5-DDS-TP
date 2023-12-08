@@ -24,6 +24,7 @@ public class GetIncidentesComunidadHandler implements Handler {
             IncidentePresentacion unIncidente = new IncidentePresentacion(incidente);
             incidentes.add(unIncidente);
         }
+        System.out.println("Incidentes encontrados: "+ incidentesMiembro.size());
         context.json(incidentes);
     }
 }

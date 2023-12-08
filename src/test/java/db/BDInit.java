@@ -50,7 +50,7 @@ public class BDInit {
 
     @Before
     public void init(){
-         usuario1 = new Usuario("jorge","123", Rol.MIEMBRO);
+         usuario1 = new Usuario("juan","123", Rol.MIEMBRO);
         //Creo 2 lineas y las agrego al repo
         linea1 = new Linea("Linea B", TipoDeTransporte.SUBTE);
         linea2 = new Linea("Linea E",TipoDeTransporte.SUBTE);

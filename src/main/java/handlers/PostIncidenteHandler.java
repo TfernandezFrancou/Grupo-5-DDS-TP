@@ -5,10 +5,15 @@ import dto.IncidentePresentacion;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
+import utils.BDUtils;
+
+import javax.persistence.EntityManager;
 
 public class PostIncidenteHandler implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
+        String idComunidad = context.pathParamAsClass("idComunidad", String.class).get();
+        String idSesion = context.pathParamAsClass("idSesion", String.class).get();
         IncidentePresentacion incidentePost =context.bodyAsClass(IncidentePresentacion.class);
 
         //Podriamos agregar validacion de que sea un servicio y establecimiento de la BD pero no lo creo necesario
@@ -17,10 +22,11 @@ public class PostIncidenteHandler implements Handler {
         System.out.println(incidentePost.getFechaCreacion());
         System.out.println(incidentePost.getDescripcion());
 
-        //Aca hay que crear el incidente miembro, pero como requiere un miembro por comunidad y no esta hecho lo de
-        // sesion entonces lo hacemos desp por ahora printea lo que recibe
-        context.status(200);
-        context.result("Incidente recibido correctamente");
-
+        IncidenteMiembro incidente = incidentePost.generarIncidente(idComunidad,idSesion);
+        EntityManager em = utils.BDUtils.getEntityManager();
+        BDUtils.comenzarTransaccion(em);
+        em.persist(incidente);
+        BDUtils.commit(em);
+        context.status(201).result("Incidente creado con éxito");
     }
 }

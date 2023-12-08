@@ -27,4 +27,8 @@ public class ComunidadTest {
     public void buscarComunidadEspecifica(){
         Assert.assertEquals(1,ComunidadesRepo.getInstance().buscarComunidadPorId(1).getComunidad_codigo());
     }
+    @Test
+    public void buscarMiemporPorComunidad(){
+        Assert.assertEquals(1,ComunidadesRepo.getInstance().obtenerMiembroPorComunidad(1,1).getMiembro().getMiembro_codigo());
+    }
 }

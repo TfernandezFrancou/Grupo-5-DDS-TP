@@ -20,14 +20,14 @@ public class Aplicacion {
                     javalinConfig.jsonMapper(new JavalinJackson().updateMapper(mapper ->
                             mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)));
                 }
-                ).get("/", ctx -> ctx.result("Hello World"))
+                ).get("/", new GetLoginLiv())
                 .start(4567);
 
         // Handlers
         // Cliente Pesado
         app.get("/api/incidentes/comunidad/{id}", new GetIncidentesComunidadHandler());
         app.get("/api/rankings", new GetRankingsHandler());
-        app.post("/api/agregarIncidente", new PostIncidenteHandler());
+        app.post("/api/agregarIncidente/{idComunidad}/{idSesion}", new PostIncidenteHandler());
         app.get("/api/ranking/{id}",new GetRankingHandler());
         app.get("/api/establecimientos", new GetEstablecimientosHandler());
         app.post("/api/login", new LoginHandler());

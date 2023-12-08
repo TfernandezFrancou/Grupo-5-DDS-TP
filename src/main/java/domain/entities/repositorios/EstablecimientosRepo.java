@@ -1,6 +1,5 @@
 package domain.entities.repositorios;
 
-import domain.entities.ranking.Ranking;
 import domain.entities.servicios.Establecimiento;
 import lombok.Getter;
 
@@ -28,7 +27,7 @@ public class EstablecimientosRepo {
         return this.estalecimientos;
     }
 
-    public Establecimiento buscarEstableciminento(String nombre, String tipoEstablecimiento, String nombreEntidad){
+    public Establecimiento buscarEstablecimiento(String nombre, String tipoEstablecimiento, String nombreEntidad){
         EntityManager em = utils.BDUtils.getEntityManager();
         List<Establecimiento> establecimientos = em.createQuery("select e from Establecimiento e WHERE e.nombre=?1 AND e.tipoDeEstablecimiento.tipoEstablecimiento=?2 AND e.entidad.nombre=?3", Establecimiento.class)
                 .setParameter(1,nombre)

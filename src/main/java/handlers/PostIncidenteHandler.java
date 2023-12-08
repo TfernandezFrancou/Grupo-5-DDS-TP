@@ -12,6 +12,8 @@ import javax.persistence.EntityManager;
 public class PostIncidenteHandler implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
+        String idComunidad = context.pathParamAsClass("idComunidad", String.class).get();
+        String idSesion = context.pathParamAsClass("idSesion", String.class).get();
         IncidentePresentacion incidentePost =context.bodyAsClass(IncidentePresentacion.class);
 
         //Podriamos agregar validacion de que sea un servicio y establecimiento de la BD pero no lo creo necesario
@@ -19,14 +21,12 @@ public class PostIncidenteHandler implements Handler {
         System.out.println(incidentePost.getServicio());
         System.out.println(incidentePost.getFechaCreacion());
         System.out.println(incidentePost.getDescripcion());
-        System.out.println(incidentePost.getIdComunidad());
-        System.out.println(incidentePost.getIdSesion());
 
-        IncidenteMiembro incidente = incidentePost.generarIncidente();
+        IncidenteMiembro incidente = incidentePost.generarIncidente(idComunidad,idSesion);
         EntityManager em = utils.BDUtils.getEntityManager();
         BDUtils.comenzarTransaccion(em);
         em.persist(incidente);
         BDUtils.commit(em);
-        context.status(202);
+        context.status(201).result("Incidente creado con éxito");
     }
 }

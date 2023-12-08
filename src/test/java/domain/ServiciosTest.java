@@ -14,7 +14,7 @@ public class ServiciosTest {
     }
     @Test
     public void obtenerEstablecimiento(){
-        Assert.assertEquals("Medrano", EstablecimientosRepo.getInstance().buscarEstableciminento("Medrano","Estacion","Linea B").getNombre());
+        Assert.assertEquals("Medrano", EstablecimientosRepo.getInstance().buscarEstablecimiento("Medrano","Estacion","Linea B").getNombre());
     }
     @Test
     public void obtenerEstablecimientoPorPatron(){

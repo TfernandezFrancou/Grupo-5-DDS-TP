@@ -28,8 +28,6 @@ public class IncidentePresentacion {
     private  String fechaCreacion;
     private  String descripcion;
     private  String fechaCierre;
-    private String idComunidad;
-    private  String idSesion;
 
     public IncidentePresentacion(Incidente incidente){
         this.creador= incidente.obtenerCreador();
@@ -50,20 +48,16 @@ public class IncidentePresentacion {
     public IncidentePresentacion(@JsonProperty("servicio") String servicio,
                                  @JsonProperty("establecimiento") String establecimiento,
                                  @JsonProperty("descripcion") String descripcion,
-                                 @JsonProperty("fechaCreacion") String fechaCreacion,
-                                 @JsonProperty("idComunidad") String idComunidad,
-                                 @JsonProperty("idSesion") String idSesion){
+                                 @JsonProperty("fechaCreacion") String fechaCreacion){
         this.servicio = servicio;
         this.establecimiento = establecimiento;
         this.descripcion = descripcion;
         this.fechaCreacion= fechaCreacion;
-        this.idComunidad=idComunidad;
-        this.idSesion=idSesion;
     }
-    public IncidenteMiembro generarIncidente(){
+    public IncidenteMiembro generarIncidente(String idComunidad, String idSesion){
         String descripcion = this.descripcion;
         LocalDateTime fechaCreacion=  LocalDateTime.parse(this.fechaCreacion, DateTimeFormatter.ISO_DATE_TIME);
-        Miembro miembro = SesionManager.get().obtenerMiembro(this.idSesion);
+        Miembro miembro = SesionManager.get().obtenerMiembro(idSesion);
         MiembroPorComunidad creador = ComunidadesRepo.getInstance().obtenerMiembroPorComunidad(miembro.getMiembro_codigo(), Integer.parseInt(idComunidad));
         Establecimiento establecimiento = obtenerEstablecimiento(this.establecimiento);
         Servicio servicio = obtenerServicio(establecimiento, this.servicio);
@@ -94,7 +88,7 @@ public class IncidentePresentacion {
         }
 
         // Buscar el establecimiento
-        return EstablecimientosRepo.getInstance().buscarEstableciminento(nombre,tipoEstablecimiento,nombreEntidad);
+        return EstablecimientosRepo.getInstance().buscarEstablecimiento(nombre,tipoEstablecimiento,nombreEntidad);
     }
 
     private Servicio obtenerServicio(Establecimiento establecimiento, String descripcionServicio){

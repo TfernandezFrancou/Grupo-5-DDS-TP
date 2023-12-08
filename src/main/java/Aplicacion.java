@@ -40,6 +40,7 @@ public class Aplicacion {
         app.post("/loginLiv",new PostLogin());
         app.get("/loginFail", new GetLoginErrado());
         app.get("/cargaDatos", new GetCargaDatosHandler());
+        app.post("/cargarDatos", new PostCargarDatosHandler());
     }
     private static void initTemplateEngine() {
         JavalinRenderer.register(

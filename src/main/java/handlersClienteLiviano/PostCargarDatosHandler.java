@@ -19,25 +19,16 @@ public class PostCargarDatosHandler implements Handler {
         if (files != null && !files.isEmpty()) {
             UploadedFile file = files.get(0);
 
-            // Obtiene el nombre del archivo
             String fileName = file.filename();
 
-            // Obtiene el contenido del archivo como InputStream
             InputStream fileContent = file.content();
 
-            // Define la ruta donde se guardará el archivo (cambia según tus necesidades)
             String filePath = "src/main/domain.entities/cargaDatos" + fileName;
 
-            // Guarda el archivo en el servidor
             java.nio.file.Files.copy(fileContent, new File(filePath).toPath(), StandardCopyOption.REPLACE_EXISTING);
 
-            // Procesa el archivo según tus necesidades
-            // ...
-
-            // Muestra un mensaje de éxito o realiza redireccionamiento
             ctx.redirect("/exito");
         } else {
-            // No se subió ningún archivo, maneja según tus necesidades
             ctx.redirect("/error");
         }
     }

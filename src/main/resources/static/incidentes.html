@@ -359,12 +359,16 @@
 			methods: {
 				submitForm() {
 					const fechaActualISO = new Date().toISOString();
+					const idComunidad = localStorage.getItem('comunidadId');
+					const idSesion = localStorage.getItem('id_sesion');
 					// Crear un objeto con los datos del formulario
 					const incidenteData = {
 						servicio: this.formData.servicio,
 						establecimiento: this.formData.establecimiento,
 						descripcion: this.formData.descripcion,
-						fechaCreacion: fechaActualISO
+						fechaCreacion: fechaActualISO,
+						idComunidad: idComunidad,
+						idSesion: idSesion
 					};
 
 					// Realizar la solicitud POST

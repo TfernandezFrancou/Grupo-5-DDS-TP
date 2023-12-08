@@ -27,4 +27,14 @@ public class EstablecimientosRepo {
                 getResultList();
         return this.estalecimientos;
     }
+
+    public Establecimiento buscarEstableciminento(String nombre, String tipoEstablecimiento, String nombreEntidad){
+        EntityManager em = utils.BDUtils.getEntityManager();
+        List<Establecimiento> establecimientos = em.createQuery("select e from Establecimiento e WHERE e.nombre=?1 AND e.tipoDeEstablecimiento.tipoEstablecimiento=?2 AND e.entidad.nombre=?3", Establecimiento.class)
+                .setParameter(1,nombre)
+                .setParameter(2,tipoEstablecimiento)
+                .setParameter(3,nombreEntidad).getResultList();
+        if (establecimientos.isEmpty()){return null;}
+        return establecimientos.get(0);
+    }
 }

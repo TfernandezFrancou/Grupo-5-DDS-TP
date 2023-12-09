@@ -31,6 +31,8 @@ public class Aplicacion {
         app.get("/api/ranking/{id}",new GetRankingHandler());
         app.get("/api/establecimientos", new GetEstablecimientosHandler());
         app.post("/api/login", new LoginHandler());
+        app.patch("/api/cerrarIncidente/{idComunidad}/{idSesion}", new PatchIncidenteHandler());
+
         //Cliente Liviano
         app.get("/rankingsLiviano",new GetRankingsLivianoHandler());
         app.get("/rankingLiviano/{id}",new GetRankingLivianoHandler());

@@ -21,9 +21,13 @@ public class IncidenteMiembro extends Incidente{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int incidenteMiembro_codigo;*/
 
-    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "miembroPorComunidad_codigo", referencedColumnName = "miembroPorComunidad_codigo")
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "miembro_creacion_codigo", referencedColumnName = "miembroPorComunidad_codigo")
     private MiembroPorComunidad miembro;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "miembro_cierre_codigo", referencedColumnName = "miembroPorComunidad_codigo")
+    private MiembroPorComunidad miembroCierre;
 
     public IncidenteMiembro(String descripcion, Servicio servicio, LocalDateTime fechaRealizacion, Establecimiento establecimiento, MiembroPorComunidad miembro) {
         super(descripcion,servicio, fechaRealizacion,establecimiento);
@@ -46,5 +50,13 @@ public class IncidenteMiembro extends Incidente{
     }
     public String obtenerCreador(){
         return this.miembro.getMiembro().getNombre() + ", "+ this.miembro.getMiembro().getApellido();
+    }
+
+    public void cerrarIncidente(LocalDateTime fehcaCierre,MiembroPorComunidad miembro){
+        this.cerrarIncidente(fehcaCierre);
+        this.miembroCierre=miembro;
+    }
+    public String cerradoPor(){
+        return this.miembroCierre.getMiembro().getNombre() + ", " + this.miembroCierre.getMiembro().getApellido();
     }
 }

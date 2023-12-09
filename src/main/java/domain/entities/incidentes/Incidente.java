@@ -68,5 +68,6 @@ public abstract class Incidente {
     public abstract void notificar();
 
     public String obtenerCreador(){return "";}
+    public String cerradoPor(){return "";}
 
 }

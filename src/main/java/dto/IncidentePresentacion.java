@@ -21,6 +21,7 @@ import java.util.regex.Pattern;
 
 @Getter
 public class IncidentePresentacion {
+    private Integer codigo;
     private  String creador;
     private String establecimiento;
     private  String servicio;
@@ -28,8 +29,10 @@ public class IncidentePresentacion {
     private  String fechaCreacion;
     private  String descripcion;
     private  String fechaCierre;
+    private String cerradoPor;
 
     public IncidentePresentacion(Incidente incidente){
+        this.codigo=incidente.getIncidente_codigo();
         this.creador= incidente.obtenerCreador();
         this.establecimiento= incidente.getEstablecimiento().getNombre();
         this.servicio= incidente.getServicio().obtenerDescripcion();
@@ -37,6 +40,7 @@ public class IncidentePresentacion {
         if(incidente.getResuelto()){
             this.estado="Resuelto/Cerrado";
             this.fechaCierre=incidente.getFechaCierre().format(formatter);
+            this.cerradoPor=incidente.cerradoPor();
         }else{
             this.estado="Abierto";
         }

@@ -43,7 +43,7 @@ public class BDInit {
     TipoDeEstablecimiento tipoA;
     TipoDeMiembro observador;
     TipoDeMiembro noObservador;
-    Incidente incidente1;
+    IncidenteMiembro incidente1;
     Incidente incidente2;
     Incidente incidente3;
     Usuario usuario1;
@@ -100,7 +100,7 @@ public class BDInit {
         incidente1 = new IncidenteMiembro("Incidente en EscaleraPlata 1", escaleraPlata, LocalDateTime.of(2023, 8, 21, 10, 0), paradaPlata, juanDeViajeros);
         incidente2 = new IncidenteMiembro("Incidente en Medrano", banioHMedrano, LocalDateTime.of(2023, 8, 21, 0, 0), paradaMedrano, juanDeViajeros);
         incidente3 = new IncidenteMiembro("Incidente en Carlos", banioMCarlos, LocalDateTime.of(2023, 8, 21, 0, 0), paradaCarlos, juanDeViajeros);
-        incidente1.cerrarIncidente(LocalDateTime.of(2023, 8, 21, 2, 0));
+        incidente1.cerrarIncidente(LocalDateTime.of(2023, 8, 21, 2, 0),juanDeViajeros);
 
         //Creo los dos tipos de miembros
         observador= new TipoDeMiembro("Observador");

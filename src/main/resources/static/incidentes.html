@@ -170,6 +170,10 @@
 										<td><strong>Fecha Cierre:</strong></td>
 										<td>{{ incidenteSeleccionado.fechaCierre }}</td>
 									</tr>
+									<tr v-if="incidenteSeleccionado.fechaCierre !== null">
+										<td><strong>Cerrado por:</strong></td>
+										<td>{{ incidenteSeleccionado.cerradoPor }}</td>
+									</tr>
 									</tbody>
 								</table>
 							</div>
@@ -328,6 +332,28 @@
 			},
 			cerrarIncidente(incidente){
 				this.modificarIncidenteSeleccionado=false;
+				const idComunidad = localStorage.getItem('comunidadId');
+				const idSesion = localStorage.getItem('id_sesion');
+				incidente.fechaCierre=new Date().toISOString();
+				fetch(`http://localhost:4567/api/cerrarIncidente/${idComunidad}/${idSesion}`, {
+					method: 'PATCH',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(incidente)
+				}).then(response => {
+					if (!response.ok) {
+						throw new Error('Error al enviar el incidente');
+					}
+					return response.text();
+				}).then(data => {
+					// Verificar el contenido de la respuesta y mostrar un mensaje en consecuencia
+					if (data.includes("Incidente cerrado con éxito")) {
+						alert('Incidente cerrado con éxito');
+					}
+				}).catch(error => {
+					console.error('Error:', error);
+				});
 			},
 			mostrarIncidentes(estado){
 				if(estado==='Abierto'){
@@ -377,21 +403,18 @@
 							'Content-Type': 'application/json'
 						},
 						body: JSON.stringify(incidenteData)
-					})
-							.then(response => {
-								if (!response.ok) {
-									throw new Error('Error al enviar el incidente');
-								}
-								return response.text();
-							})
-							.then(data => {
+					}).then(response => {
+						if (!response.ok) {
+							throw new Error('Error al enviar el incidente');
+							}
+							return response.text();
+							}).then(data => {
 								console.log('Respuesta del servidor:', data);
 								// Verificar el contenido de la respuesta y mostrar un mensaje en consecuencia
 								if (data.includes("Incidente creado con éxito")) {
 									alert('Incidente creado con éxito');
 								}
-							})
-							.catch(error => {
+							}).catch(error => {
 								console.error('Error:', error);
 							});
 				},

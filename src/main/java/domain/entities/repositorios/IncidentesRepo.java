@@ -52,4 +52,11 @@ public class IncidentesRepo {
         EntityManager em = utils.BDUtils.getEntityManager();
         return em.createQuery("select i from IncidenteMiembro i ", IncidenteMiembro.class).getResultList();
     }
+    public IncidenteMiembro buscarIncidente(Integer idIncidente) {
+        EntityManager em = utils.BDUtils.getEntityManager();
+        List<IncidenteMiembro> incidentes = em.createQuery("select i from IncidenteMiembro i WHERE i.id=?1", IncidenteMiembro.class)
+                .setParameter(1,idIncidente).getResultList();
+        if (incidentes.isEmpty()){return null;}
+        return incidentes.get(0);
+    }
 }

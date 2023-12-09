@@ -37,7 +37,8 @@ public class Aplicacion {
         app.get("/rankingsLiviano",new GetRankingsLivianoHandler());
         app.get("/rankingLiviano/{id}",new GetRankingLivianoHandler());
         app.get("/comunidad/{id}",new GetComunidadHandler());
-        app.get("/perfil/{idSesion}",new GetPerfilMiembroHandler());
+        app.post("/comunidad/cambiar/{id_comunidad}/{id_miembro}",new PostCambioTipoMiembro());
+        app.get("/perfil",new GetPerfilMiembroHandler());
         app.get("/login",new GetLoginLiv());
         app.post("/loginLiv",new PostLogin());
         app.get("/loginFail", new GetLoginErrado());

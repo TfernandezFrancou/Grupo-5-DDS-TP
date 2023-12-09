@@ -37,7 +37,26 @@
                             <div class="row mb-2">
                                 {{#if miembros}}
                                     {{#each miembros}}
-                                        <li class="centerLeft"><span>✔</span>
+                                        <li class="centerLeft">
+                                            {{#if administrador}}
+                                            <form action="http://localhost:4567/comunidad/cambiar/{{codigoComunidad}}/{{id_miembro}}" method="post" >
+                                                {{#if esObservador}}
+                                                <button id="boton-cambia-observador" name="tipoMiembro" value="observador">
+                                                    👁️
+                                                </button>
+                                                {{else}}
+                                                <button id="boton-cambia-observador" name="tipoMiembro" value="Usuario">
+                                                    ✔‍
+                                                </button>
+                                                {{/if}}
+                                            </form>
+                                            {{else}}
+                                                {{#if esObservador}}
+                                                    <span>👁️‍</span>
+                                                {{else}}
+                                                    <span>✔</span>
+                                                {{/if}}
+                                            {{/if}}
                                             <a style="text-decoration: none; color: black" href="#" data-bs-toggle="modal" data-bs-target="#modal-miembro" onclick="mostrarDetallesMiembro('{{nombre}}', '{{apellido}}', '{{tipoDeMiembro}}')">
                                                 {{nombre}}, {{apellido}}
                                             </a>

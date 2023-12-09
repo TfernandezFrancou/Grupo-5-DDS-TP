@@ -33,7 +33,9 @@ public class BDInit {
     ServicioBase escaleraPlata;
     ServicioBase banioJujuy;
     MiembroPorComunidad juanDeViajeros;
+    MiembroPorComunidad maxiDeViajeros;
     Miembro juan;
+    Miembro maxi;
     Comunidad viajeros;
     AgrupacionServicio banio;
     AgrupacionServicio escalera;
@@ -47,10 +49,12 @@ public class BDInit {
     Incidente incidente2;
     Incidente incidente3;
     Usuario usuario1;
+    Usuario usuario2;
 
     @Before
     public void init(){
          usuario1 = new Usuario("juan","123", Rol.MIEMBRO);
+         usuario2 = new Usuario("maxi", "123", Rol.MIEMBRO);
         //Creo 2 lineas y las agrego al repo
         linea1 = new Linea("Linea B", TipoDeTransporte.SUBTE);
         linea2 = new Linea("Linea E",TipoDeTransporte.SUBTE);
@@ -94,6 +98,8 @@ public class BDInit {
         //Creo un miembro por comunidad
         viajeros = new Comunidad("Viajeros","Reportar incidentes del subte");
         juan = new Miembro("Juan Francisco","Caceres","jucaceres@frba.utn.edu.ar","11123");
+        maxi= new Miembro("Maximiliano","Fiorentino","ada@gmail.com","216464");
+        maxiDeViajeros=new MiembroPorComunidad(maxi,viajeros,true);
         juanDeViajeros = new MiembroPorComunidad(juan,viajeros);
 
         //creo incidentes
@@ -107,7 +113,9 @@ public class BDInit {
         noObservador= new TipoDeMiembro("Usuarios de servicio");
 
         juan.setUsuario(usuario1);
+        maxi.setUsuario(usuario2);
         juanDeViajeros.setTipoDeMiembro(noObservador);
+        maxiDeViajeros.setTipoDeMiembro(noObservador);
     }
     @Test
     public void persistir(){
@@ -137,6 +145,9 @@ public class BDInit {
         em.persist(incidente1);
         em.persist(incidente2);
         em.persist(incidente3);
+        em.persist(usuario2);
+        em.persist(maxi);
+        em.persist(maxiDeViajeros);
 
         BDUtils.commit(em);
     }

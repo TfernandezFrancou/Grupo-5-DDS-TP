@@ -33,7 +33,9 @@ public class PostLogin implements Handler {
         System.out.println("Login: " + miembroObtenido.getNombre());
         System.out.println("Login: " + idSesion);
 
-        ctx.redirect("/perfil/"+idSesion);
+        ctx.cookie("id_sesion",idSesion);
+
+        ctx.redirect("/perfil");
         }
         else{ctx.redirect("/loginFail");}
 

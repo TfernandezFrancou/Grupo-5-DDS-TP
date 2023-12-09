@@ -5,6 +5,7 @@ import domain.entities.actores.miembros.Miembro;
 import domain.entities.actores.miembros.MiembroPorComunidad;
 import domain.entities.repositorios.ComunidadesRepo;
 import dto.MiembroPresentacion;
+import handlers.SesionManager;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
@@ -19,8 +20,15 @@ public class GetComunidadHandler implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = new HashMap<>();
+        String idSesion=context.cookie("id_sesion");
+        Miembro miembroActual = SesionManager.get().obtenerMiembro(idSesion);
         Integer idBuscado = context.pathParamAsClass("id", Integer.class).get();
         Comunidad comunidad = ComunidadesRepo.getInstance().buscarComunidadPorId(idBuscado);
+        MiembroPorComunidad miembroPorComunidadActual=ComunidadesRepo.getInstance().obtenerMiembroPorComunidad(
+                miembroActual.getMiembro_codigo(),comunidad.getComunidad_codigo()
+        );
+        Boolean esAdmin=miembroPorComunidadActual.getEsAdmin();
+        model.put("administrador",esAdmin);
 
         // Agregar la información relevante al modelo
         model.put("nombreComunidad", comunidad.getNombre());

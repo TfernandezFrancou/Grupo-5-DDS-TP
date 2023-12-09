@@ -41,6 +41,15 @@ public class MiembroPorComunidad {
             comunidad.getMiembros().add(this);
         }
     }
+    public MiembroPorComunidad(Miembro miembro,Comunidad comunidad,Boolean admin) {
+        this.miembro = miembro;
+        this.comunidad = comunidad;
+        this.esAdmin=admin;
+
+        if(!comunidad.getMiembros().contains(this)){
+            comunidad.getMiembros().add(this);
+        }
+    }
 
     public MiembroPorComunidad() {
 

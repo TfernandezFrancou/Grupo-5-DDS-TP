@@ -17,7 +17,8 @@ public class GetPerfilMiembroHandler implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = new HashMap<>();
-        String idSesion = context.pathParamAsClass("idSesion", String.class).get();
+        //String idSesion = context.pathParamAsClass("idSesion", String.class).get();
+        String idSesion =context.cookie("id_sesion");
         Miembro miembro = SesionManager.get().obtenerMiembro(idSesion);
         if(miembro!= null){
             List<Comunidad> comunidades = ComunidadesRepo.getInstance().bucarComunidadesMimebro(idSesion);

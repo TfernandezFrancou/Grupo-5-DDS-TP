@@ -25,7 +25,7 @@ public class GetPerfilMiembroHandler implements Handler {
 
             MiembroPresentacion unMiembro= new MiembroPresentacion(miembro);
             model.put("miembro",unMiembro);
-            model.put("id",idSesion);
+            model.put("idSesion",idSesion);
 
             context.render("perfil.hbs",model);
         }else {

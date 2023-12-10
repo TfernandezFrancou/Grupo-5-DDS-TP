@@ -1,13 +1,11 @@
 package domain.entities.repositorios;
 
-import domain.entities.actores.miembros.MiembroPorComunidad;
 import domain.entities.incidentes.Incidente;
 import domain.entities.incidentes.IncidenteMiembro;
+import domain.entities.servicios.Establecimiento;
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,5 +56,20 @@ public class IncidentesRepo {
                 .setParameter(1,idIncidente).getResultList();
         if (incidentes.isEmpty()){return null;}
         return incidentes.get(0);
+    }
+
+    public List<IncidenteMiembro> buscarIncidentesPorEstablecimiento(Establecimiento establecimiento){
+        EntityManager em = utils.BDUtils.getEntityManager();
+        List<IncidenteMiembro> incidentesEstablecimiento = em.createQuery("select i from IncidenteMiembro i WHERE i.establecimiento=?1", IncidenteMiembro.class)
+                .setParameter(1,establecimiento).getResultList();
+        return incidentesEstablecimiento;
+
+    }
+
+    public List<IncidenteMiembro> buscarIncidentesPorEstablecimientoResuelto(Establecimiento establecimiento){
+        List<IncidenteMiembro> incidentesEstablecimiento = buscarIncidentesPorEstablecimiento(establecimiento);
+        if(incidentesEstablecimiento!=null){
+        return incidentesEstablecimiento.stream().filter(i -> !i.getResuelto()).collect(Collectors.toList());
+    }else return null;
     }
 }

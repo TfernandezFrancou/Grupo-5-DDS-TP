@@ -21,6 +21,10 @@ public class MedioNotificacion {
     @Transient
     private EstrategiaNotificar estrategiaNotificar;
 
+    public MedioNotificacion() {
+
+    }
+
     public void notificar(Notificacion notificacion, Miembro miembro) {
         if(medioNotificacion.equals("email")){
             estrategiaNotificar= new EstrategiaEmail();

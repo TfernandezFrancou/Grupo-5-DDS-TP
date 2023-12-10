@@ -4,7 +4,7 @@ import domain.entities.actores.miembros.Miembro;
 import domain.entities.incidentes.Incidente;
 import domain.entities.incidentes.IncidenteMiembro;
 import domain.entities.repositorios.RepoMiembros;
-import domain.sugerencias.RevisionDeIncidentes;
+import domain.entities.sugerencias.RevisionDeIncidentes;
 import org.junit.Assert;
 import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;

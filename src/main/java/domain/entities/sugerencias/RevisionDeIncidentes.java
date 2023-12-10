@@ -1,14 +1,12 @@
-package domain.sugerencias;
+package domain.entities.sugerencias;
 
 
 import domain.entities.actores.miembros.Miembro;
-import domain.entities.incidentes.Incidente;
 
 import domain.entities.incidentes.IncidenteMiembro;
 import domain.entities.repositorios.EstablecimientosRepo;
 import domain.entities.repositorios.IncidentesRepo;
 import domain.entities.servicios.Establecimiento;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;

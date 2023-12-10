@@ -78,6 +78,15 @@
                              <!-- Contenido de Incidentes a Revisar -->
                              <h4 class="centroH">Incidentes a Revisar:</h4>
                              <!-- Agrega aquí el contenido específico de los incidentes a revisar -->
+                             <ul class="centroComu">
+                                 {{#if incidentes}}
+                                    {{#each incidentes}}
+                                         <li><a>{{descripcion}}</a><a href=# data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2  text-secondary"><i class="bi bi-arrow-return-right"></i></a></li>
+                                    {{/each}}
+                                {{else}}
+                                     <p>No hay ningún incidente para revisar</p>
+                                {{/if}}
+                            </ul>
                          </div>
                      </section>
                  </div>

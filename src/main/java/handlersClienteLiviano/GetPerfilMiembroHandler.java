@@ -2,7 +2,9 @@ package handlersClienteLiviano;
 
 import domain.entities.actores.Comunidad;
 import domain.entities.actores.miembros.Miembro;
+import domain.entities.incidentes.IncidenteMiembro;
 import domain.entities.repositorios.ComunidadesRepo;
+import domain.entities.sugerencias.RevisionDeIncidentes;
 import dto.MiembroPresentacion;
 import handlers.SesionManager;
 import io.javalin.http.Context;
@@ -20,13 +22,18 @@ public class GetPerfilMiembroHandler implements Handler {
         //String idSesion = context.pathParamAsClass("idSesion", String.class).get();
         String idSesion =context.cookie("id_sesion");
         Miembro miembro = SesionManager.get().obtenerMiembro(idSesion);
+
         if(miembro!= null){
             List<Comunidad> comunidades = ComunidadesRepo.getInstance().bucarComunidadesMimebro(idSesion);
             model.put("comunidades",comunidades);
 
-            MiembroPresentacion unMiembro= new MiembroPresentacion(miembro);
-            model.put("miembro",unMiembro);
-            model.put("idSesion",idSesion);
+            MiembroPresentacion miembroPresentacion= new MiembroPresentacion(miembro);
+            model.put("miembro",miembroPresentacion);
+
+            List<IncidenteMiembro> incidentes = RevisionDeIncidentes.getInstance().obtenerIncidentes(miembro);
+            model.put("incidentes", incidentes);
+
+            model.put("idSesion",idSesion); //todo: esto para q es?? no esta en la cookie ya?
 
             context.render("perfil.hbs",model);
         }else {

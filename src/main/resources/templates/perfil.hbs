@@ -36,24 +36,56 @@
             </div>
             <hr class="m-0">
             <ul class="nav nav-tabs tabs-alt justify-content-center">
-               <li class="nav-item"> <a class="nav-link py-4 active" href="#">Comunidades</a></li>
-               <li class="nav-item"> <a class="nav-link py-4" href="#">Información</a></li>
+               <li class="nav-item"> <a class="nav-link py-4 active" data-bs-toggle="tab" href="#comunidades">Comunidades</a></li>
+               <li class="nav-item"> <a class="nav-link py-4" data-bs-toggle="tab" href="#informacion">Información</a></li>
+               <li class="nav-item"> <a class="nav-link py-4" data-bs-toggle="tab" href="#incidentes">Incidentes a Revisar</a></li>
             </ul>
+
          </div>
-         <section class="node_category card d-inline-block w-100 mb-3">
-            <div class="card-body2">
-               <h4 class="centroH">Detalles Comunidades:</h4>
-               <ul class ="centroComu">
-                   {{#if comunidades}}
-                       {{#each comunidades}}
-                            <li><a>{{nombre}}</a><a href="http://localhost:4567/comunidad/{{comunidad_codigo}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2  text-secondary"><i class="bi bi-arrow-return-right"></i></a></li>
-                       {{/each}}
-                       {{else}}
-                        <p>No estas en ninguna comunidad</p>
-                       {{/if}}
-               </ul>
-            </div>
-         </section>
+
+         <div class="container">
+             <!-- Contenido de Comunidades, Información e Incidentes a Revisar -->
+             <div class="tab-content">
+                 <div class="tab-pane fade show active" id="comunidades">
+
+                    <section class="node_category card d-inline-block w-100 mb-3">
+                    <div class="card-body2">
+                     <!-- Contenido de Comunidades -->
+                     <h4 class="centroH">Detalles Comunidades:</h4>
+                     <ul class="centroComu">
+                         {{#if comunidades}}
+                             {{#each comunidades}}
+                                 <li><a>{{nombre}}</a><a href="http://localhost:4567/comunidad/{{comunidad_codigo}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2  text-secondary"><i class="bi bi-arrow-return-right"></i></a></li>
+                             {{/each}}
+                         {{else}}
+                             <p>No estás en ninguna comunidad</p>
+                         {{/if}}
+                     </ul>
+                     </div>
+                     </section>
+                 </div>
+                 <div class="tab-pane fade" id="informacion">
+                     <section class="node_category card d-inline-block w-100 mb-3">
+                     <div class="card-body2">
+                     <!-- Contenido de Información -->
+                     </div>
+                     </section>
+                 </div>
+                 <div class="tab-pane fade" id="incidentes">
+
+                     <section class="node_category card d-inline-block w-100 mb-3">
+                         <div class="card-body2">
+                             <!-- Contenido de Incidentes a Revisar -->
+                             <h4 class="centroH">Incidentes a Revisar:</h4>
+                             <!-- Agrega aquí el contenido específico de los incidentes a revisar -->
+                         </div>
+                     </section>
+                 </div>
+             </div>
+         </div>
+
+
+
          <style type="text/css">.text-white {
             color: #fff !important;
             }
@@ -191,5 +223,25 @@
                   localStorage.setItem('id_sesion', id_sesion);
               });
         </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Agregar manejo de clics para cambiar entre pestañas
+                const tabs = document.querySelectorAll('.nav-tabs .nav-link');
+                const tabContents = document.querySelectorAll('.tab-content .tab-pane');
+
+                tabs.forEach((tab, index) => {
+                    tab.addEventListener('click', function () {
+                        // Ocultar todos los contenidos de pestañas
+                        tabContents.forEach((content) => {
+                            content.classList.remove('show', 'active');
+                        });
+
+                        // Mostrar el contenido de la pestaña correspondiente
+                        tabContents[index].classList.add('show', 'active');
+                    });
+                });
+            });
+        </script>
+
    </body>
 </html>

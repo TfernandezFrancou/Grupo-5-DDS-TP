@@ -1,6 +1,7 @@
 package domain.entities.servicios;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import domain.entities.actores.OrganismoDeControl;
 import domain.entities.services.georef.entities.Localizacion;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +20,10 @@ public abstract class Entidad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int entidad_codigo;
+
+    @OneToOne(mappedBy = "entidad")
+    private OrganismoDeControl organismoDeControl;
+
     @Column
     protected String nombre;
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE}, fetch = FetchType.LAZY)

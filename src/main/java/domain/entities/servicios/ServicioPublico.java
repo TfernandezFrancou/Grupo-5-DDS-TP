@@ -1,6 +1,7 @@
 package domain.entities.servicios;
 
 
+import domain.entities.actores.Propietario;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +18,9 @@ public class ServicioPublico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int servicioPublico_codigo;
+
+    @OneToOne(mappedBy = "servicioPublico")
+    private Propietario propietario;
 
     @Enumerated(EnumType.STRING)
     @Column

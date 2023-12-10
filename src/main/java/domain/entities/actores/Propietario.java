@@ -2,12 +2,14 @@ package domain.entities.actores;
 
 import domain.entities.servicios.ServicioPublico;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table
 @Getter
+@Setter
 public class Propietario {
 
     @Id

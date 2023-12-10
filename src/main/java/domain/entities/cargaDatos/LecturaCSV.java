@@ -6,6 +6,7 @@ import domain.entities.repositorios.*;
 import domain.entities.servicios.Entidad;
 import domain.entities.servicios.Organizacion;
 import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -18,9 +19,10 @@ import java.util.Objects;
 
 
 @Getter
+@Setter
 public class LecturaCSV {
 
-    private static final String rutaArchivo = "src/main/java/domain/entities/cargaDatos/datos.csv";
+    private String rutaArchivo = "src/main/java/domain/entities/cargaDatos/datos.csv";
     Reader reader;
 
     public LecturaCSV()

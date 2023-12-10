@@ -3,12 +3,14 @@ package domain.entities.actores;
 import domain.entities.servicios.Entidad;
 import domain.entities.servicios.TipoDeServicio;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table
 @Getter
+@Setter
 public class OrganismoDeControl {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

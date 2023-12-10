@@ -1,8 +1,11 @@
 package domain.entities.repositorios;
 
 import domain.entities.actores.Propietario;
+import domain.entities.servicios.ServicioPublico;
 import lombok.Getter;
+import utils.BDUtils;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +28,24 @@ public class PropietarioRepo {
     }
 
     public void agregarPropietario(Propietario propietario){
-        propietarios.add(propietario);
+        EntityManager em = utils.BDUtils.getEntityManager();
+        BDUtils.comenzarTransaccion(em);
+        // Verificar si el ServicioPublico está en estado detached
+        ServicioPublico servicioPublico = propietario.getServicioPublico();
+        propietario.setServicioPublico(null);
+        if (!em.contains(servicioPublico)) {
+            // Si está detached, cargarlo en el contexto de persistencia
+            servicioPublico = em.merge(servicioPublico);
+        }
+        propietario.setServicioPublico(servicioPublico);
+        em.persist(propietario);
+        BDUtils.commit(em);
     }
 
+    public List<Propietario> buscarPropiertarios(){
+        EntityManager em = utils.BDUtils.getEntityManager();
+        List<Propietario> propietariosEncontrados= em.createQuery("SELECT p from Propietario p",Propietario.class).getResultList();
+        return propietariosEncontrados;
+    }
 
 }

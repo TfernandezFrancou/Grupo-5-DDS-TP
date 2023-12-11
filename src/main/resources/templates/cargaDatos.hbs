@@ -51,15 +51,16 @@
                         </p>
                     </div>
                     <div class="col-12 col-sm-10 col-md-10 col-lg-9 col-xl-9 d-flex flex-wrap padMar mx-auto" style="padding-top: 0px; margin-bottom: 46px; margin-top: -16px;">
-                        <!-- Agregado el campo de entrada de tipo archivo y el script JS -->
-                        <input type="file" id="fileInput" style="display: none;" onchange="updateFileName()">
-                        <label class="btn btn-primary btn-Oscuro" for="fileInput">SELECCIONAR ARCHIVO</label>
-                        <!-- Modificado el estilo del input para centrar el texto y ajustar los márgenes -->
-                        <input type="text" id="fileNameDisplay" style="text-align: center; margin: 0; padding: 5px; border: 2px solid #3b76e1;" placeholder=" No file chosen..." readonly>
-                        <button class="btn btn-primary btn-Oscuro" type="button" onclick="uploadFile()">SUBIR</button>
+
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <input type="file" id="fileInput" name="archivo" style="display: none;" onchange="updateFileName()">
+                            <label class="btn btn-primary btn-Oscuro" for="fileInput">SELECCIONAR ARCHIVO</label>
+                            <input type="text" id="fileNameDisplay" style="text-align: center; margin: 0; padding: 5px; border: 2px solid #3b76e1;" placeholder=" No file chosen..." readonly>
+                            <button class="btn btn-primary btn-Oscuro" type="button" onclick="uploadFile()">SUBIR</button>
+                        </form>
                     </div>
                     <div class="col-12 col-sm-10 col-md-9 col-lg-10 col-xl-9 d-flex flex-wrap padMar mx-auto" style="padding-right: 132px; margin-right: -141px; margin-top: -58px;">
-                        <!-- Modal de éxito -->
+
                         <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -119,7 +120,7 @@
         </div>
     </footer>
 
-    <!-- Agregados los scripts de Bootstrap y jQuery -->
+
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
@@ -136,18 +137,35 @@
                 var fileName = fileInput.files[0].name;
                 // Verificar la extensión del archivo
                 if (fileName.endsWith('.csv')) {
-                    // Puedes agregar aquí la lógica de carga del archivo si es necesario
+                    // Realizar la petición AJAX
+                    var formData = new FormData();
+                    formData.append('archivo', fileInput.files[0]);
 
-                    // Mostrar el mensaje de éxito usando el modal
-                    var successModal = new bootstrap.Modal(document.getElementById('successModal'));
-                    successModal.show();
+                    fetch('/cargarDatos', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => {
+                        if (response.ok) {
+
+                            var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                            successModal.show();
+                        } else {
+
+                            var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                            errorModal.show();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error en la petición AJAX:', error);
+                    });
                 } else {
-                    // Mostrar mensaje de error en el modal
+
                     var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
                     errorModal.show();
                 }
             } else {
-                // No se ha seleccionado ningún archivo, puedes manejarlo según tus necesidades
+
                 console.error('No se ha seleccionado ningún archivo');
             }
         }

@@ -1,16 +1,25 @@
 package handlersClienteLiviano;
 
+import domain.entities.cargaDatos.LecturaCSV;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.http.UploadedFile;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 public class PostCargarDatosHandler implements Handler {
+
+
+    private static final String UPLOAD_DIR = "src/main/java/domain/entities/cargaDatos/";
 
     @Override
     public void handle(Context ctx) throws Exception {
@@ -18,18 +27,22 @@ public class PostCargarDatosHandler implements Handler {
 
         if (files != null && !files.isEmpty()) {
             UploadedFile file = files.get(0);
-
             String fileName = file.filename();
+            Path filePath = Paths.get(UPLOAD_DIR, fileName);
 
-            InputStream fileContent = file.content();
 
-            String filePath = "src/main/domain.entities/cargaDatos" + fileName;
+            Files.createDirectories(filePath.getParent());
 
-            java.nio.file.Files.copy(fileContent, new File(filePath).toPath(), StandardCopyOption.REPLACE_EXISTING);
 
-            ctx.redirect("/exito");
+            Files.copy(file.content(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+            System.out.println("Archivo guardado correctamente en: " + filePath);
+            LecturaCSV lectorCSV = new LecturaCSV();
+            lectorCSV.leerArchivo(filePath.toString());
+            ctx.status(200);
         } else {
-            ctx.redirect("/error");
+            System.err.println("No se recibieron archivos en la solicitud");
+            ctx.status(404);
         }
     }
 }

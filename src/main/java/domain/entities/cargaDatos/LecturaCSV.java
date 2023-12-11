@@ -22,48 +22,50 @@ import java.util.Objects;
 @Setter
 public class LecturaCSV {
 
-    private String rutaArchivo = "src/main/java/domain/entities/cargaDatos/datos.csv";
     Reader reader;
 
-    public LecturaCSV()
+    public LecturaCSV() {
+    }
 
-        {
-            try {
-                reader = Files.newBufferedReader(Paths.get(rutaArchivo));
+    public void leerArchivo(String rutaArchivo){
+        try {
+            reader = Files.newBufferedReader(Paths.get(rutaArchivo));
 
-                CSVParser parser = new CSVParser(reader, CSVFormat.DEFAULT);
+            CSVParser parser = new CSVParser(reader, CSVFormat.DEFAULT);
 
-                for (CSVRecord registro : parser){
-                    String nombre = registro.get(0);
-                    String tipo = registro.get(1);
-                    String servicio = registro.get(2);
-                    String tipoServicio = "";
+            for (CSVRecord registro : parser){
+                String nombre = registro.get(0);
+                String tipo = registro.get(1);
+                String servicio = registro.get(2);
+                String tipoServicio = "";
 
-                    if (registro.size() > 3) {
-                        tipoServicio = registro.get(3);
-                    }
-
-                    if(Objects.equals(tipo, "propietario")){
-                        Propietario entidadPropietaria = new Propietario(nombre,ServicioPublicoRepo.getInstance().buscar(servicio));
-                        PropietarioRepo.getInstance().agregarPropietario(entidadPropietaria);
-                    }else{
-                        Entidad ent;
-                        if(tipoServicio.equals("organizacion")) {
-                           ent = OrganizacionesRepo.getInstance().buscar(servicio);
-
-                        }else{
-                            ent = LineaRepo.getInstance().buscar(servicio,tipoServicio);
-                        }
-                        OrganismoDeControlRepo.getInstance().agregarOrganismo(new OrganismoDeControl(nombre,ent));
-                    }
+                if (registro.size() > 3) {
+                    tipoServicio = registro.get(3);
                 }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+
+                if(Objects.equals(tipo, "propietario")){
+                    Propietario entidadPropietaria = new Propietario(nombre,ServicioPublicoRepo.getInstance().buscar(servicio));
+                    PropietarioRepo.getInstance().agregarPropietario(entidadPropietaria);
+                }else{
+                    Entidad ent;
+                    if(tipoServicio.equals("organizacion")) {
+                        ent = OrganizacionesRepo.getInstance().buscar(servicio);
+
+                    }else{
+                        ent = LineaRepo.getInstance().buscar(servicio,tipoServicio);
+                    }
+                    OrganismoDeControlRepo.getInstance().agregarOrganismo(new OrganismoDeControl(nombre,ent));
+                }
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
 
         }
-    }
+}
+
+
 
 
 

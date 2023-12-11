@@ -3,4 +3,4 @@ target
 Grupo-5-DDS-TP.iml
 tokenwpp.properties
 tokenemail.properties
-./src/main/resources/META-INF/persistence.xml
+src/main/resources/META-INF/persistence.xml

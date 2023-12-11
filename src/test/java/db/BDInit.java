@@ -36,6 +36,7 @@ public class BDInit {
     MiembroPorComunidad maxiDeViajeros;
     Miembro juan;
     Miembro maxi;
+    Miembro admin;
     Comunidad viajeros;
     AgrupacionServicio banio;
     AgrupacionServicio escalera;
@@ -50,11 +51,17 @@ public class BDInit {
     Incidente incidente3;
     Usuario usuario1;
     Usuario usuario2;
+    Usuario usuario3;
 
     @Before
     public void init(){
          usuario1 = new Usuario("juan","123", Rol.MIEMBRO);
          usuario2 = new Usuario("maxi", "123", Rol.MIEMBRO);
+         usuario3 = new Usuario("admin","123",Rol.ADMIN);
+
+         admin=new Miembro("Admin","Admin","admin@gmail.com","749");
+         admin.setUsuario(usuario3);
+
         //Creo 2 lineas y las agrego al repo
         linea1 = new Linea("Linea B", TipoDeTransporte.SUBTE);
         linea2 = new Linea("Linea E",TipoDeTransporte.SUBTE);
@@ -122,6 +129,8 @@ public class BDInit {
         EntityManager em = BDUtils.getEntityManager();
         BDUtils.comenzarTransaccion(em);
         em.persist(usuario1);
+        em.persist(usuario3);
+        em.persist(admin);
         em.persist(observador);
         em.persist(noObservador);
         em.persist(tipoA);
@@ -151,10 +160,33 @@ public class BDInit {
 
         BDUtils.commit(em);
     }
-    /*@Test
-    public void buscarTipoServicioTest(){
-        banioHombres = TipoDeServicioRepo.getInstance().buscar("Baño","Hombre");
+    @Test
+    public void carga(){
+        Linea linea1 = new Linea("7", TipoDeTransporte.COLECTIVO);
+        Linea linea2 = new Linea("A",TipoDeTransporte.SUBTE);
+        Organizacion org1 = new Organizacion("Organizacion1","srl");
+        ServicioPublico serv1 = new ServicioPublico(TipoDeTransporte.COLECTIVO);
+        ServicioPublico serv2 = new ServicioPublico(TipoDeTransporte.TREN);
+        ServicioPublico serv3 = new ServicioPublico(TipoDeTransporte.SUBTE);
 
-        Assert.assertEquals("Hombre",banioHombres.getTipoDeServicio());
-    }*/
+        /*
+        LineaRepo.getInstance().agregar(linea1);
+        LineaRepo.getInstance().agregar(linea2);
+
+        OrganizacionesRepo.getInstance().agregar(org1);
+
+       ServicioPublicoRepo.getInstance().agregarServicio(new ServicioPublico(TipoDeTransporte.COLECTIVO));
+       ServicioPublicoRepo.getInstance().agregarServicio(new ServicioPublico(TipoDeTransporte.TREN));
+       ServicioPublicoRepo.getInstance().agregarServicio(new ServicioPublico(TipoDeTransporte.SUBTE));
+       */
+        EntityManager em = utils.BDUtils.getEntityManager();
+        BDUtils.comenzarTransaccion(em);
+        em.persist(linea1);
+        em.persist(linea2);
+        em.persist(org1);
+        em.persist(serv1);
+        em.persist(serv2);
+        em.persist(serv3);
+        BDUtils.commit(em);
+    }
 }

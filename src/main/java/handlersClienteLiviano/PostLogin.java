@@ -1,5 +1,6 @@
 package handlersClienteLiviano;
 
+import domain.entities.actores.Rol;
 import domain.entities.actores.miembros.Miembro;
 import domain.entities.repositorios.RepoMiembros;
 import dto.LoginRequest;
@@ -34,8 +35,11 @@ public class PostLogin implements Handler {
         System.out.println("Login: " + idSesion);
 
         ctx.cookie("id_sesion",idSesion);
-
-        ctx.redirect("/perfil");
+        if(miembroObtenido.getUsuario().getRol().equals(Rol.ADMIN)){
+            ctx.redirect("/cargaDatos");
+        }else{
+            ctx.redirect("/perfil");
+            }
         }
         else{ctx.redirect("/loginFail");}
 

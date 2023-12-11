@@ -53,5 +53,12 @@ public class ComunidadesRepo {
         if(miembros.isEmpty()) {return null;}
         return miembros.stream().findFirst().get();
     }
+    public List<Comunidad> buscarComunidadesMiembro(Miembro miembro){
+        List<Comunidad> comunidades = new ArrayList<>();
+        for(MiembroPorComunidad miembroPorComunidad: miembro.getComunidades() ){
+            comunidades.add(miembroPorComunidad.getComunidad());
+        }
+        return comunidades;
+    }
 
 }

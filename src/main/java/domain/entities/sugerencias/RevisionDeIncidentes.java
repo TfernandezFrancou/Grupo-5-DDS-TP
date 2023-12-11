@@ -3,6 +3,7 @@ package domain.entities.sugerencias;
 
 import domain.entities.actores.miembros.Miembro;
 
+import domain.entities.incidentes.Incidente;
 import domain.entities.incidentes.IncidenteMiembro;
 import domain.entities.repositorios.EstablecimientosRepo;
 import domain.entities.repositorios.IncidentesRepo;
@@ -10,6 +11,7 @@ import domain.entities.servicios.Establecimiento;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class RevisionDeIncidentes {
@@ -25,14 +27,17 @@ public class RevisionDeIncidentes {
         return instance;
     }
     //todo: usar incidentes y no incidentemiembro maybe
-    public List<IncidenteMiembro> obtenerIncidentes(Miembro miembro){
+    public List<Incidente> obtenerIncidentes(Miembro miembro){
         List<Establecimiento> establecimientos = estaCercaDe(miembro);
-        List<IncidenteMiembro>  incidentes = new ArrayList<>();
-        if(establecimientos != null) {
-            for(Establecimiento establecimiento : establecimientos){
-                incidentes.addAll(IncidentesRepo.getInstance().buscarIncidentesPorEstablecimientoResuelto(establecimiento));
-            }
+        List<Incidente>  incidentes = IncidentesRepo.getInstance().obtenerIncidentesParaMiembro(miembro);
+        if (establecimientos != null && !establecimientos.isEmpty()) {
+            // Filtrar los incidentes que tienen un establecimiento cuyo código está en la lista de establecimientos
+            incidentes = incidentes.stream()
+                    .filter(incidente -> establecimientos.stream()
+                            .anyMatch(establecimiento -> establecimiento.getEstablecimiento_codigo() == incidente.getEstablecimiento().getEstablecimiento_codigo()))
+                    .collect(Collectors.toList());
         }
+        incidentes= incidentes.stream().filter(i-> !i.getResuelto()).collect(Collectors.toList());
         return incidentes;
     }
 

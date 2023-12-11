@@ -18,7 +18,7 @@ public class SugerenciasTest extends AbstractPersistenceTest implements WithGlob
     public void testSugerencias(){
         //ya tener cargada la bd
         Miembro miembro1 = RepoMiembros.getInstance().buscarMiembro(1);
-        List<IncidenteMiembro> incidentes = RevisionDeIncidentes.getInstance().obtenerIncidentes(miembro1);
+        List<Incidente> incidentes = RevisionDeIncidentes.getInstance().obtenerIncidentes(miembro1);
         for(Incidente i : incidentes){
             System.out.println(i.getDescripcion());
         }

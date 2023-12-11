@@ -16,12 +16,15 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Getter
 public class IncidentePresentacion {
     private Integer codigo;
+    private Integer idComunidad;
     private  String creador;
     private String establecimiento;
     private  String servicio;
@@ -33,6 +36,7 @@ public class IncidentePresentacion {
 
     public IncidentePresentacion(Incidente incidente){
         this.codigo=incidente.getIncidente_codigo();
+        this.idComunidad=incidente.getComunidad().getComunidad_codigo();
         this.creador= incidente.obtenerCreador();
         this.establecimiento= incidente.getEstablecimiento().getNombre();
         this.servicio= incidente.getServicio().obtenerDescripcion();

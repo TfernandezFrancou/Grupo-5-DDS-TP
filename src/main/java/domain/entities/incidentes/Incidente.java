@@ -20,10 +20,10 @@ public abstract class Incidente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int incidente_codigo;
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "establecimiento_codigo", referencedColumnName = "establecimiento_codigo")
     private Establecimiento establecimiento;
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "servicio_codigo", referencedColumnName = "servicio_codigo")
     private Servicio servicio;
     @Column

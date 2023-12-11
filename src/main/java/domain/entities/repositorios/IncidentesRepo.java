@@ -1,13 +1,17 @@
 package domain.entities.repositorios;
 
+import domain.entities.actores.Comunidad;
+import domain.entities.actores.miembros.Miembro;
 import domain.entities.incidentes.Incidente;
 import domain.entities.incidentes.IncidenteMiembro;
+import domain.entities.incidentes.IncidentePropietario;
 import domain.entities.servicios.Establecimiento;
 import lombok.Getter;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -71,5 +75,22 @@ public class IncidentesRepo {
         if(incidentesEstablecimiento!=null){
         return incidentesEstablecimiento.stream().filter(i -> !i.getResuelto()).collect(Collectors.toList());
     }else return null;
+    }
+    public List<IncidentePropietario> buscarIncidentesPropetarios(){
+        EntityManager em = utils.BDUtils.getEntityManager();
+        List<IncidentePropietario> incidentePropietarios = em.createQuery("select i from IncidentePropietario i", IncidentePropietario.class).getResultList();
+        return incidentePropietarios;
+    }
+    public List<Incidente> obtenerIncidentesParaMiembro(Miembro miembro){
+        List<Comunidad> comunidades= ComunidadesRepo.getInstance().buscarComunidadesMiembro(miembro);
+
+        List<Incidente> incidetes = comunidades.stream()
+                .flatMap(comunidad -> comunidad.getIncidentes().stream())
+                .collect(Collectors.toList());
+        List<IncidentePropietario> incidentePropietarios= this.buscarIncidentesPropetarios();
+
+        incidetes.addAll(incidentePropietarios);
+        return  incidetes;
+
     }
 }

@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 public class MiembroPresentacion {
     private int id_miembro;
+    private int comunidad_codigo;
     private String nombre;
     private String apellido;
     private String email;
@@ -14,6 +15,7 @@ public class MiembroPresentacion {
     private String tipoDeMiembro;
     private Boolean esObservador;
     private Boolean esAdmin;
+    private String comunidad;
 
     public MiembroPresentacion(MiembroPorComunidad miembro){
         this.id_miembro=miembro.getMiembro().getMiembro_codigo();
@@ -29,6 +31,8 @@ public class MiembroPresentacion {
         else{
             this.esObservador=false;
         }
+        this.comunidad=miembro.getComunidad().getNombre();
+        this.comunidad_codigo=miembro.getComunidad().getComunidad_codigo();
     }
     public MiembroPresentacion(Miembro miembro){
         this.id_miembro= miembro.getMiembro_codigo();

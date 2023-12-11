@@ -56,7 +56,6 @@
             <hr class="m-0">
             <ul class="nav nav-tabs tabs-alt justify-content-center">
                <li class="nav-item"> <a class="nav-link py-4 active" data-bs-toggle="tab" href="#comunidades">Comunidades</a></li>
-               <li class="nav-item"> <a class="nav-link py-4" data-bs-toggle="tab" href="#informacion">Información</a></li>
                <li class="nav-item"> <a class="nav-link py-4" data-bs-toggle="tab" href="#incidentes">Incidentes a Revisar</a></li>
             </ul>
 
@@ -74,7 +73,11 @@
                      <ul class="centroComu">
                          {{#if comunidades}}
                              {{#each comunidades}}
-                                 <li><a>{{nombre}}</a><a href="http://localhost:4567/comunidad/{{comunidad_codigo}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2  text-secondary"><i class="bi bi-arrow-return-right"></i></a></li>
+                                 <li><a href="javascript:void(0);" data-bs-target="#modal-comunidad" data-bs-toggle="modal" data-bs-placement="top" title="Ver" class="px-2 text-primary" onclick="mostrarDetallesMiembro('{{nombre}}', '{{apellido}}', '{{tipoDeMiembro}}','{{comunidad_codigo}}')">
+                                     <i class="bi bi-eye font-size-18"></i></a>
+                                     <a>{{comunidad}}</a>
+                                     <a href="http://localhost:4567/comunidad/{{comunidad_codigo}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2  text-secondary"><i class="bi bi-arrow-return-right"></i></a>
+                                 </li>
                              {{/each}}
                          {{else}}
                              <p>No estás en ninguna comunidad</p>
@@ -153,7 +156,47 @@
                   </div>
               </div>
           </div>
-
+          <form id="miembroForm" action="http://localhost:4567/api/cambiarTipoMiembro" method="post">
+          <div class="modal fade" role="dialog" tabindex="-1" id="modal-comunidad">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h4 class="modal-title">Miembro</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="table-responsive">
+                                  <input type="hidden" id="idComunidad" name="idComunidad" value="">
+                                  <table class="table">
+                                      <tbody>
+                                      <tr>
+                                          <td><strong>Nombre:</strong></td>
+                                          <td id="nombreMiembro"></td>
+                                      </tr>
+                                      <tr>
+                                          <td><strong>Apellido:</strong></td>
+                                          <td id="apellidoMiembro"></td>
+                                      </tr>
+                                      <tr>
+                                          <td><strong>Tipo Usuario:</strong></td>
+                                          <td>
+                                              <select id="tipoMiembro" name="tipoMiembro">
+                                                  <option value="Observador">Observador</option>
+                                                  <option value="Usuario de Servicio">Usuario de Servicio</option>
+                                              </select>
+                                          </td>
+                                      </tr>
+                                      </tbody>
+                                  </table>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                          <button class="btn btn-light" type="button" data-bs-dismiss="modal" >Cerrar</button>
+                          <button class="btn btn-primary" type="submit" data-bs-dismiss="modal">Aplicar Cambios</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          </form>
 
 
          <style type="text/css">.text-white {
@@ -267,6 +310,23 @@
             #carbonads *{margin:initial;padding:initial;text-align:center}#carbonads{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen-Sans,Ubuntu,Cantarell,'Helvetica Neue',Helvetica,Arial,sans-serif;display:inline-block;font-size:14px;text-shadow:0 1px hsla(0,0%,100%,.8)}#carbonads a,#carbonads a:hover{color:#444;text-decoration:none}#carbonads>span{display:grid;background-color:#f9f9fa;max-width:250px;padding:1em;box-sizing:border-box;border-radius:4px;box-shadow:0 0 1px hsl(0deg 0% 0% / .075),0 0 2px hsl(0deg 0% 0% / .075),0 0 4px hsl(0deg 0% 0% / .075),0 0 8px hsl(0deg 0% 0% / .075),0 0 16px hsl(0deg 0% 0% / .075)}#carbonads .carbon-wrap{display:grid;row-gap:1em}#carbonads .carbon-text{font-size:1em;margin-bottom:.5em}#carbonads .carbon-poweredby{opacity:.5;font-size:.725em;text-transform:uppercase;font-weight:600;letter-spacing:.05ch}
          </style>
       </div>
+        <footer class="text-center py-4 bg-dark" style="position: fixed; bottom: 0; width: 100vw">
+            <div class="container">
+                <div class="row row-cols-1 row-cols-lg-3">
+                    <div class="col">
+                        <p class="text-light my-2">TP ANUAL DDS 2023</p>
+                    </div>
+                    <div class="col">
+                        <ul class="list-inline my-2">
+                            <li class="list-inline-item me-4"></li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <p class="text-light my-2">GRUPO 5</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-F1RTS0P1CD"></script> <script>window.dataLayer = window.dataLayer || [];
          function gtag(){dataLayer.push(arguments);}
          gtag('js', new Date());
@@ -309,6 +369,7 @@
 
                 var cerrarIncidenteBtn = document.getElementById('cerrarIncidenteBtn');
                 cerrarIncidenteBtn.setAttribute('data-codigo-incidente', codigoIncidente);
+                console.log(cerrarIncidenteBtn)
                 cerrarIncidenteBtn.setAttribute('data-id-comunidad', idComunidad);
             }
         </script>
@@ -334,6 +395,7 @@
                     // Verificar el contenido de la respuesta y mostrar un mensaje en consecuencia
                     if (data.includes("Incidente cerrado con éxito")) {
                         alert('Incidente cerrado con éxito');
+                        window.location.href = `http://localhost:4567/perfil`;
                     }
                 }).catch(error => {
                     console.error('Error:', error);
@@ -346,5 +408,19 @@
                 return new Date().toISOString(); // Puedes ajustar esto según cómo manejas las fechas
             }
         </script>
+      <script>
+          function mostrarDetallesMiembro(nombre, apellido, tipoDeMiembro, comunidadCodigo) {
+              // Rellenar dinámicamente los campos del modal
+              document.getElementById('nombreMiembro').innerText = nombre;
+              document.getElementById('apellidoMiembro').innerText = apellido;
+
+              // Configurar la opción seleccionada en el campo tipoMiembro
+              var tipoMiembroSelect = document.getElementById('tipoMiembro');
+              tipoMiembroSelect.value = tipoDeMiembro;
+
+              document.getElementById('idComunidad').value = comunidadCodigo;
+
+          }
+      </script>
    </body>
 </html>

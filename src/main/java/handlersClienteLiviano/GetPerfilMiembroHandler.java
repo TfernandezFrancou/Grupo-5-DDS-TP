@@ -2,6 +2,7 @@ package handlersClienteLiviano;
 
 import domain.entities.actores.Comunidad;
 import domain.entities.actores.miembros.Miembro;
+import domain.entities.actores.miembros.MiembroPorComunidad;
 import domain.entities.incidentes.Incidente;
 import domain.entities.incidentes.IncidenteMiembro;
 import domain.entities.repositorios.ComunidadesRepo;
@@ -27,7 +28,12 @@ public class GetPerfilMiembroHandler implements Handler {
         Miembro miembro = SesionManager.get().obtenerMiembro(idSesion);
 
         if(miembro!= null){
-            List<Comunidad> comunidades = ComunidadesRepo.getInstance().bucarComunidadesMimebro(idSesion);
+            //List<Comunidad> comunidades = ComunidadesRepo.getInstance().bucarComunidadesMimebro(idSesion);
+            List<MiembroPresentacion> comunidades = new ArrayList<>();
+            for(MiembroPorComunidad miembroPorComunidad: miembro.getComunidades()){
+                MiembroPresentacion unMiembro = new MiembroPresentacion(miembroPorComunidad);
+                comunidades.add(unMiembro);
+            }
             model.put("comunidades",comunidades);
 
             MiembroPresentacion miembroPresentacion= new MiembroPresentacion(miembro);

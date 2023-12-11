@@ -110,7 +110,7 @@ public class BDInit {
 
         //Creo los dos tipos de miembros
         observador= new TipoDeMiembro("Observador");
-        noObservador= new TipoDeMiembro("Usuarios de servicio");
+        noObservador= new TipoDeMiembro("Usuario de Servicio");
 
         juan.setUsuario(usuario1);
         maxi.setUsuario(usuario2);

@@ -1,6 +1,7 @@
 package domain.entities.repositorios;
 
 import domain.entities.actores.miembros.Miembro;
+import domain.entities.actores.miembros.TipoDeMiembro;
 import dto.LoginRequest;
 
 import javax.persistence.Entity;
@@ -45,6 +46,12 @@ public class RepoMiembros {
                 .getResultList();
         if(miembros.isEmpty()) {return new Miembro(-1);}
         return miembros.stream().findFirst().get();
-
+    }
+    public TipoDeMiembro buscarTipoDeMiembro(String tipo){
+        EntityManager em = utils.BDUtils.getEntityManager();
+        List<TipoDeMiembro> tipoDeMiembros = em.createQuery("SELECT t FROM TipoDeMiembro t WHERE t.tipoDeMiembro=?1", TipoDeMiembro.class)
+                .setParameter(1,tipo)
+                .getResultList();
+        return tipoDeMiembros.get(0);
     }
 }

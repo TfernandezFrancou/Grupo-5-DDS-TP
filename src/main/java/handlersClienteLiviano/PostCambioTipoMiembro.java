@@ -5,6 +5,7 @@ import domain.entities.actores.miembros.MiembroPorComunidad;
 import domain.entities.actores.miembros.TipoDeMiembro;
 import domain.entities.incidentes.IncidenteMiembro;
 import domain.entities.repositorios.ComunidadesRepo;
+import domain.entities.repositorios.RepoMiembros;
 import handlers.SesionManager;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
@@ -37,13 +38,11 @@ public class PostCambioTipoMiembro implements Handler {
 
         if(miembroPorComunidadEjecutor.getEsAdmin()){
             if(tipoUsuario.equalsIgnoreCase("Observador")){
-                TipoDeMiembro nuevoTipo=new TipoDeMiembro("Usuarios de servicio");
-                em.persist(nuevoTipo);
+                TipoDeMiembro nuevoTipo= RepoMiembros.getInstance().buscarTipoDeMiembro("Usuario de Servicio");
                 elPosta.setTipoDeMiembro(nuevoTipo);
             }
             else{
-                TipoDeMiembro nuevoTipo=new TipoDeMiembro("Observador");
-                em.persist(nuevoTipo);
+                TipoDeMiembro nuevoTipo=RepoMiembros.getInstance().buscarTipoDeMiembro("Observador");
                 elPosta.setTipoDeMiembro(nuevoTipo);
             }
 

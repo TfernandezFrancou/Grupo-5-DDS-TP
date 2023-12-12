@@ -39,8 +39,8 @@
                             <div class="row mb-2" v-for="miembro in comunidad.miembros">
                                 <li class="centerLeft">
 
-                                    <span v-if="miembro.esObservador">👁</span>
-                                    <span v-else>✔</span>
+                                    <span v-if="miembro.esObservador" @click="cambiarTipoMiembro(miembro)">👁</span>
+                                    <span v-else @click="cambiarTipoMiembro(miembro)">✔</span>
                                     <a style="text-decoration: none; color: black" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-miembro" @click="mostrarDetallesMiembro(miembro)">
                                     {{miembro.nombre}}, {{miembro.apellido}}
                                 </a>
@@ -245,7 +245,36 @@ gtag('config', 'G-F1RTS0P1CD');
                     document.getElementById('nombreMiembro').innerText = administrador.nombre;
                     document.getElementById('apellidoMiembro').innerText = administrador.apellido;
                     document.getElementById('tipoUsuarioMiembro').innerText = administrador.tipoDeMiembro;
-                }
+                },
+                cambiarTipoMiembro(miembro) {
+                    // Cambia entre 'usuario' y 'observador'
+                    console.log('Tipo antes de la actualización:', miembro.esObservador);
+                    miembro.esObservador = !miembro.esObservador;
+                    console.log('Tipo después de la actualización:', miembro.esObservador, "tipo: ", typeof miembro.esObservador);
+                    console.log('ID de la comunidad:', this.codigoComunidad, "tipo: ", typeof this.codigoComunidad);
+                    console.log('Miembro ID:', miembro.id_miembro, "tipe: ", typeof miembro.id_miembro);
+                    const cambioTipoMiembro={
+                        miembroId: miembro.id_miembro,
+                        nuevoTipo: miembro.esObservador ? 'Observador' : 'Usuario',
+                        comunidadId: this.codigoComunidad
+                    }
+                    //Puedes agregar una llamada al servidor para actualizar la información
+                     fetch('http://localhost:4567/api/cambiarTipoMiembro', {
+                         method: 'POST',
+                         headers: {
+                             'Content-Type': 'application/json',
+                         },
+                         body: JSON.stringify(cambioTipoMiembro),
+                     })
+                     .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Error de red: ${response.status} ${response.statusText}`);
+                    }
+                     }).then(() => {
+                         console.log('Tipo de miembro actualizado correctamente.');
+                     })
+                     .catch(error => console.error('Error al actualizar el tipo de miembro:', error));
+                },
             }
         });
     </script>

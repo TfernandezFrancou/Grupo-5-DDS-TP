@@ -50,6 +50,12 @@
                         <div class="card-body">
                             <div class="row mb-2 centerH">
                                 <h4 class="my-2">Miembros de la comunidad:</h4>
+                                {{#if administrador}}
+                                        <h6 style="cursor: pointer;">
+                                            <a>Administrar miembros con cliente pesado</a>
+                                            <a href="#" onclick="adminitrarComunidad()" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-secondary"><i class="bi bi-arrow-return-right"></i></a>
+                                        </h6>
+                                {{/if}}
                              </div>
                             <div class="row mb-2">
                                 {{#if miembros}}
@@ -275,6 +281,14 @@
                   document.getElementById('nombreMiembro').innerText = nombre;
                   document.getElementById('apellidoMiembro').innerText = apellido;
                   document.getElementById('tipoUsuarioMiembro').innerText = tipoDeMiembro;
+              }
+              function adminitrarComunidad() {
+                  // Obtener el código de la comunidad desde el modelo o donde sea que lo tengas
+                  var codigoComunidad = "{{codigoComunidad}}";
+
+                  localStorage.setItem('comunidadId', codigoComunidad);
+
+                  window.location.href = '../static/perfil_comunidad.html';
               }
           </script>
 

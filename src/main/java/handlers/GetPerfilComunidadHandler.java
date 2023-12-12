@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 public class GetPerfilComunidadHandler implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
+        String idSesion=context.cookie("id_sesion");
 
     }
 }

@@ -1,6 +1,7 @@
 package handlersClienteLiviano;
 
 import domain.entities.actores.Comunidad;
+import domain.entities.actores.Rol;
 import domain.entities.actores.miembros.Miembro;
 import domain.entities.actores.miembros.MiembroPorComunidad;
 import domain.entities.incidentes.Incidente;
@@ -38,6 +39,11 @@ public class GetPerfilMiembroHandler implements Handler {
 
             MiembroPresentacion miembroPresentacion= new MiembroPresentacion(miembro);
             model.put("miembro",miembroPresentacion);
+
+            // Agregar el rol del usuario al modelo
+            model.put("esAdmin", Rol.ADMIN.equals(miembro.getUsuario().getRol()));
+
+
 
             List<Incidente> incidentesMiembro = RevisionDeIncidentes.getInstance().obtenerIncidentes(miembro);
             List<IncidentePresentacion> incidentes=new ArrayList<>();

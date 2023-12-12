@@ -17,12 +17,24 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navcol-5">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="./rankingsLiviano">Rankings Liviano</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../static/VistasRanking.html">Rankings Pesado</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="#">Perfil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./login">Salir</a></li>
-                </ul>
+              <!-- ... (código existente) ... -->
+
+              <ul class="navbar-nav ms-auto">
+                  {{#if esAdmin}}
+                  <li class="nav-item"><a class="nav-link" href="./cargaDatos">Carga Datos</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#">Perfil</a></li>
+                  <li class="nav-item"><a class="nav-link" href="./login">Salir</a></li>
+
+                  {{else}}
+                  <li class="nav-item"><a class="nav-link" href="./rankingsLiviano">Rankings Liviano</a></li>
+                  <li class="nav-item"><a class="nav-link" href="../static/VistasRanking.html">Rankings Pesado</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#">Perfil</a></li>
+                  <li class="nav-item"><a class="nav-link" href="./login">Salir</a></li>
+                  {{/if}}
+              </ul>
+
+              <!-- ... (resto del código) ... -->
+
             </div>
         </div>
     </nav>

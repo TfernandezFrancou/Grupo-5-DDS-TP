@@ -31,18 +31,18 @@
             <div class="col margenesCajas">
                 <div class="row">
                     <div class="col-12 col-sm-10 col-md-4 col-lg-5 col-xl-9 offset-lg-2 d-flex flex-wrap padMar mx-auto justify-content-center"
-                        style="padding-bottom: 0px; margin-bottom: 85px; margin-top: -68px;">
-                        <h4 class="padMar">SUBIR ARCHIVO</h4>
+                        style="padding-bottom: 0px; margin-bottom: 25px; margin-top: -30px;">
+                        <h4 class="padMar" style="font-size: 1.5em; font-family: 'Times New Roman', Times, serif; font-weight: bold;">SUBIR ARCHIVO</h4>
                     </div>
-                    <div class="col-12 col-sm-10 col-md-10 col-lg-11 col-xl-9 d-flex flex-wrap padMar mx-auto">
-                        <p class="margenesTxts" style="margin-top: -75px;">Por favor, siga las instrucciones a continuación para subir su archivo: </p>
-                    </div>
-                    <div class="col-12 col-sm-10 col-md-10 col-lg-11 col-xl-9 d-flex flex-wrap padMar mx-auto" style="margin-bottom: 30px;">
-                        <p class="margenesTxts" style="padding-bottom: 0px; margin-top: -39px;">
+                    <div class="col-12 col-sm-10 col-md-10 col-lg-11 col-xl-9 d-flex flex-wrap padMar mx-auto" style="background-color: #fff; border-radius: 10px; padding: 20px;">
+                        <p class="margenesTxts" style="padding-bottom: 0px; margin-top: 0px;">
+                            Por favor, siga las instrucciones a continuación para subir su archivo:
+                        </p>
+                        <p class="margenesTxts" style="padding-bottom: 0px; margin-top: -20px;">
                             1) Haga clic en el botón de abajo para seleccionar el archivo.<br>
                             2) Asegúrese de que sea de formato '.csv'.<br>
                             3) Haga clic en el botón "Subir" para cargar el archivo.<br><br>
-                            Ejemplo de un archivo:<br>
+                            <strong>Ejemplo de un archivo:</strong><br>
                             Raul SA, propietario, COLECTIVO<br>
                             UTN, organismo de control, Organizacion1, organizacion<br>
                             Lopez SA, propietario, TREN<br>
@@ -50,17 +50,15 @@
                             Roberto SA, organismo de control, A, SUBTE
                         </p>
                     </div>
-                    <div class="col-12 col-sm-10 col-md-10 col-lg-9 col-xl-9 d-flex flex-wrap padMar mx-auto" style="padding-top: 0px; margin-bottom: 46px; margin-top: -16px;">
-
-                        <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="col-12 col-sm-10 col-md-10 col-lg-9 col-xl-9 d-flex flex-wrap padMar mx-auto" style="padding-top: 0px; margin-bottom: 46px; margin-top: 20px;">
+                        <form id="uploadForm" enctype="multipart/form-data" class="d-flex flex-wrap">
                             <input type="file" id="fileInput" name="archivo" style="display: none;" onchange="updateFileName()">
-                            <label class="btn btn-primary btn-Oscuro" for="fileInput">SELECCIONAR ARCHIVO</label>
-                            <input type="text" id="fileNameDisplay" style="text-align: center; margin: 0; padding: 5px; border: 2px solid #3b76e1;" placeholder=" No file chosen..." readonly>
-                            <button class="btn btn-primary btn-Oscuro" type="button" onclick="uploadFile()">SUBIR</button>
+                            <label class="btn btn-primary btn-Oscuro" for="fileInput" style="margin-right: 5px;">SELECCIONAR ARCHIVO</label>
+                            <input type="text" id="fileNameDisplay" style="text-align: center; margin: 0; padding: 5px; border: 2px solid #3b76e1; flex-grow: 1;" placeholder=" No file chosen..." readonly>
+                            <button class="btn btn-primary btn-Oscuro" type="button" onclick="uploadFile()" style="margin-left: 5px;">SUBIR</button>
                         </form>
                     </div>
                     <div class="col-12 col-sm-10 col-md-9 col-lg-10 col-xl-9 d-flex flex-wrap padMar mx-auto" style="padding-right: 132px; margin-right: -141px; margin-top: -58px;">
-
                         <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -102,7 +100,6 @@
             background-color: rgba(59, 118, 225, .25) !important;
         }
     </style>
-
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

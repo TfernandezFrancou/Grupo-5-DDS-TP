@@ -38,7 +38,10 @@
                             </div>
                             <div class="row mb-2" v-for="miembro in comunidad.miembros">
                                 <li class="centerLeft">
-                                    <span>✔</span><a style="text-decoration: none; color: black" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-miembro" @click="mostrarDetallesMiembro(miembro)">
+
+                                    <span v-if="miembro.esObservador">👁</span>
+                                    <span v-else>✔</span>
+                                    <a style="text-decoration: none; color: black" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-miembro" @click="mostrarDetallesMiembro(miembro)">
                                     {{miembro.nombre}}, {{miembro.apellido}}
                                 </a>
                                 </li>

@@ -37,7 +37,7 @@
                             <div class="row mb-2 centerH">
                                 <h4 class="my-2">Miembros de la comunidad:</h4>
                             </div>
-                            <div class="row mb-2" v-for="miembro in comunidad.miembros">
+                            <div class="row mb-2" v-for="miembro in comunidad.miembros" style="cursor: pointer;">
                                 <li class="centerLeft">
 
                                     <span v-if="miembro.esObservador" @click="cambiarTipoMiembro(miembro)">👁</span>
@@ -58,7 +58,7 @@
                                 <h5 class="my-2">Administradores:</h5>
                             </div>
                             <div class="row mb-3">
-                                <li class=" centerLeft" v-for="administrador in comunidad.administradores">
+                                <li class=" centerLeft" v-for="administrador in comunidad.administradores" style="cursor: pointer;">
                                     <span>✅</span><a style="text-decoration: none; color: black" href="#" data-bs-toggle="modal" data-bs-target="#modal-miembro" @click="mostrarDetallesMiembro(administrador)"> {{administrador.nombre}}, {{administrador.apellido}} </a>
                                 </li>
                             </div>

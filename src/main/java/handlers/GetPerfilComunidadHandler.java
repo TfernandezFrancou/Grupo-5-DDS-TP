@@ -14,11 +14,18 @@ public class GetPerfilComunidadHandler implements Handler {
     public void handle(@NotNull Context context) throws Exception {
         String idSesion=context.cookie("id_sesion");
         Integer idComunidad = context.pathParamAsClass("idComunidad", Integer.class).get();
+        System.out.println(idSesion);
+        System.out.println(idComunidad);
         Miembro miembro = SesionManager.get().obtenerMiembro(idSesion);
-        MiembroPorComunidad miembroPorComunidad = ComunidadesRepo.getInstance().obtenerMiembroPorComunidad(miembro.getMiembro_codigo(), idComunidad);
+        if(miembro!=null){
+            MiembroPorComunidad miembroPorComunidad = ComunidadesRepo.getInstance().obtenerMiembroPorComunidad(miembro.getMiembro_codigo(), idComunidad);
 
-        ComunidadPresentacion comunidad = new ComunidadPresentacion(miembroPorComunidad.getComunidad(),miembroPorComunidad);
+            ComunidadPresentacion comunidad = new ComunidadPresentacion(miembroPorComunidad.getComunidad(),miembroPorComunidad);
 
-        context.json(comunidad);
+            context.json(comunidad);
+        }else {
+            context.json("mensaje: no tienes session valida");
+        }
+
     }
 }

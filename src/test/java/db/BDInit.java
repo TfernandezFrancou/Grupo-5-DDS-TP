@@ -8,12 +8,7 @@ import domain.entities.actores.miembros.MiembroPorComunidad;
 import domain.entities.actores.miembros.TipoDeMiembro;
 import domain.entities.incidentes.Incidente;
 import domain.entities.incidentes.IncidenteMiembro;
-import domain.entities.ranking.GeneradorDeRankings;
-import domain.entities.repositorios.IncidentesRepo;
-import domain.entities.repositorios.RankingsRepo;
-import domain.entities.repositorios.TipoDeServicioRepo;
 import domain.entities.servicios.*;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import utils.BDUtils;
@@ -35,9 +30,15 @@ public class BDInit {
     MiembroPorComunidad juanDeViajeros;
     MiembroPorComunidad maxiDeViajeros;
     MiembroPorComunidad tomDeViajeros;
+    MiembroPorComunidad ignacioDeViajeros;
+    MiembroPorComunidad juan2DeViajeros;
     Miembro juan;
     Miembro maxi;
     Miembro admin;
+
+    Miembro ignacio;
+
+    Miembro juan2;
 
     Miembro tom;
     Comunidad viajeros;
@@ -57,12 +58,17 @@ public class BDInit {
     Usuario usuario3;
     Usuario usuario4;
 
+    Usuario usuario5;
+    Usuario usuario6;
+
     @Before
     public void init(){
          usuario1 = new Usuario("juan","123", Rol.MIEMBRO);
          usuario2 = new Usuario("maxi", "123", Rol.MIEMBRO);
          usuario4 = new Usuario("tom","123", Rol.MIEMBRO);
          usuario3 = new Usuario("admin","123", Rol.ADMIN);
+         usuario5 = new Usuario("ignacio","123",Rol.MIEMBRO);
+         usuario6 = new Usuario("juan2","123",Rol.MIEMBRO);
 
          admin=new Miembro("Admin","Admin","admin@gmail.com","749");
          admin.setUsuario(usuario3);
@@ -112,9 +118,13 @@ public class BDInit {
         juan = new Miembro("Juan Francisco","Caceres","jucaceres@frba.utn.edu.ar","11123");
         maxi= new Miembro("Maximiliano","Fiorentino","ada@gmail.com","216464");
         tom= new Miembro("Tomás","Fernández Francou","tfernndezfrancou@frba.utn.edu.ar","+54 9 3446 57-3532");
+        ignacio = new Miembro("Ignacio","Bisio","ignaci.bisio8780@gmail.com","1134223454");
+        juan2 = new Miembro("Juan","Moscatelli","juanmoscatelli@gmail.com","491295402");
         maxiDeViajeros=new MiembroPorComunidad(maxi,viajeros,true);
         juanDeViajeros = new MiembroPorComunidad(juan,viajeros);
         tomDeViajeros = new MiembroPorComunidad(tom,viajeros);
+        ignacioDeViajeros = new MiembroPorComunidad(ignacio,viajeros);
+        juan2DeViajeros = new MiembroPorComunidad(juan2,viajeros);
 
         //creo incidentes
         incidente1 = new IncidenteMiembro("Incidente en EscaleraPlata 1", escaleraPlata, LocalDateTime.of(2023, 8, 21, 10, 0), paradaPlata, juanDeViajeros);
@@ -129,9 +139,14 @@ public class BDInit {
         juan.setUsuario(usuario1);
         maxi.setUsuario(usuario2);
         tom.setUsuario(usuario4);
+        ignacio.setUsuario(usuario5);
+        juan2.setUsuario(usuario6);
         juanDeViajeros.setTipoDeMiembro(noObservador);
         maxiDeViajeros.setTipoDeMiembro(noObservador);
         tomDeViajeros.setTipoDeMiembro(noObservador);
+        ignacioDeViajeros.setTipoDeMiembro(noObservador);
+        juan2DeViajeros.setTipoDeMiembro(observador);
+
     }
     @Test
     public void persistir(){
@@ -139,7 +154,8 @@ public class BDInit {
         BDUtils.comenzarTransaccion(em);
         em.persist(usuario1);
         em.persist(usuario3);
-        em.persist(admin);
+        em.persist(usuario5);
+        em.persist(usuario6);
         em.persist(observador);
         em.persist(noObservador);
         em.persist(tipoA);
@@ -169,6 +185,11 @@ public class BDInit {
         em.persist(usuario4);
         em.persist(tom);
         em.persist(tomDeViajeros);
+        em.persist(ignacio);
+        em.persist(juan2);
+        em.persist(ignacioDeViajeros);
+        em.persist(juan2DeViajeros);
+        em.persist(admin);
 
         BDUtils.commit(em);
     }

@@ -32,7 +32,11 @@ public class BDInit {
     MiembroPorComunidad tomDeViajeros;
     MiembroPorComunidad ignacioDeViajeros;
     MiembroPorComunidad juan2DeViajeros;
+    MiembroPorComunidad gonzaDeViajeros;
     Miembro juan;
+
+    Miembro gonza;
+
     Miembro maxi;
     Miembro admin;
 
@@ -60,6 +64,7 @@ public class BDInit {
 
     Usuario usuario5;
     Usuario usuario6;
+    Usuario usuario7;
 
     @Before
     public void init(){
@@ -69,6 +74,7 @@ public class BDInit {
          usuario3 = new Usuario("admin","123", Rol.ADMIN);
          usuario5 = new Usuario("ignacio","123",Rol.MIEMBRO);
          usuario6 = new Usuario("juan2","123",Rol.MIEMBRO);
+         usuario7 = new Usuario("gonza","123",Rol.MIEMBRO);
 
          admin=new Miembro("Admin","Admin","admin@gmail.com","749");
          admin.setUsuario(usuario3);
@@ -120,11 +126,15 @@ public class BDInit {
         tom= new Miembro("Tomás","Fernández Francou","tfernndezfrancou@frba.utn.edu.ar","+54 9 3446 57-3532");
         ignacio = new Miembro("Ignacio","Bisio","ignaci.bisio8780@gmail.com","1134223454");
         juan2 = new Miembro("Juan","Moscatelli","juanmoscatelli@gmail.com","491295402");
+        gonza = new Miembro("Gonza","Rodriguez","gorodriguez@frba.utn.edu.ar","1156039524");
+
+
         maxiDeViajeros=new MiembroPorComunidad(maxi,viajeros,true);
         juanDeViajeros = new MiembroPorComunidad(juan,viajeros);
         tomDeViajeros = new MiembroPorComunidad(tom,viajeros);
         ignacioDeViajeros = new MiembroPorComunidad(ignacio,viajeros);
         juan2DeViajeros = new MiembroPorComunidad(juan2,viajeros);
+        gonzaDeViajeros = new MiembroPorComunidad(gonza,viajeros);
 
         //creo incidentes
         incidente1 = new IncidenteMiembro("Incidente en EscaleraPlata 1", escaleraPlata, LocalDateTime.of(2023, 8, 21, 10, 0), paradaPlata, juanDeViajeros);
@@ -141,11 +151,13 @@ public class BDInit {
         tom.setUsuario(usuario4);
         ignacio.setUsuario(usuario5);
         juan2.setUsuario(usuario6);
+        gonza.setUsuario(usuario7);
         juanDeViajeros.setTipoDeMiembro(noObservador);
         maxiDeViajeros.setTipoDeMiembro(noObservador);
         tomDeViajeros.setTipoDeMiembro(noObservador);
         ignacioDeViajeros.setTipoDeMiembro(noObservador);
         juan2DeViajeros.setTipoDeMiembro(observador);
+        gonzaDeViajeros.setTipoDeMiembro(observador);
 
     }
     @Test
@@ -156,6 +168,7 @@ public class BDInit {
         em.persist(usuario3);
         em.persist(usuario5);
         em.persist(usuario6);
+        em.persist(usuario7);
         em.persist(observador);
         em.persist(noObservador);
         em.persist(tipoA);
@@ -187,8 +200,11 @@ public class BDInit {
         em.persist(tomDeViajeros);
         em.persist(ignacio);
         em.persist(juan2);
+        em.persist(gonza);
         em.persist(ignacioDeViajeros);
         em.persist(juan2DeViajeros);
+        em.persist(gonzaDeViajeros);
+
         em.persist(admin);
 
         BDUtils.commit(em);

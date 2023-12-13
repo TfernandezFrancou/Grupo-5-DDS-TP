@@ -1,4 +1,4 @@
-package handlers;
+package handlersClienteLiviano;
 
 import domain.entities.actores.Rol;
 import domain.entities.actores.miembros.Miembro;
@@ -11,6 +11,7 @@ import domain.entities.sugerencias.RevisionDeIncidentes;
 import dto.IncidentePresentacion;
 import dto.MiembroPresentacion;
 import dto.PatchTipoMiembroResponse;
+import handlers.SesionManager;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;

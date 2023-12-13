@@ -188,6 +188,62 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal fade" role="dialog" tabindex="-1" id="modal-exito">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header" style="background-color: #4CAF50; color: #fff;">
+						<h5 class="modal-title" id="successModalLabel">Éxito <span style="font-size: 1.5em;">✅</span></h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						Se agregó correctamente el nuevo incidente.
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" role="dialog" tabindex="-1" id="modal-exito2">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header" style="background-color: #4CAF50; color: #fff;">
+						<h5 class="modal-title" id="successModalLabel2">Éxito <span style="font-size: 1.5em;">✅</span></h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						Se cerró correctamente el incidente
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" role="dialog" tabindex="-1" id="modal-error">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header" style="background-color: #ff6b6b; color: #000;">
+						<h5 class="modal-title" id="errorModalLabel">
+							Error &#x274C;
+						</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						Se produjo un error al agregar un nuevo incidente.
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" role="dialog" tabindex="-1" id="modal-error2">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header" style="background-color: #ff6b6b; color: #000;">
+						<h5 class="modal-title" id="errorModalLabel2">
+							Error &#x274C;
+						</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						Se produjo un error al cerrar el incidente.
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<style type="text/css">
 		body{
@@ -349,10 +405,11 @@
 				}).then(data => {
 					// Verificar el contenido de la respuesta y mostrar un mensaje en consecuencia
 					if (data.includes("Incidente cerrado con éxito")) {
-						alert('Incidente cerrado con éxito');
+						$('#modal-exito2').modal('show');
 					}
 				}).catch(error => {
 					console.error('Error:', error);
+					$('#modal-error2').modal('show');
 				});
 			},
 			mostrarIncidentes(estado){
@@ -395,7 +452,6 @@
 						descripcion: this.formData.descripcion,
 						fechaCreacion: fechaActualISO,
 					};
-
 					// Realizar la solicitud POST
 					fetch(`http://localhost:4567/api/agregarIncidente/${idComunidad}/${idSesion}`, {
 						method: 'POST',
@@ -412,10 +468,11 @@
 								console.log('Respuesta del servidor:', data);
 								// Verificar el contenido de la respuesta y mostrar un mensaje en consecuencia
 								if (data.includes("Incidente creado con éxito")) {
-									alert('Incidente creado con éxito');
+									$('#modal-exito').modal('show');
 								}
 							}).catch(error => {
 								console.error('Error:', error);
+								$('#modal-error').modal('show');
 							});
 				},
 				buscarEstablecimientos(){

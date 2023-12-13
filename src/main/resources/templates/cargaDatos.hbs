@@ -59,20 +59,23 @@
                             <button class="btn btn-primary btn-Oscuro" type="button" onclick="uploadFile()" style="margin-left: 5px;">SUBIR</button>
                         </form>
                     </div>
-                    <div class="col-12 col-sm-10 col-md-9 col-lg-10 col-xl-9 d-flex flex-wrap padMar mx-auto" style="padding-right: 132px; margin-right: -141px; margin-top: -28px;">
-                        <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="successModalLabel">Éxito</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        El archivo fue subido exitosamente.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                   <div class="col-12 col-sm-10 col-md-9 col-lg-10 col-xl-9 d-flex flex-wrap padMar mx-auto" style="padding-right: 132px; margin-right: -141px; margin-top: -28px;">
+                       <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+                           <div class="modal-dialog">
+                               <div class="modal-content">
+                                   <div class="modal-header" style="background-color: #4CAF50; color: #fff;">
+                                       <h5 class="modal-title" id="successModalLabel">Éxito <span style="font-size: 1.5em;">✅</span></h5>
+                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                   </div>
+                                   <div class="modal-body">
+                                       El archivo fue subido exitosamente.
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+
+
 
                         <p id="successMessage" class="tada animated margenesTxts" style="display: none; margin-top: 20px; margin-left: 98px; padding-top: 20px;">Estado: Archivo subido correctamente</p>
                     </div>
@@ -153,20 +156,25 @@
         }
     </script>
 
-    <!-- Modal de error -->
-    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="errorModalLabel">Error</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    No se pudo subir el archivo. Asegúrate de que sea un archivo con extensión ".csv".
-                </div>
-            </div>
-        </div>
-    </div>
+   <!-- Modal de error -->
+   <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+           <div class="modal-content">
+               <div class="modal-header" style="background-color: #ff6b6b; color: #000;">
+                   <h5 class="modal-title" id="errorModalLabel">
+                       Error &#x274C;
+                   </h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                   No se pudo subir el archivo. Asegúrate de que sea un archivo con extensión ".csv".
+               </div>
+           </div>
+       </div>
+   </div>
+
+
+
 </body>
 
 </html>

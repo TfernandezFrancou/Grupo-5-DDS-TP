@@ -34,9 +34,12 @@ public class BDInit {
     ServicioBase banioJujuy;
     MiembroPorComunidad juanDeViajeros;
     MiembroPorComunidad maxiDeViajeros;
+    MiembroPorComunidad tomDeViajeros;
     Miembro juan;
     Miembro maxi;
     Miembro admin;
+
+    Miembro tom;
     Comunidad viajeros;
     AgrupacionServicio banio;
     AgrupacionServicio escalera;
@@ -52,12 +55,14 @@ public class BDInit {
     Usuario usuario1;
     Usuario usuario2;
     Usuario usuario3;
+    Usuario usuario4;
 
     @Before
     public void init(){
          usuario1 = new Usuario("juan","123", Rol.MIEMBRO);
          usuario2 = new Usuario("maxi", "123", Rol.MIEMBRO);
-         usuario3 = new Usuario("admin","123",Rol.ADMIN);
+         usuario4 = new Usuario("tom","123", Rol.MIEMBRO);
+         usuario3 = new Usuario("admin","123", Rol.ADMIN);
 
          admin=new Miembro("Admin","Admin","admin@gmail.com","749");
          admin.setUsuario(usuario3);
@@ -106,8 +111,10 @@ public class BDInit {
         viajeros = new Comunidad("Viajeros","Reportar incidentes del subte");
         juan = new Miembro("Juan Francisco","Caceres","jucaceres@frba.utn.edu.ar","11123");
         maxi= new Miembro("Maximiliano","Fiorentino","ada@gmail.com","216464");
+        tom= new Miembro("Tomás","Fernández Francou","tfernndezfrancou@frba.utn.edu.ar","+54 9 3446 57-3532");
         maxiDeViajeros=new MiembroPorComunidad(maxi,viajeros,true);
         juanDeViajeros = new MiembroPorComunidad(juan,viajeros);
+        tomDeViajeros = new MiembroPorComunidad(tom,viajeros);
 
         //creo incidentes
         incidente1 = new IncidenteMiembro("Incidente en EscaleraPlata 1", escaleraPlata, LocalDateTime.of(2023, 8, 21, 10, 0), paradaPlata, juanDeViajeros);
@@ -121,8 +128,10 @@ public class BDInit {
 
         juan.setUsuario(usuario1);
         maxi.setUsuario(usuario2);
+        tom.setUsuario(usuario4);
         juanDeViajeros.setTipoDeMiembro(noObservador);
         maxiDeViajeros.setTipoDeMiembro(noObservador);
+        tomDeViajeros.setTipoDeMiembro(noObservador);
     }
     @Test
     public void persistir(){
@@ -157,6 +166,9 @@ public class BDInit {
         em.persist(usuario2);
         em.persist(maxi);
         em.persist(maxiDeViajeros);
+        em.persist(usuario4);
+        em.persist(tom);
+        em.persist(tomDeViajeros);
 
         BDUtils.commit(em);
     }

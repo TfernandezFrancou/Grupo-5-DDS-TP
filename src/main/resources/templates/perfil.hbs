@@ -52,6 +52,11 @@
             </div>
             <hr class="m-0">
             <div class="container">
+                {{#if exito}}
+                    <div class="alert alert-success" role="alert">
+                        Se acutualizo correctamente
+                    </div>
+                {{/if}}
                <div class="text-center py-5">
                     <img src="../static/assets/images/avatar6.png" class="ui-w-100 rounded-circle">
                   <div class="col-md-8 col-lg-6 col-xl-5 p-0 mx-auto">
@@ -165,7 +170,7 @@
                   </div>
               </div>
           </div>
-          <form id="miembroForm" action="http://localhost:4567/api/cambiarTipoMiembro" method="post">
+          <form id="miembroForm" action="http://localhost:4567/perfil" method="post">
           <div class="modal fade" role="dialog" tabindex="-1" id="modal-comunidad">
               <div class="modal-dialog" role="document">
                   <div class="modal-content">
@@ -415,8 +420,8 @@
                     // Verificar el contenido de la respuesta y mostrar un mensaje en consecuencia
                     if (data.includes("Incidente cerrado con éxito")) {
                         alert('Incidente cerrado con éxito');
-                        /*$('#modal-exito2').modal('show');
-                        window.location.href = `http://localhost:4567/perfil`;*/
+                        $('#modal-exito2').modal('show');
+
                     }
                 }).catch(error => {
                     console.error('Error:', error);

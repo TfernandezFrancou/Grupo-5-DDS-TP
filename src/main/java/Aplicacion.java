@@ -33,7 +33,7 @@ public class Aplicacion {
         app.post("/api/login", new LoginHandler());
         app.patch("/api/cerrarIncidente/{idComunidad}/{idSesion}", new PatchIncidenteHandler());
         app.get("/api/comunidad/{idComunidad}/{idSesion}",new GetPerfilComunidadHandler());
-        app.post("/api/cambiarTipoMiembro",new PatchTipoDeMiembroHandler());
+        app.post("/perfil",new PatchTipoDeMiembroHandler());
         app.post("/api/admin/cambiarTipoMiembro",new PostTipoMiembroPorAdmin());
 
         //Cliente Liviano

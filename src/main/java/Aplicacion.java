@@ -34,6 +34,7 @@ public class Aplicacion {
         app.patch("/api/cerrarIncidente/{idComunidad}/{idSesion}", new PatchIncidenteHandler());
         app.get("/api/comunidad/{idComunidad}/{idSesion}",new GetPerfilComunidadHandler());
         app.post("/api/cambiarTipoMiembro",new PatchTipoDeMiembroHandler());
+        app.post("/api/admin/cambiarTipoMiembro",new PostTipoMiembroPorAdmin());
 
         //Cliente Liviano
         app.get("/rankingsLiviano",new GetRankingsLivianoHandler());

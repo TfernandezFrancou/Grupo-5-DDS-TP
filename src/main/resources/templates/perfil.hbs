@@ -414,8 +414,9 @@
                 }).then(data => {
                     // Verificar el contenido de la respuesta y mostrar un mensaje en consecuencia
                     if (data.includes("Incidente cerrado con éxito")) {
-                        $('#modal-exito2').modal('show');
-                        window.location.href = `http://localhost:4567/perfil`;
+                        alert('Incidente cerrado con éxito');
+                        /*$('#modal-exito2').modal('show');
+                        window.location.href = `http://localhost:4567/perfil`;*/
                     }
                 }).catch(error => {
                     console.error('Error:', error);

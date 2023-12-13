@@ -287,6 +287,9 @@ gtag('config', 'G-F1RTS0P1CD');
                 },
                 mostrarModalExito() {
                     $('#modal-exito').modal('show');
+                    $('#modal-exito').on('hidden.bs.modal', function (e) {
+                        window.location.reload();
+                    });
                 },
 
                 mostrarModalError() {

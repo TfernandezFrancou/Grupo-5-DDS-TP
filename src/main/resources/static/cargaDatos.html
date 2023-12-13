@@ -117,9 +117,8 @@
             var fileInput = document.getElementById('fileInput');
             if (fileInput.files.length > 0) {
                 var fileName = fileInput.files[0].name;
-                // Verificar la extensión del archivo
+
                 if (fileName.endsWith('.csv')) {
-                    // Puedes agregar aquí la lógica de carga del archivo si es necesario
 
                     // Mostrar el mensaje de éxito usando el modal
                     var successModal = new bootstrap.Modal(document.getElementById('successModal'));
@@ -130,7 +129,7 @@
                     errorModal.show();
                 }
             } else {
-                // No se ha seleccionado ningún archivo, puedes manejarlo según tus necesidades
+
                 console.error('No se ha seleccionado ningún archivo');
             }
         }

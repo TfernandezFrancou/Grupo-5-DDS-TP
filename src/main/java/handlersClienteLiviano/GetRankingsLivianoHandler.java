@@ -1,6 +1,7 @@
 package handlersClienteLiviano;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import domain.entities.ranking.Ranking;
 import domain.entities.repositorios.RankingsRepo;
@@ -27,7 +28,12 @@ public class GetRankingsLivianoHandler implements Handler {
             RankingPresentacion unRanking = new RankingPresentacion(ranking);
             rankingsPresentacion.add(unRanking);
         }
+        List<RankingPresentacion> cantidadDeIncidentes = rankingsPresentacion.stream().filter(r-> Objects.equals(r.getTipoRanking(), "Mayor Cantidad de Incidentes")).collect(Collectors.toList());
+        List<RankingPresentacion> tiempoPromedio = rankingsPresentacion.stream().filter(r-> Objects.equals(r.getTipoRanking(), "Mayor Tiempo Promedio")).collect(Collectors.toList());
 
+
+        model.put("cantidadDeIncidentes", cantidadDeIncidentes);
+        model.put("tiempoPromedio", tiempoPromedio);
         model.put("rankings", rankingsPresentacion);
         ctx.render("VistasRanking.hbs", model);
 

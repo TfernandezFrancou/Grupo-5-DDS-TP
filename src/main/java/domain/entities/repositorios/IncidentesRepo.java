@@ -50,9 +50,10 @@ public class IncidentesRepo {
                         incidente.getFechaRealizacion().isBefore(finSemana) &&
                         incidente.getFechaRealizacion().isAfter(inicioSemana)).collect(Collectors.toList());
     }
-    public List<IncidenteMiembro> buscarIncidentes() {
+    public void buscarIncidentes() {
         EntityManager em = utils.BDUtils.getEntityManager();
-        return em.createQuery("select i from IncidenteMiembro i ", IncidenteMiembro.class).getResultList();
+        this.incidentes=em.createQuery("select i from IncidenteMiembro i ", Incidente.class).getResultList();
+        return;
     }
     public IncidenteMiembro buscarIncidente(Integer idIncidente) {
         EntityManager em = utils.BDUtils.getEntityManager();

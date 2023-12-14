@@ -410,6 +410,10 @@
 					// Verificar el contenido de la respuesta y mostrar un mensaje en consecuencia
 					if (data.includes("Incidente cerrado con éxito")) {
 						$('#modal-exito2').modal('show');
+						setTimeout(function () {
+							// Recargar la página /perfil después de 1 segundo
+							location.reload();
+						}, 1000);
 					}
 				}).catch(error => {
 					console.error('Error:', error);
@@ -473,6 +477,10 @@
 								// Verificar el contenido de la respuesta y mostrar un mensaje en consecuencia
 								if (data.includes("Incidente creado con éxito")) {
 									$('#modal-exito').modal('show');
+									setTimeout(function () {
+										// Recargar la página /perfil después de 1 segundo
+										location.reload();
+									}, 1000);
 								}
 							}).catch(error => {
 								console.error('Error:', error);

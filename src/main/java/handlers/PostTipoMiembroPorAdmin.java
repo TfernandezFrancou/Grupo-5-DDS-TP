@@ -4,7 +4,6 @@ import domain.entities.actores.miembros.MiembroPorComunidad;
 import domain.entities.actores.miembros.TipoDeMiembro;
 import domain.entities.repositorios.ComunidadesRepo;
 import domain.entities.repositorios.RepoMiembros;
-import dto.PatchTipoMiembroResponse;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;

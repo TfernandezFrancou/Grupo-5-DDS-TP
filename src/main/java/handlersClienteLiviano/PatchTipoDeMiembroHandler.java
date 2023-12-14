@@ -10,7 +10,6 @@ import domain.entities.repositorios.RepoMiembros;
 import domain.entities.sugerencias.RevisionDeIncidentes;
 import dto.IncidentePresentacion;
 import dto.MiembroPresentacion;
-import dto.PatchTipoMiembroResponse;
 import handlers.SesionManager;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;

@@ -64,7 +64,7 @@ public class IncidentePresentacion {
     }
     public IncidenteMiembro generarIncidente(String idComunidad, String idSesion){
         String descripcion = this.descripcion;
-        LocalDateTime fechaCreacion=  LocalDateTime.parse(this.fechaCreacion, DateTimeFormatter.ISO_DATE_TIME);
+        LocalDateTime fechaCreacion=  LocalDateTime.parse(this.fechaCreacion, DateTimeFormatter.ISO_DATE_TIME).minusHours(3);
         Miembro miembro = SesionManager.get().obtenerMiembro(idSesion);
         MiembroPorComunidad creador = ComunidadesRepo.getInstance().obtenerMiembroPorComunidad(miembro.getMiembro_codigo(), Integer.parseInt(idComunidad));
         Establecimiento establecimiento = obtenerEstablecimiento(this.establecimiento);

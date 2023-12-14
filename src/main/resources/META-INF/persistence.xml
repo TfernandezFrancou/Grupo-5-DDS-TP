@@ -19,6 +19,8 @@
             <property name="hibernate.format_sql" value="true" />
             <property name="use_sql_comments" value="true" />
             <property name="hibernate.hbm2ddl.auto" value="update" />
+
+            <property name="c3p0.max_size" value="250"/>
         </properties>
 
     </persistence-unit>

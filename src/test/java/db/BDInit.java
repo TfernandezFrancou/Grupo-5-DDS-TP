@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 public class BDInit {
     Linea linea1;
     Linea linea2;
+
     Establecimiento paradaMedrano;
     Establecimiento paradaCarlos;
     Establecimiento paradaPlata;
@@ -27,36 +28,48 @@ public class BDInit {
     ServicioBase banioMCarlos;
     ServicioBase escaleraPlata;
     ServicioBase banioJujuy;
+    ServicioBase banioMPlata;
+    ServicioBase ascensorJujuy;
+
     MiembroPorComunidad juanDeViajeros;
     MiembroPorComunidad maxiDeViajeros;
     MiembroPorComunidad tomDeViajeros;
     MiembroPorComunidad ignacioDeViajeros;
     MiembroPorComunidad juan2DeViajeros;
     MiembroPorComunidad gonzaDeViajeros;
+
+    MiembroPorComunidad ignacioDeCABA;
+    MiembroPorComunidad juanDeCABA;
+    MiembroPorComunidad gonzaDeCABA;
+    MiembroPorComunidad maxiDeCABA;
+    MiembroPorComunidad tomDeCABA;
+    MiembroPorComunidad juan2DeCABA;
+
     Miembro juan;
-
     Miembro gonza;
-
     Miembro maxi;
     Miembro admin;
-
     Miembro ignacio;
-
     Miembro juan2;
-
     Miembro tom;
     Comunidad viajeros;
+    Comunidad caba;
     AgrupacionServicio banio;
     AgrupacionServicio escalera;
+    AgrupacionServicio ascensor;
     TipoDeServicio banioHombres;
     TipoDeServicio banioMujeres;
-    TipoDeServicio acceso;
+    TipoDeServicio accesoEscalera;
+    TipoDeServicio accesoAscensor;
     TipoDeEstablecimiento tipoA;
     TipoDeMiembro observador;
     TipoDeMiembro noObservador;
     IncidenteMiembro incidente1;
     Incidente incidente2;
     Incidente incidente3;
+    Incidente incidente4;
+    Incidente incidente5;
+    Incidente incidente6;
     Usuario usuario1;
     Usuario usuario2;
     Usuario usuario3;
@@ -101,26 +114,34 @@ public class BDInit {
         //Creo 2 agrupaciones de servicio
          banio = new AgrupacionServicio("Baño");
          escalera = new AgrupacionServicio("Escalera");
+        ascensor = new AgrupacionServicio("Ascensor");
 
         //Creo 3 tipos de servicio
          banioHombres = new TipoDeServicio("Hombre",banio);
          banioMujeres = new TipoDeServicio("Mujer",banio);
-         acceso = new TipoDeServicio("Acceso",escalera);
+         accesoEscalera = new TipoDeServicio("Acceso",escalera);
+        accesoAscensor = new TipoDeServicio("Acceso",ascensor);
 
         //Creo 4 servicios
         banioHMedrano = new ServicioBase(paradaMedrano,Boolean.TRUE,banioHombres);
         banioMCarlos = new ServicioBase(paradaCarlos,Boolean.TRUE,banioMujeres);
-        escaleraPlata = new ServicioBase(paradaPlata, Boolean.TRUE,acceso);
+        escaleraPlata = new ServicioBase(paradaPlata, Boolean.TRUE,accesoEscalera);
         banioJujuy = new ServicioBase(paradaJujuy,Boolean.TRUE,banioMujeres);
+        banioMPlata = new ServicioBase(paradaPlata,Boolean.TRUE,banioHombres);
+        ascensorJujuy = new ServicioBase(paradaJujuy,Boolean.TRUE,accesoAscensor);
+
 
         //Agrego los servicios a los establecimientos correspondientes
         paradaMedrano.agregarServicio(banioHMedrano);
         paradaCarlos.agregarServicio(banioMCarlos);
         paradaPlata.agregarServicio(escaleraPlata);
         paradaJujuy.agregarServicio(banioJujuy);
+        paradaPlata.agregarServicio(banioMPlata);
+        paradaJujuy.agregarServicio(ascensorJujuy);
 
         //Creo un miembro por comunidad
         viajeros = new Comunidad("Viajeros","Reportar incidentes del subte");
+        caba = new Comunidad("CABA","Reportar incidentes de cualquier tipo de transporte en CABA");
         juan = new Miembro("Juan Francisco","Caceres","jucaceres@frba.utn.edu.ar","11123");
         maxi= new Miembro("Maximiliano","Fiorentino","ada@gmail.com","216464");
         tom= new Miembro("Tomás","Fernández Francou","tfernndezfrancou@frba.utn.edu.ar","+54 9 3446 57-3532");
@@ -136,11 +157,25 @@ public class BDInit {
         juan2DeViajeros = new MiembroPorComunidad(juan2,viajeros);
         gonzaDeViajeros = new MiembroPorComunidad(gonza,viajeros);
 
+        gonzaDeCABA = new MiembroPorComunidad(gonza,caba,true);
+        juanDeCABA = new MiembroPorComunidad(juan,caba);
+        juan2DeCABA = new MiembroPorComunidad(juan2,caba);
+        ignacioDeCABA = new MiembroPorComunidad(ignacio,caba);
+        maxiDeCABA = new MiembroPorComunidad(maxi,caba);
+        tomDeCABA = new MiembroPorComunidad(tom,caba);
+
+
         //creo incidentes
         incidente1 = new IncidenteMiembro("Incidente en EscaleraPlata 1", escaleraPlata, LocalDateTime.of(2023, 8, 21, 10, 0), paradaPlata, juanDeViajeros);
         incidente2 = new IncidenteMiembro("Incidente en Medrano", banioHMedrano, LocalDateTime.of(2023, 8, 21, 0, 0), paradaMedrano, juanDeViajeros);
         incidente3 = new IncidenteMiembro("Incidente en Carlos", banioMCarlos, LocalDateTime.of(2023, 8, 21, 0, 0), paradaCarlos, juanDeViajeros);
-        incidente1.cerrarIncidente(LocalDateTime.of(2023, 8, 21, 2, 0),juanDeViajeros);
+        incidente1.cerrarIncidente(LocalDateTime.of(2023, 8, 22, 2, 0),juanDeViajeros);
+
+        incidente4 = new IncidenteMiembro("Incidente en Ascensor Jujuy", ascensorJujuy, LocalDateTime.of(2023, 9, 9, 10, 0), paradaJujuy, gonzaDeCABA);
+        incidente5 = new IncidenteMiembro("Incidente en La Plata", banioMPlata, LocalDateTime.of(2023, 9, 9, 2, 0), paradaPlata, gonzaDeCABA);
+        incidente6 = new IncidenteMiembro("Incidente en Medrano", banioHMedrano, LocalDateTime.of(2023, 9, 9, 15, 0), paradaMedrano, gonzaDeCABA);
+        //incidente4.cerrarIncidente(LocalDateTime.of(2023, 10, 21, 2, 0),gonzaDeCABA);
+
 
         //Creo los dos tipos de miembros
         observador= new TipoDeMiembro("Observador");
@@ -152,6 +187,7 @@ public class BDInit {
         ignacio.setUsuario(usuario5);
         juan2.setUsuario(usuario6);
         gonza.setUsuario(usuario7);
+
         juanDeViajeros.setTipoDeMiembro(noObservador);
         maxiDeViajeros.setTipoDeMiembro(noObservador);
         tomDeViajeros.setTipoDeMiembro(noObservador);
@@ -159,6 +195,12 @@ public class BDInit {
         juan2DeViajeros.setTipoDeMiembro(observador);
         gonzaDeViajeros.setTipoDeMiembro(observador);
 
+        juanDeCABA.setTipoDeMiembro(observador);
+        maxiDeCABA.setTipoDeMiembro(observador);
+        tomDeCABA.setTipoDeMiembro(noObservador);
+        ignacioDeCABA.setTipoDeMiembro(noObservador);
+        juan2DeCABA.setTipoDeMiembro(observador);
+        gonzaDeCABA.setTipoDeMiembro(noObservador);
     }
     @Test
     public void persistir(){
@@ -180,18 +222,29 @@ public class BDInit {
         em.persist(paradaJujuy);
         em.persist(banio);
         em.persist(escalera);
+        em.persist(ascensor);
         em.persist(banioHombres);
         em.persist(banioMujeres);
+        em.persist(accesoEscalera);
+        em.persist(accesoAscensor);
         em.persist(banioHMedrano);
         em.persist(banioMCarlos);
         em.persist(escaleraPlata);
+        em.persist(ascensorJujuy);
+        em.persist(banioMPlata);
         em.persist(banioJujuy);
         em.persist(viajeros);
+        em.persist(caba);
         em.persist(juan);
+        em.persist(gonza);
         em.persist(juanDeViajeros);
+        em.persist(gonzaDeCABA);
         em.persist(incidente1);
         em.persist(incidente2);
         em.persist(incidente3);
+        em.persist(incidente4);
+        em.persist(incidente5);
+        em.persist(incidente6);
         em.persist(usuario2);
         em.persist(maxi);
         em.persist(maxiDeViajeros);
@@ -200,10 +253,14 @@ public class BDInit {
         em.persist(tomDeViajeros);
         em.persist(ignacio);
         em.persist(juan2);
-        em.persist(gonza);
         em.persist(ignacioDeViajeros);
         em.persist(juan2DeViajeros);
         em.persist(gonzaDeViajeros);
+        em.persist(juanDeCABA);
+        em.persist(juan2DeCABA);
+        em.persist(maxiDeCABA);
+        em.persist(ignacioDeCABA);
+        em.persist(tomDeCABA);
 
         em.persist(admin);
 

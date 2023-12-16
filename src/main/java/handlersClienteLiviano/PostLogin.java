@@ -1,5 +1,6 @@
 package handlersClienteLiviano;
 
+import FireBase.ValidadorTokenFireBase;
 import domain.entities.actores.Rol;
 import domain.entities.actores.miembros.Miembro;
 import domain.entities.repositorios.RepoMiembros;
@@ -19,27 +20,28 @@ public class PostLogin implements Handler {
     public void handle(@NotNull Context ctx) throws Exception {
         //validamos user/pass y buscamos datos de ese usuario para agregar en la sesión
         LoginRequest loginRequest = ctx.bodyAsClass(LoginRequest.class);
-        System.out.println(loginRequest.toString());
-        //todo: hacer que se puedan logear todos, una clase abstracta "logeable" x ej
-        Miembro miembroObtenido = RepoMiembros.getInstance().buscarMiembroUsuario(loginRequest);
-        System.out.println("Encontre el miembro ?");
-        if(miembroObtenido.getMiembro_codigo()!=-1){
-        SesionManager sesionManager = SesionManager.get();
-        String idSesion = sesionManager.crearSesion("usuario", miembroObtenido);
-        sesionManager.agregarAtributo(idSesion, "fechaInicio", LocalDateTime.now());
-        sesionManager.agregarAtributo(idSesion, "rol", miembroObtenido.getUsuario().getRol());
-        System.out.println("Login: " + loginRequest);
-        System.out.println("Login: " + miembroObtenido.getNombre());
-        System.out.println("Login: " + idSesion);
+        System.out.println(loginRequest);
+        System.out.println(loginRequest.getToken());
+        if(ValidadorTokenFireBase.getInstance().validar(loginRequest.getToken())){
+            Miembro miembroObtenido = RepoMiembros.getInstance().buscarMiembroUsuario(loginRequest);
+            if(miembroObtenido.getMiembro_codigo()!=-1){
+                SesionManager sesionManager = SesionManager.get();
+                String idSesion = sesionManager.crearSesion("usuario", miembroObtenido);
+                sesionManager.agregarAtributo(idSesion, "fechaInicio", LocalDateTime.now());
+                sesionManager.agregarAtributo(idSesion, "rol", miembroObtenido.getUsuario().getRol());
+                System.out.println("Login: " + loginRequest);
+                System.out.println("Login: " + miembroObtenido.getNombre());
+                System.out.println("Login: " + idSesion);
 
-        ctx.cookie("id_sesion",idSesion);
-        if(miembroObtenido.getUsuario().getRol().equals(Rol.ADMIN)){
-            ctx.redirect("/cargaDatos");
-        }else{
-            ctx.redirect("/perfil");
+                ctx.cookie("id_sesion",idSesion);
+                if(miembroObtenido.getUsuario().getRol().equals(Rol.ADMIN)){
+                    ctx.redirect("/cargaDatos");
+                }else{
+                    ctx.redirect("/perfil");
+                }
             }
-        }
-        else{ctx.redirect("/loginFail");}
+        } else{ctx.redirect("/loginFail");}
+
 
 
 

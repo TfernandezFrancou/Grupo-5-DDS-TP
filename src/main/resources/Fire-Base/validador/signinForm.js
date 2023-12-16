@@ -13,14 +13,16 @@ signInForm.addEventListener("submit",async (e) => {
     try {
         //me autentico con firebase
         const userCredentials = await signInWithEmailAndPassword(auth, email, password)
-        console.log(userCredentials)
+        //console.log(JSON.stringify(userCredentials))
         // reset the form
         //signInForm.reset();
-
+        const idToken = await userCredentials.user.getIdToken();
         const credentials = {
             email: email,
             password: password,
+            token: idToken
         };
+        console.log(credentials);
 
         //Envio email y contraseña al backend y me devuelve el id de la sesion
         const requestOptions = {

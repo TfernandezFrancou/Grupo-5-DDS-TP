@@ -1,4 +1,7 @@
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import handlers.*;
 import handlersClienteLiviano.*;
 import io.javalin.Javalin;
@@ -8,11 +11,13 @@ import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 import io.javalin.http.HttpStatus;
 import io.javalin.rendering.JavalinRenderer;
+
+import java.io.FileInputStream;
 import java.io.IOException;
 
 
 public class Aplicacion {
-    public static void main(String[] args) throws SchedulerException {
+    public static void main(String[] args) throws SchedulerException, IOException {
         initTemplateEngine();
         Javalin app = Javalin.create(javalinConfig -> {
                     javalinConfig.plugins.enableCors(cors -> {cors.add(it -> it.anyHost());}); // para poder hacer requests de un dominio a otro
@@ -22,6 +27,7 @@ public class Aplicacion {
                 }
                 ).get("/", new GetLoginLiv())
                 .start(4567);
+        initializeFireBase();
 
         // Handlers
         // Cliente Pesado
@@ -66,5 +72,19 @@ public class Aplicacion {
                     }
                 }, ".hbs" // Extensión del archivo de template
         );
+    }
+    public static void initializeFireBase() {
+        try {
+            // Reemplaza "path/to/your/serviceAccountKey.json" con la ruta correcta a tu archivo JSON
+            FileInputStream serviceAccount = new FileInputStream("src/main/resources/Fire-Base/fireBaseCredentials.json");
+
+            FirebaseOptions options = new FirebaseOptions.Builder()
+                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                    .build();
+
+            FirebaseApp.initializeApp(options);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

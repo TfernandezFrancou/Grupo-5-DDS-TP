@@ -9,11 +9,12 @@ googleButton.addEventListener("click", async (e) => {
 
     const provider = new GoogleAuthProvider();
     try {
-        const credentials = await signInWithPopup(auth, provider)
+        const credentials = await signInWithPopup(auth, provider);
+        const idToken = await credentials.user.getIdToken();
         const usuario={
-            email: credentials.user.email
+            email: credentials.user.email,
+            token: idToken
         }
-
         const requestOptions = {
             method: 'POST',
             headers: {

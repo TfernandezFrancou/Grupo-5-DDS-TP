@@ -10,7 +10,7 @@ export async function logout() {
             //elimino la sesion en el backend
 
             // obtengo id de sesion del local storage
-            var id_sesion = localStorage.getItem("IDSESION")
+            var id_sesion = localStorage.getItem("idSesion")
 
             // hago post a la api
             const requestOptions = {
@@ -29,10 +29,10 @@ export async function logout() {
                         throw new Error('Error HTTP: ' + response.status);
                     }
                     // eliminio el id del local storage
-                    localStorage.removeItem("IDSESION")
+                    localStorage.removeItem("idSesion")
                     console.log('el usuario cerró sesión')
                     //me lleva
-                    window.location.href="http://localhost:4567/static/LogIn.html"
+                    window.location.href="http://localhost:4567/login"
                     })
                 .catch(error => {
                 showMessage("Error en la solicitud", "error")

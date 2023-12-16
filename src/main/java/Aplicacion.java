@@ -48,6 +48,7 @@ public class Aplicacion {
         app.get("/cargaDatos", new GetCargaDatosHandler());
         app.post("/cargarDatos", new PostCargarDatosHandler());
         app.post("/login/google", new PostLoginGoogle());
+        app.post("api/logout", new PostCierreSesion());
     }
     private static void initTemplateEngine() {
         JavalinRenderer.register(

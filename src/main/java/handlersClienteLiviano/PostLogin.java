@@ -18,13 +18,11 @@ public class PostLogin implements Handler {
     @Override
     public void handle(@NotNull Context ctx) throws Exception {
         //validamos user/pass y buscamos datos de ese usuario para agregar en la sesión
-        System.out.println(ctx.formParam("username"));
-        LoginRequest loginRequest = new LoginRequest();
-        loginRequest.setUsername(ctx.formParam("username"));
-        loginRequest.setPassword(ctx.formParam("password"));
-
+        LoginRequest loginRequest = ctx.bodyAsClass(LoginRequest.class);
+        System.out.println(loginRequest.toString());
         //todo: hacer que se puedan logear todos, una clase abstracta "logeable" x ej
         Miembro miembroObtenido = RepoMiembros.getInstance().buscarMiembroUsuario(loginRequest);
+        System.out.println("Encontre el miembro ?");
         if(miembroObtenido.getMiembro_codigo()!=-1){
         SesionManager sesionManager = SesionManager.get();
         String idSesion = sesionManager.crearSesion("usuario", miembroObtenido);

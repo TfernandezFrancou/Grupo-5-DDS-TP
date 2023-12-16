@@ -41,7 +41,7 @@ public class RepoMiembros {
         EntityManager em = utils.BDUtils.getEntityManager();
         List<Miembro> miembros = em.createQuery("select m from Miembro m join Usuario u on u.usuario_codigo = m.usuario.usuario_codigo " +
                         "where u.nombreUsuario = ?1 and u.contrasenia = ?2", Miembro.class)
-                .setParameter(1,loginRequest.getUsername())
+                .setParameter(1,loginRequest.getEmail())
                 .setParameter(2,loginRequest.getPassword())
                 .getResultList();
         if(miembros.isEmpty()) {return new Miembro(-1);}

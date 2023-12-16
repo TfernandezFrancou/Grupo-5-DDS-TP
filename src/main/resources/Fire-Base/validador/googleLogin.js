@@ -10,9 +10,35 @@ googleButton.addEventListener("click", async (e) => {
     const provider = new GoogleAuthProvider();
     try {
         const credentials = await signInWithPopup(auth, provider)
-        console.log(credentials);
-        console.log("google sign in");
-        window.location.href="../static/loginPage.html";
+        const usuario={
+            email: credentials.user.email
+        }
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // Puedes agregar más encabezados según sea necesario, como tokens de autorización, etc.
+            },
+            body: JSON.stringify(usuario),
+        };
+        fetch("http://localhost:4567/login/google", requestOptions)
+            .then(response => {
+                if (!response.ok) {
+                    //throw new Error('Error en la respuesta del servidor');
+                    showMessage("Algo salió mal", "error")
+                }
+                return response.text();
+            })
+            .then(data => {
+                // Manejar la respuesta del servidor
+                console.log('Respuesta del servidor:', data);
+                window.location.href = 'http://localhost:4567/perfil';
+
+            }).catch(error => {
+            showMessage("Error en el servidor", "error")
+        });
+
         showMessage("Bienvenido " + credentials.user.displayName,"success");
     } catch (error) {
         console.log(error);

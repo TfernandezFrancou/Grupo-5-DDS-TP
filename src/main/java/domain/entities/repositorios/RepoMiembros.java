@@ -47,6 +47,16 @@ public class RepoMiembros {
         if(miembros.isEmpty()) {return new Miembro(-1);}
         return miembros.stream().findFirst().get();
     }
+    public Miembro buscarMiembroUsuarioGoogle(LoginRequest loginRequest) {
+        EntityManager em = utils.BDUtils.getEntityManager();
+        List<Miembro> miembros = em.createQuery("select m from Miembro m join Usuario u on u.usuario_codigo = m.usuario.usuario_codigo " +
+                        "where u.nombreUsuario = ?1", Miembro.class)
+                .setParameter(1,loginRequest.getEmail())
+                .getResultList();
+        if(miembros.isEmpty()) {return new Miembro(-1);}
+        return miembros.stream().findFirst().get();
+    }
+
     public TipoDeMiembro buscarTipoDeMiembro(String tipo){
         EntityManager em = utils.BDUtils.getEntityManager();
         List<TipoDeMiembro> tipoDeMiembros = em.createQuery("SELECT t FROM TipoDeMiembro t WHERE t.tipoDeMiembro=?1", TipoDeMiembro.class)

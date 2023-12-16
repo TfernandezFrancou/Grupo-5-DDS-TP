@@ -47,6 +47,7 @@ public class Aplicacion {
         app.get("/loginFail", new GetLoginErrado());
         app.get("/cargaDatos", new GetCargaDatosHandler());
         app.post("/cargarDatos", new PostCargarDatosHandler());
+        app.post("/login/google", new PostLoginGoogle());
     }
     private static void initTemplateEngine() {
         JavalinRenderer.register(

@@ -65,8 +65,6 @@
 				</div>
 			</div>
 		</div>
-
-		</style>
 		<script async src="https://cdn.jsdelivr.net/npm/es-module-shims@1/dist/es-module-shims.min.js" crossorigin="anonymous"></script>
 		<script type="importmap">
 		{
@@ -85,10 +83,9 @@
     <script type="text/javascript"></script>
     <style>
 			#bsaHolder{right:10px;position:absolute;top:0;width:345px;z-index:10}
-			        #bsa_closeAd{width:15px;height:15px;overflow:hidden;position:absolute;top:10px;right:110px;border:none!important;z-index:1;text-decoration:none!important;background:url(https://bootdey.com/img/x_icon.png) red no-repeat} 
+			        #bsa_closeAd{width:15px;height:15px;overflow:hidden;position:absolute;top:10px;right:110px;border:none!important;z-index:1;text-decoration:none!important;background:url(https://bootdey.com/img/x_icon.png) red no-repeat}
 			        #carbonads *{margin:initial;padding:initial;text-align:center}#carbonads{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen-Sans,Ubuntu,Cantarell,'Helvetica Neue',Helvetica,Arial,sans-serif;display:inline-block;font-size:14px;text-shadow:0 1px hsla(0,0%,100%,.8)}#carbonads a,#carbonads a:hover{color:#444;text-decoration:none}#carbonads>span{display:grid;background-color:#f9f9fa;max-width:250px;padding:1em;box-sizing:border-box;border-radius:4px;box-shadow:0 0 1px hsl(0deg 0% 0% / .075),0 0 2px hsl(0deg 0% 0% / .075),0 0 4px hsl(0deg 0% 0% / .075),0 0 8px hsl(0deg 0% 0% / .075),0 0 16px hsl(0deg 0% 0% / .075)}#carbonads .carbon-wrap{display:grid;row-gap:1em}#carbonads .carbon-text{font-size:1em;margin-bottom:.5em}#carbonads .carbon-poweredby{opacity:.5;font-size:.725em;text-transform:uppercase;font-weight:600;letter-spacing:.05ch}
     </style>
-	</div>
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-F1RTS0P1CD"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
@@ -97,23 +94,23 @@
 		    
 		            gtag('config', 'G-F1RTS0P1CD');
 	</script>
-<script type="module">
-	import { logout } from '../Fire-Base/validador/logout.js';
+	<script type="module">
+		import { logout } from '../Fire-Base/validador/logout.js';
 
-	document.addEventListener('DOMContentLoaded', function() {
-		// Asigna la función logout al evento click del enlace.
-		const enlaceLogout = document.getElementById('enlaceLogout');
+		document.addEventListener('DOMContentLoaded', function() {
+			// Asigna la función logout al evento click del enlace.
+			const enlaceLogout = document.getElementById('enlaceLogout');
 
-		if (enlaceLogout) {
-			enlaceLogout.addEventListener('click', function(event) {
-				event.preventDefault(); // Evita la navegación si es un enlace.
-				logout(); // Llama a la función logout.
-			});
-		} else {
-			console.error("Elemento con ID 'enlaceLogout' no encontrado.");
-		}
-	});
-</script>
+			if (enlaceLogout) {
+				enlaceLogout.addEventListener('click', function(event) {
+					event.preventDefault(); // Evita la navegación si es un enlace.
+					logout(); // Llama a la función logout.
+				});
+			} else {
+				console.error("Elemento con ID 'enlaceLogout' no encontrado.");
+			}
+		});
+	</script>
 	<script>
 		var app = new Vue({
 			el: "#rankingConVue",

@@ -83,7 +83,7 @@ public class BDInit {
     public void init(){
          usuario1 = new Usuario("jucaceres@frba.utn.edu.ar","123", Rol.MIEMBRO);
          usuario2 = new Usuario("maxi", "123", Rol.MIEMBRO);
-         usuario4 = new Usuario("tom","123", Rol.MIEMBRO);
+         usuario4 = new Usuario("tfernndezfrancou@frba.utn.edu.ar","123", Rol.MIEMBRO);
          usuario3 = new Usuario("admin","123", Rol.ADMIN);
          usuario5 = new Usuario("ignacio","123",Rol.MIEMBRO);
          usuario6 = new Usuario("juan2","123",Rol.MIEMBRO);

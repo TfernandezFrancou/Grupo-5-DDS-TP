@@ -4,7 +4,7 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <title itemprop="name">Perfil de Comunidad</title>
         <link rel="stylesheet" href="../static/assets/css/styles.min.css">
-       <script src = "../Fire-Base/validador/logout.js"></script>
+
 
    </head>
    <body style="margin: 0;">
@@ -19,7 +19,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="#">Comunidad</a></li>
                     <li class="nav-item"><a class="nav-link" href="../perfil">Perfil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" onclick="logout()">Salir</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" id="enlaceLogout">Salir</a></li>
                 </ul>
             </div>
         </div>
@@ -196,6 +196,23 @@
 
                   // Agregar un event listener para el clic en el elemento li
                   verIncidentesLi.addEventListener('click', redirectToIncidentes);
+              });
+          </script>
+          <script type="module">
+              import { logout } from '../Fire-Base/validador/logout.js';
+
+              document.addEventListener('DOMContentLoaded', function() {
+                  // Asigna la función logout al evento click del enlace.
+                  const enlaceLogout = document.getElementById('enlaceLogout');
+
+                  if (enlaceLogout) {
+                      enlaceLogout.addEventListener('click', function(event) {
+                          event.preventDefault(); // Evita la navegación si es un enlace.
+                          logout(); // Llama a la función logout.
+                      });
+                  } else {
+                      console.error("Elemento con ID 'enlaceLogout' no encontrado.");
+                  }
               });
           </script>
           <script>

@@ -21,7 +21,7 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link active" href="#" >Comunidad</a></li>
                 <li class="nav-item"><a class="nav-link" href="../perfil" >Perfil</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" onclick="logout()">Salir</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" id="enlaceLogout">Salir</a></li>
             </ul>
         </div>
     </div>
@@ -175,6 +175,23 @@ gtag('js', new Date());
 
 gtag('config', 'G-F1RTS0P1CD');
 </script>
+    <script type="module">
+        import { logout } from '../Fire-Base/validador/logout.js';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Asigna la función logout al evento click del enlace.
+            const enlaceLogout = document.getElementById('enlaceLogout');
+
+            if (enlaceLogout) {
+                enlaceLogout.addEventListener('click', function(event) {
+                    event.preventDefault(); // Evita la navegación si es un enlace.
+                    logout(); // Llama a la función logout.
+                });
+            } else {
+                console.error("Elemento con ID 'enlaceLogout' no encontrado.");
+            }
+        });
+    </script>
     <script>
         var app = new Vue({
             el: "#perfilComunidadConVue",

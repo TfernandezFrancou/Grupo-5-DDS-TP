@@ -81,7 +81,7 @@ public class BDInit {
 
     @Before
     public void init(){
-         usuario1 = new Usuario("juan","123", Rol.MIEMBRO);
+         usuario1 = new Usuario("jucaceres@frba.utn.edu.ar","123", Rol.MIEMBRO);
          usuario2 = new Usuario("maxi", "123", Rol.MIEMBRO);
          usuario4 = new Usuario("tom","123", Rol.MIEMBRO);
          usuario3 = new Usuario("admin","123", Rol.ADMIN);

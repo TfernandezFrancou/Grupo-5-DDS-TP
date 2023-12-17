@@ -58,7 +58,7 @@ public class GetPerfilMiembroHandler implements Handler {
 
             context.render("perfil.hbs",model);
         }else {
-            context.status(404).json("No tenes una miembro asociado");
+            context.status(404).json("La base de datos no cuenta con un miembro par tu usuario");
         }
 
     }
